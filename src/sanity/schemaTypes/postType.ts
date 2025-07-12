@@ -57,7 +57,6 @@ export const project = defineType({
     }),
   ],
 })
-
 export const about = defineType({
   name: 'about',
   title: 'About',
@@ -79,5 +78,34 @@ export const about = defineType({
       of: [{type: 'string'}],
       validation: (rule) => rule.required(),
     }),
+  ]
+})
+export const homepage = defineType({
+  name: 'homepage',
+  title: 'Homepage',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'title',
+      title: 'Homepage Title',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'subtitle',
+      title: 'Homepage subtitle',
+      type: 'string',
+    }),
+    defineField({
+      name: 'description',
+      title: 'Homepage description',
+      type: 'string',
+    }),
+    defineField({
+      name: 'contactDescription',
+      title: 'Contact description',
+      type: 'string',
+    }),
+   
   ]
 })
