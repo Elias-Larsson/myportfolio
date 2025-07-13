@@ -1,4 +1,5 @@
 import { Button } from "./components/button";
+import { Footer } from "./components/footer";
 import { Navbar } from "./components/navbar";
 import { ProjectsDisplay } from "./components/projectsdisplay";
 
@@ -6,7 +7,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <div className="font-outfit flex flex-col items-center bg-[url('/wavebackground.svg')] bg-cover bg-center bg-no-repeat h-screen">
-        <Navbar></Navbar>
+        <Navbar/>
         <div className="flex flex-col justify-center h-full p-4">
             <section>
             <h1 className="text-5xl font-outfit ">Hello, <br /> I am Elias Larsson</h1>
@@ -21,6 +22,7 @@ export default function Home() {
         </div>
       </div>
       <ProjectsDisplay />
+      <Footer/>
     </div>
   );
 }
