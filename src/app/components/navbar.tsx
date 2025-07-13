@@ -7,7 +7,7 @@ export const Navbar = () => {
   const [hovered, setHovered] = useState<string | null>(null);
   const menuitems = ["Home", "About", "Projects", "Contact"];
   return (
-    <nav onMouseLeave={() => setHovered(null)} className="pt-4">
+    <nav onMouseLeave={() => setHovered(null)} className="pt-4 sticky top-0 z-50">
       <ul className="bg-neutral-300/30 bg-blur p-2 flex rounded-4xl gap-2 backdrop-blur-[4px] shadow-lg">
         {menuitems.map((item) => (
           <li 
