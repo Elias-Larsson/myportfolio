@@ -1,13 +1,11 @@
+import Image from "next/image";
 import { Button } from "./components/button";
-import { Footer } from "./components/footer";
-import { Navbar } from "./components/navbar";
 import { ProjectsDisplay } from "./components/projectsdisplay";
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
-      <div className="font-outfit flex flex-col items-center bg-[url('/wavebackground.svg')] bg-cover bg-center bg-no-repeat h-screen">
-        <Navbar/>
+    <>
+      <div className="font-outfit flex flex-col items-center bg-[url('/wavebackground.svg')] bg-cover bg-center bg-no-repeat h-screen pb-12">
         <div className="flex flex-col justify-center h-full p-4">
             <section>
             <h1 className="text-5xl font-outfit ">Hello, <br /> I am Elias Larsson</h1>
@@ -20,9 +18,11 @@ export default function Home() {
           </section>
           <Button name="Contact me" route="/contact" decoration={true}/>
         </div>
+        <div className="h-24">
+        <Image src="/maki_whitedownarrow.svg" alt="" width={38} height={38} className="arrow-animation"/>
+        </div>
       </div>
       <ProjectsDisplay />
-      <Footer/>
-    </div>
+    </>
   );
 }

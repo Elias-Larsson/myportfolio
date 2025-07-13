@@ -41,3 +41,23 @@ body {
   position: relative;
   z-index: 1;
 }
+
+.underline-animation {
+  text-decoration: underline transparent;
+  text-underline-offset: 0.5rem;
+  transition: 0.4s ease-in-out;
+
+}
+
+.underline-animation:hover {
+  text-decoration: underline white;
+  text-underline-offset: 0.1rem;
+}
+@keyframes slide-y {
+  0%   { transform: translateY(0%); }
+  50%  { transform: translateY(100%); }
+  100% { transform: translateY(0%); }
+}
+.arrow-animation {
+ animation: slide-y 2.5s ease-in-out infinite;
+}

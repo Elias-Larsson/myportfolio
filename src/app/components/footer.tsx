@@ -28,16 +28,16 @@ export const Footer = () => {
           <Image
             src="/mdi_github.svg"
             alt="github icon"
-            width={24}
-            height={24}
+            width={32}
+            height={32}
           />
         </Link>
         <Link href="https://www.linkedin.com/in/elias-h-larsson/">
           <Image
             src="/mdi_linkedin.svg"
             alt="github icon"
-            width={24}
-            height={24}
+            width={32}
+            height={32}
           />
         </Link>
       </section>
