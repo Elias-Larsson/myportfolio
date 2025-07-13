@@ -1,12 +1,28 @@
-import Image from 'next/image'
-export default function Home() {
+import { Button } from "./components/button";
+import { Navbar } from "./components/navbar";
+import { ProjectsDisplay } from "./components/projectsdisplay";
 
+export default function Home() {
   return (
-  <>
-    <h1>Elias Larsson</h1>
-    <Image alt="idc" width="64" height="64" src="lionicon.svg" />
-   <p>coming soon...</p>
-   <a href="https://github.com/Elias-Larsson">github</a>
-   </>
-  )
+    <div className="flex flex-col">
+      <div className="text-white font-outfit flex flex-col items-center bg-[url('/wavebackground.svg')] bg-cover bg-center bg-no-repeat h-screen">
+        <Navbar></Navbar>
+        <div className="flex flex-col justify-center h-full p-4">
+            <section>
+            <h1 className="text-5xl font-outfit ">Hello, <br /> I am Elias Larsson</h1>
+            <h2 className="text-neutral-400 text-2xl">An awesome fullstack developer</h2>
+            <p className="p-4">
+              I talk about myself and stuff. A short and entising hook
+              I talk about myself. <br/>
+              I talk about myself and stuff.
+            </p>
+          </section>
+          <Button name="Contact me" route="/contact" decoration={true}/>
+        </div>
+      </div>
+      <div className= "h-screen">
+      <ProjectsDisplay />
+      </div>
+    </div>
+  );
 }
