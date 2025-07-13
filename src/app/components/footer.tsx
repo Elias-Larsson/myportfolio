@@ -9,14 +9,18 @@ import Link from "next/link";
 export const Footer = () => {
   const [footerData, setFooterData] = useState<SanityDocument[]>([]);
   useEffect(() => {
-    async function fetchData() {
-      const data = await client.fetch<SanityDocument[]>(
-        `*[_type == "homepage"]{contactDescription}`
-      );
-      console.log("Fetched data:", data);
-      setFooterData(data);
+    try{
+      async function fetchData() {
+        const data = await client.fetch<SanityDocument[]>(
+          `*[_type == "homepage"]{contactDescription}`
+        );
+        console.log("Fetched data:", data);
+        setFooterData(data);
+      }
+      fetchData();
+    } catch (err) {
+      console.error("Error fetching footer data:", err);
     }
-    fetchData();
   }, []);
   return (
     <footer className="flex flex-col justify-center items-center text-white gap-4 py-4">

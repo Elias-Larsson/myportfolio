@@ -24,7 +24,7 @@ export const ProjectsDisplay = () => {
     fetchProjects();
   }, []);
   return (
-    <div className="flex flex-col items-center justify-center gap-12 py-8">
+    <div className="flex flex-col items-center justify-center gap-12 py-8 min-h-screen">
       <h1 className="text-4xl">Projects</h1>
       <ul className="flex flex-row justify-center flex-wrap gap-12">
         {projects.map((project) => (
