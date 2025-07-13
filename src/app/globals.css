@@ -61,3 +61,10 @@ body {
 .arrow-animation {
  animation: slide-y 2.5s ease-in-out infinite;
 }
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

@@ -47,7 +47,7 @@ export const ProjectsDisplay = () => {
             </Link>
             <h2 className="text-sm text-neutral-400">{project.definition}</h2>
             <h1 className="text-3xl">{project.title}</h1>
-            <p className="text-neutral-400 pt-2">{project.description}</p>
+            <p className="text-neutral-400 pt-2 line-clamp">{project.description}</p>
             <Link href="#" className="text-neutral-400 underline pt-2">VIEW PROJECT</Link>
             {/* <div className="flex flex-wrap gap-2 pt-2">
               {project.techstack?.map((tech: string) => (
