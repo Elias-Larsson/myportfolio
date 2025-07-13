@@ -2,6 +2,8 @@ import { ProjectsDisplay } from "../components/projectsdisplay";
 
 export default function Projects() {
   return (
-  <ProjectsDisplay />
+  <div className="pt-24">
+    <ProjectsDisplay />
+  </div>
   );
 }
