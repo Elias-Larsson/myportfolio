@@ -2,6 +2,7 @@
 
 body {
   background-color: #1E1E1E;
+  color: white;
 }
 
 .navbarList {
@@ -23,7 +24,7 @@ body {
   background: #fff;
   transform: scale(0);
   transform-origin: 85% 50%;
-  transition: transform 0.5s cubic-bezier(0, 0, 0, 1);
+  transition: transform 0.3s cubic-bezier(0, 0, 0, 0.8);
   z-index: 0;
   border-radius: 2.5rem;
 }

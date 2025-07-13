@@ -5,7 +5,7 @@ import { ProjectsDisplay } from "./components/projectsdisplay";
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <div className="text-white font-outfit flex flex-col items-center bg-[url('/wavebackground.svg')] bg-cover bg-center bg-no-repeat h-screen">
+      <div className="font-outfit flex flex-col items-center bg-[url('/wavebackground.svg')] bg-cover bg-center bg-no-repeat h-screen">
         <Navbar></Navbar>
         <div className="flex flex-col justify-center h-full p-4">
             <section>
@@ -20,9 +20,7 @@ export default function Home() {
           <Button name="Contact me" route="/contact" decoration={true}/>
         </div>
       </div>
-      <div className= "h-screen">
       <ProjectsDisplay />
-      </div>
     </div>
   );
 }
