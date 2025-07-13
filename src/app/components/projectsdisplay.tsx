@@ -16,7 +16,6 @@ export const ProjectsDisplay = () => {
           `*[_type == "project"]{_id, title, definition, slug, techstack, description, projectImage}`
         );
         setProjects(data);
-        console.log("Fetched projects:", data);
       } catch (err) {
         console.error("Error fetching projects:", err);
       }
@@ -25,12 +24,15 @@ export const ProjectsDisplay = () => {
   }, []);
   return (
     <div className="flex flex-col items-center justify-center gap-12 py-8 min-h-screen">
-      <h1 className="text-4xl">Projects</h1>
+      <div className="flex flex-col items-start w-fit gap-4 group">
+      <h1 className="text-3xl">Projects</h1>
+      <p className="text-neutral-400 max-w-128">These are some highlight projects. Each page discusses the purpose of the project, what was learned, and how I came up with solutions.</p>
+      </div>
       <ul className="flex flex-row justify-center flex-wrap gap-12">
         {projects.map((project) => (
           <li
             key={project._id}
-            className="flex flex-col justify-start py-16 w-xs gap-1"
+            className="flex flex-col justify-start w-xs gap-1"
           >
             <Link href="#" className="group projectImage relative overflow-hidden w-xs transition duration-300 ease-in-out rounded-xl hover:shadow-2xl cursor-pointer">
             <Image
@@ -46,9 +48,9 @@ export const ProjectsDisplay = () => {
             </div>
             </Link>
             <h2 className="text-sm text-neutral-400">{project.definition}</h2>
-            <h1 className="text-3xl">{project.title}</h1>
+            <h2 className="text-2xl">{project.title}</h2>
             <p className="text-neutral-400 pt-2 line-clamp">{project.description}</p>
-            <Link href="#" className="text-neutral-400 underline pt-2">VIEW PROJECT</Link>
+            <Link href={`projects/${project.slug.current}`} className="underline pt-2 transition duration-300 ease-in-out">VIEW PROJECT</Link>
             {/* <div className="flex flex-wrap gap-2 pt-2">
               {project.techstack?.map((tech: string) => (
                 <span   

@@ -14,7 +14,6 @@ export const Footer = () => {
         const data = await client.fetch<SanityDocument[]>(
           `*[_type == "homepage"]{contactDescription}`
         );
-        console.log("Fetched data:", data);
         setFooterData(data);
       }
       fetchData();
@@ -23,28 +22,31 @@ export const Footer = () => {
     }
   }, []);
   return (
-    <footer className="flex flex-col justify-center items-center text-white gap-4 py-4">
-      <h1 className="text-4xl">Contact</h1>
-      <p className="text-sm max-w-128">{footerData[0]?.contactDescription}</p>
+    <footer className="flex flex-col justify-center items-center py-8">
+      <div className="flex flex-col items-start gap-4 ">
+     <h1 className="text-3xl">Contact</h1>
+      <p className="max-w-128 text-neutral-400">{footerData[0]?.contactDescription}</p>
       <Button name="Contact me" route="/contact" decoration={true} />
-      <section className="flex flex-row gap-2 p-1">
+      <div className="flex flex-row gap-2 p-1">
         <Link href="https://github.com/Elias-Larsson">
           <Image
             src="/mdi_github.svg"
             alt="github icon"
-            width={32}
-            height={32}
+            width={48}
+            height={48}
           />
         </Link>
         <Link href="https://www.linkedin.com/in/elias-h-larsson/">
           <Image
             src="/mdi_linkedin.svg"
             alt="github icon"
-            width={32}
-            height={32}
+            width={48}
+            height={48}
           />
         </Link>
-      </section>
+      </div>
+     
+      </div>
     </footer>
   );
 };
