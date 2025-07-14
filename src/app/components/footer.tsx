@@ -3,8 +3,6 @@ import { client } from "@/sanity/lib/client";
 import { SanityDocument } from "next-sanity";
 import { useEffect, useState } from "react";
 import { Button } from "./button";
-import Image from "next/image";
-import Link from "next/link";
 
 export const Footer = () => {
   const [footerData, setFooterData] = useState<SanityDocument[]>([]);
@@ -31,24 +29,13 @@ export const Footer = () => {
         <p className="max-w-128 text-neutral-400">
           {footerData[0]?.contactDescription}
         </p>
-        <Button name="Contact me" route="/contact" decoration="/maki_arrow.svg" />
         <div className="flex flex-row gap-2">
-          <Link href="https://github.com/Elias-Larsson">
-            <Image
-              src="/mdi_github.svg"
-              alt="github icon"
-              width={48}
-              height={48}
-            />
-          </Link>
-          <Link href="https://www.linkedin.com/in/elias-h-larsson/">
-            <Image
-              src="/mdi_linkedin.svg"
-              alt="github icon"
-              width={48}
-              height={48}
-            />
-          </Link>
+
+        <Button name="Contact me" route="/contact" decoration="/maki_arrow.svg" />
+          <Button decoration="/mdi_github.svg" route="https://github.com/Elias-Larsson"/>
+          <Button decoration="/mdi_linkedin.svg" route="https://www.linkedin.com/in/elias-h-larsson/"/>
+        <div className="flex flex-row gap-2">
+        </div>
         </div>
       </div>
     </footer>
