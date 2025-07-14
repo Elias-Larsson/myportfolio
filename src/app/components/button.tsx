@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const Button = ({ name, route, decoration }: Props) => {
-  const invertColors = !name ? "invert" : "";
+  const invertColors = !name ? "group-hover:invert" : "";
 
 
   return (
@@ -25,7 +25,7 @@ export const Button = ({ name, route, decoration }: Props) => {
             alt="arrow"
             width={24}
             height={24}
-            className={` group-hover:${invertColors}`}
+            className={`${invertColors}`}
           />
         )}
       </div>
