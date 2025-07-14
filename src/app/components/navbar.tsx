@@ -10,6 +10,7 @@ export const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
+    { name: "Contact", href: "/contact" },
   ];
   const current =
     menuitems.find((item) => item.href === pathname)?.name || null;

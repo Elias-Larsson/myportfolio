@@ -72,12 +72,6 @@ export const about = defineType({
       title: 'Profile Image',
       type: 'image',
     }),
-    defineField({
-      name: 'skills',
-      type: 'array',
-      of: [{type: 'string'}],
-      validation: (rule) => rule.required(),
-    }),
   ]
 })
 export const homepage = defineType({
@@ -105,6 +99,11 @@ export const homepage = defineType({
       name: 'contactDescription',
       title: 'Contact description',
       type: 'string',
+    }),
+    defineField({
+      name: 'skills',
+      type: 'array',
+      of: [{type: 'string'}],
     }),
    
   ]

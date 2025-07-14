@@ -22,8 +22,8 @@ export const Footer = () => {
     }
   }, []);
   return (
-    <footer className="flex flex-col justify-center items-center py-8">
-      <div className="flex flex-col items-start gap-4 ">
+    <footer className="flex flex-col justify-center items-center py-18">
+      <div className="flex flex-col items-start gap-4 bg-neutral-800 p-6 rounded-2xl shadow-2xl">
      <h1 className="text-3xl">Contact</h1>
       <p className="max-w-128 text-neutral-400">{footerData[0]?.contactDescription}</p>
       <Button name="Contact me" route="/contact" decoration={true} />

@@ -14,7 +14,7 @@ export default function Home() {
   async function fetchProjects() {
     try {
       const data = await client.fetch<SanityDocument>(
-        `*[_type == "homepage"]{contactDescription, title, subtitle, description}[0]`
+        `*[_type == "homepage"]{contactDescription, title, subtitle, description, skills}[0]`
       );
       setHomepage(data);
     } catch (err) {
@@ -44,6 +44,19 @@ if (!homepage) return <div>Loading...</div>;
         </div>
       </div>
       <ProjectsDisplay />
+      <div className="flex flex-col justify-center items-center py-24">
+        <div className="flex flex-col items-start gap-4">
+          <h1 className="text-3xl">Skills</h1>
+          <p className="text-neutral-400">Some knowledge I have picked up along the way</p>
+          <div className="flex flex-wrap justify-center gap-3 p-4 max-w-128">
+          {homepage.skills?.map((skill: string) => (
+            <span key={skill} className="bg-neutral-800 px-4 py-2 rounded-xl text-sm shadow-2xl hover:bg-red-900 transition duration-200 ease-in-out">
+              {skill}
+            </span>
+          ))}
+          </div>
+        </div>
+      </div>
       <Footer />
       
     </>
