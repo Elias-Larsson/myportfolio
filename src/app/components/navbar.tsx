@@ -10,22 +10,31 @@ export const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
-    { name: "Contact", href: "/contact" },
+    { name: "Contact", href: "#" },
   ];
   const current =
     menuitems.find((item) => item.href === pathname)?.name || null;
   const [hovered, setHovered] = useState<string | null>(current);
+
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <nav
       onMouseLeave={() => setHovered(current)}
       className="pt-4 fixed top-0 z-50 w-full flex justify-center"
     >
-      <ul className="bg-neutral-300/30 bg-blur p-2 flex rounded-4xl gap-2 backdrop-blur-[4px] shadow-lg">
+      <ul className="bg-neutral-300/30 backdrop-blur-[4px] p-2 flex rounded-4xl gap-2 shadow-lg">
         {menuitems.map((item) => (
-          <Link key={item.name} href={item.href}>
+          item.name === "Contact" ? (
             <li
+              key={item.name}
               onMouseEnter={() => setHovered(item.name)}
+              onClick={scrollToBottom}
               className="navbarList relative cursor-pointer"
             >
               {item.name}
@@ -36,7 +45,22 @@ export const Navbar = () => {
                 ></motion.div>
               )}
             </li>
-          </Link>
+          ) : (
+            <Link key={item.name} href={item.href}>
+              <li
+                onMouseEnter={() => setHovered(item.name)}
+                className="navbarList relative cursor-pointer"
+              >
+                {item.name}
+                {hovered === item.name && (
+                  <motion.div
+                    className="bg-neutral-300/30 absolute inset-0 rounded-4xl"
+                    layoutId="hover"
+                  ></motion.div>
+                )}
+              </li>
+            </Link>
+          )
         ))}
       </ul>
     </nav>
