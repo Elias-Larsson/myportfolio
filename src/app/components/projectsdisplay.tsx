@@ -23,7 +23,7 @@ export const ProjectsDisplay = () => {
     fetchProjects();
   }, []);
   return (
-    <div className="flex flex-col items-center justify-center gap-12 py-24">
+    <div className="flex flex-col items-center justify-center gap-12 py-24 px-4">
       <div>
         <h1 className="text-3xl">Projects</h1>
         <p className="text-neutral-400 max-w-128 py-4">

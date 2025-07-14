@@ -30,7 +30,7 @@ export default function Home() {
     <>
       <div className="flex flex-col items-center bg-[url('/wavebackground.svg')] bg-cover bg-center bg-no-repeat h-screen pb-12">
         <Navbar />
-        <div className="flex flex-col justify-center h-full">
+        <div className="flex flex-col justify-center h-full px-4">
           <div>
             <h1 className="text-3xl">{homepage.title}</h1>
             <h2 className="text-neutral-300 text-xl">{homepage.subtitle}</h2>
@@ -50,7 +50,7 @@ export default function Home() {
       </div>
       <ProjectsDisplay />
       <div className="flex flex-col justify-center items-center py-24">
-        <div className="flex flex-col items-start gap-4 max-w-128">
+        <div className="flex flex-col items-start gap-4 max-w-128 px-4">
           <h1 className="text-3xl">Skills</h1>
           <p className="text-neutral-400">
             Some knowledge I have picked up along the way to becoming an awesome developer.
