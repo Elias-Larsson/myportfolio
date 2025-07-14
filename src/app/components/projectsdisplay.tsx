@@ -63,16 +63,6 @@ export const ProjectsDisplay = () => {
             >
               VIEW PROJECT
             </Link>
-            {/* <div className="flex flex-wrap gap-2 pt-2">
-              {project.techstack?.map((tech: string) => (
-                <span   
-                  key={tech}
-                  className="bg-red-900 text-red-300 px-2 py-1 rounded"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div> */}
           </li>
         ))}
       </ul>

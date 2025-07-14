@@ -19,9 +19,14 @@ export const project = defineType({
     }),
     defineField({
       name: 'description',
-      title: 'Project description',
+      title: 'Project card description',
       type: 'string',
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'longDescription',
+      title: 'Project long description',
+      type: 'string',
     }),
     defineField({
       name: 'slug',
@@ -55,6 +60,17 @@ export const project = defineType({
       title: 'Background Image',
       type: 'image',
     }),
+    defineField({
+      name: 'previewImage',
+      title: 'preview image',
+      type: 'image',
+    }),
+    
+    defineField({
+    name: 'video',
+    title: 'video preview',
+    type: 'file',
+  }),
   ],
 })
 export const about = defineType({
