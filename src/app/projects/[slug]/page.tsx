@@ -15,8 +15,8 @@ export default function SlugProjectPage() {
   useEffect(() => {
     async function fetchData() {
       const query = groq`*[_type == "project" && slug.current == $slug][0]`;
-  const project = await client.fetch(query, { slug });
-        console.log("Fetched project:", project);
+      const project = await client.fetch(query, { slug });
+      console.log("Fetched project:", project.projectImage);
       setProject(project);
     }
 
@@ -27,10 +27,21 @@ export default function SlugProjectPage() {
 
   return (
     <div>
-        <h1>{project.title}</h1>
-        <p>{project.description}</p>
-        <Image src={urlFor(project.projectImage).url()} alt="whatver" width={320} height={320}/>
-        
+      <section className="h-96 flex justify-center items-center overflow-hidden">
+        <div className="w-[800px] h-[600px] justify-center items-center relative">
+          <Image
+            src={urlFor(project.projectImage).url()}
+            alt="background image"
+            width={800}
+            height={600}
+            className="object-cover"
+          />
+        </div>
+      </section>
+
+      <div className="whitespace-nowrap">
+        <h1 className="text-3xl">{project.title}</h1>
+      </div>
     </div>
   );
 }
