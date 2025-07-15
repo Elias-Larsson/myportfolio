@@ -30,7 +30,7 @@ export const Footer = () => {
           <div className="flex flex-row gap-2">
             <Button
               name="Contact me"
-              route="/contact"
+              route="https://mail.google.com/mail/?view=cm&fs=1&to=aroezi05@gmail.com"
               decoration="/maki_arrow.svg"
             />
             <Button
