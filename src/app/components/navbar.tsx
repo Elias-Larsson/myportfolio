@@ -10,7 +10,6 @@ export const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
-    { name: "Contact", href: "#" },
   ];
   const current =
     menuitems.find((item) => item.href === pathname)?.name || null;
@@ -29,23 +28,7 @@ export const Navbar = () => {
       className="pt-4 fixed top-0 z-50 w-full flex justify-center"
     >
       <ul className="bg-neutral-300/30 backdrop-blur-[4px] p-2 flex rounded-4xl gap-2 shadow-lg">
-        {menuitems.map((item) =>
-          item.name === "Contact" ? (
-            <li
-              key={item.name}
-              onMouseEnter={() => setHovered(item.name)}
-              onClick={scrollToBottom}
-              className="navbarList relative cursor-pointer"
-            >
-              {item.name}
-              {hovered === item.name && (
-                <motion.div
-                  className="bg-neutral-300/30 absolute inset-0 rounded-4xl"
-                  layoutId="hover"
-                ></motion.div>
-              )}
-            </li>
-          ) : (
+        {menuitems.map((item) => (
             <Link key={item.name} href={item.href}>
               <li
                 onMouseEnter={() => setHovered(item.name)}
@@ -62,6 +45,19 @@ export const Navbar = () => {
             </Link>
           )
         )}
+          <li
+            onMouseEnter={() => setHovered("Contact")}
+            className="navbarList relative cursor-pointer"
+            onClick={scrollToBottom}
+          >
+            Contact
+            {hovered === "Contact" && (
+              <motion.div
+                className="bg-neutral-300/30 absolute inset-0 rounded-4xl"
+                layoutId="hover"
+              ></motion.div>
+            )}
+          </li>
       </ul>
     </nav>
   );
