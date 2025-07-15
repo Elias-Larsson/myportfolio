@@ -7,7 +7,6 @@ import { client } from "@/sanity/lib/client";
 import { Banner } from "@/app/components/backgroundbanner";
 import { Techstacks } from "@/app/components/techstacks";
 import { Button } from "@/app/components/button";
-import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { projectQuery } from "@/sanity/lib/queries";
 import { Project } from "@/sanity/types/project";
@@ -64,7 +63,7 @@ export default function SlugProjectPage() {
           {project.video ? (
             <video
               src={project.video}
-              className="object-cover object-top w-96"
+              className="object-cover object-top w-96 rounded-2xl"
               autoPlay
               muted
               loop
@@ -72,11 +71,11 @@ export default function SlugProjectPage() {
           ) : (
             project.previewImage && (
               <Image
-                src={urlFor(project.previewImage).url()}
+                src={project.previewImage}
                 alt="Project preview"
                 width={384}
                 height={384}
-                className="object-cover object-top w-96 max-h-128"
+                className="object-cover object-top w-96 rounded-2xl"
               />
             )
           )}

@@ -1,13 +1,12 @@
-import { urlFor } from "@/sanity/lib/image";
 type Props = {
   url: string;
 };
 export const Banner = ({ url }: Props) => {
   return (
-    <div className="w-full sm:w-3/4 h-104 overflow-hidden">
+    <div className="w-full 2xl:w-3/4 h-104 overflow-hidden rounded-b-2xl shadow-2xl">
       <div
         style={{
-          backgroundImage: `url(${url ? urlFor(url).url() : ""})`,
+          backgroundImage: `url(${url ? url : ""})`,
           backgroundSize: "cover",
           backgroundPosition: "top",
           height: "800px",
