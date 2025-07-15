@@ -10,15 +10,12 @@ type Props = {
 export const Button = ({ name, route, decoration }: Props) => {
   const invertColors = !name ? "group-hover:invert" : "";
 
-
   return (
     <Link href={route} className="cursor-pointer">
       <div
         className={`button flex flex-row justify-center items-center w-fit bg-neutral-300/30 backdrop-blur-sm p-2 rounded-3xl gap-2 group`}
       >
-        {name &&(
-          <p>{name}</p>
-        )}
+        {name && <p>{name}</p>}
         {decoration && (
           <Image
             src={decoration}

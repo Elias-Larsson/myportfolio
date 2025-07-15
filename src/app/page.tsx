@@ -15,7 +15,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const data = await client.fetch<Homepage>(homepageQuery)
+        const data = await client.fetch<Homepage>(homepageQuery);
         setHomepage(data);
       } catch (err) {
         console.error("Error fetching homepage data:", err);
@@ -35,7 +35,11 @@ export default function Home() {
             <h2 className="text-neutral-300 text-xl">{homepage.subtitle}</h2>
             <p className="py-4 max-w-128">{homepage.description}</p>
           </div>
-          <Button name="Contact me" route="/contact" decoration="/maki_arrow.svg" />
+          <Button
+            name="Contact me"
+            route="/contact"
+            decoration="/maki_arrow.svg"
+          />
         </div>
         <div className="h-24">
           <Image
@@ -52,11 +56,10 @@ export default function Home() {
         <div className="flex flex-col items-start gap-4 max-w-128 px-4">
           <h1 className="text-3xl">Skills</h1>
           <p className="text-neutral-400">
-            Some knowledge I have picked up along the way to becoming an awesome developer.
+            Some knowledge I have picked up along the way to becoming an awesome
+            developer.
           </p>
-          {homepage.skills && (
-            <Techstacks techstacks={homepage.skills}/>
-          )}
+          {homepage.skills && <Techstacks techstacks={homepage.skills} />}
         </div>
       </div>
       <Footer />
