@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { Button } from "../components/button";
 import { SanityDocument } from "next-sanity";
 import { client } from "@/sanity/lib/client";
 import { useEffect, useState } from "react";
@@ -33,7 +32,6 @@ export default function About() {
       <div className="max-w-128">
         <h1 className="text-3xl">About me</h1>
         <p className="text-neutral-400 py-4">{aboutData[0].description}</p>
-        <Button name="Contact me" route="/contact" decoration="/maki_arrow.svg" />
       </div>
       {aboutData[0].profileImage && (
         <div className="w-full object-cover object-center offset-background">
