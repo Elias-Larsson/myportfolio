@@ -1,25 +1,25 @@
 "use client";
 import { client } from "@/sanity/lib/client";
-import { SanityDocument } from "next-sanity";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
 import Link from "next/link";
+import { Projects } from "@/sanity/types/project";
+import { projectsQuery } from "@/sanity/lib/queries";
 
 export const ProjectsDisplay = () => {
-  const [projects, setProjects] = useState<SanityDocument[]>([]);
+  const [projects, setProjects] = useState<Projects[]>([]);
 
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const data = await client.fetch<SanityDocument[]>(
-          `*[_type == "project"]{_id, title, definition, slug, techstack, description, projectImage}`
-        );
+        const data = await client.fetch<Projects[]>(projectsQuery);
+        console.log(data);
         setProjects(data);
       } catch (err) {
         console.error("Error fetching projects:", err);
       }
     }
+
     fetchProjects();
   }, []);
   return (
@@ -37,21 +37,23 @@ export const ProjectsDisplay = () => {
             key={project._id}
             className="flex flex-col justify-start w-xs gap-1"
           >
-            <Link
-              href={`projects/${project.slug.current}`}
-              className="group projectImage relative overflow-hidden w-xs transition duration-300 ease-in-out rounded-xl hover:shadow-2xl cursor-pointer"
-            >
-              <Image
-                className="rounded-xl group-hover:scale-110 transition duration-300 ease-in-out relative z-[0]"
-                alt={project.title || "Project image"}
-                src={urlFor(project.projectImage).url()}
-                width={320}
-                height={320}
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out text-white text-lg underline-animation">
-                View
-              </div>
-            </Link>
+            {project.projectImage && (
+              <Link
+                href={`projects/${project.slug.current}`}
+                className="group projectImage relative overflow-hidden w-xs transition duration-300 ease-in-out rounded-xl hover:shadow-2xl cursor-pointer"
+              >
+                <Image
+                  className="width-auto height-auto rounded-xl group-hover:scale-110 transition duration-300 ease-in-out relative z-[0]"
+                  alt={project.title || "Project image"}
+                  src={project.projectImage}
+                  width={320}
+                  height={320}
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out text-white text-lg underline-animation">
+                  View
+                </div>
+              </Link>
+            )}
             <h2 className="text-sm text-neutral-400">{project.definition}</h2>
             <h2 className="text-2xl">{project.title}</h2>
             <p className="text-neutral-400 pt-2 line-clamp">

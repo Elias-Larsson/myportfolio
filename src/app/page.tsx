@@ -6,17 +6,16 @@ import { Navbar } from "./components/navbar";
 import { Footer } from "./components/footer";
 import { useEffect, useState } from "react";
 import { client } from "@/sanity/lib/client";
-import { SanityDocument } from "next-sanity";
 import { Techstacks } from "./components/techstacks";
+import { homepageQuery } from "@/sanity/lib/queries";
+import { Homepage } from "@/sanity/types/homepage";
 
 export default function Home() {
-  const [homepage, setHomepage] = useState<SanityDocument | null>(null);
+  const [homepage, setHomepage] = useState<Homepage>();
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const data = await client.fetch<SanityDocument>(
-          `*[_type == "homepage"]{contactDescription, title, subtitle, description, skills}[0]`
-        );
+        const data = await client.fetch<Homepage>(homepageQuery);
         setHomepage(data);
       } catch (err) {
         console.error("Error fetching homepage data:", err);
@@ -36,7 +35,11 @@ export default function Home() {
             <h2 className="text-neutral-300 text-xl">{homepage.subtitle}</h2>
             <p className="py-4 max-w-128">{homepage.description}</p>
           </div>
-          <Button name="Contact me" route="/contact" decoration="/maki_arrow.svg" />
+          <Button
+            name="Contact me"
+            route="/contact"
+            decoration="/maki_arrow.svg"
+          />
         </div>
         <div className="h-24">
           <Image
@@ -53,9 +56,10 @@ export default function Home() {
         <div className="flex flex-col items-start gap-4 max-w-128 px-4">
           <h1 className="text-3xl">Skills</h1>
           <p className="text-neutral-400">
-            Some knowledge I have picked up along the way to becoming an awesome developer.
+            Some knowledge I have picked up along the way to becoming an awesome
+            developer.
           </p>
-       <Techstacks techstacks={homepage.skills}/>
+          {homepage.skills && <Techstacks techstacks={homepage.skills} />}
         </div>
       </div>
       <Footer />
