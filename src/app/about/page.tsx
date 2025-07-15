@@ -1,19 +1,18 @@
 "use client";
 import Image from "next/image";
-import { SanityDocument } from "next-sanity";
 import { client } from "@/sanity/lib/client";
 import { useEffect, useState } from "react";
-import { urlFor } from "@/sanity/lib/image";
+import { aboutQuery } from "@/sanity/lib/queries";
+import type { About } from "@/sanity/types/about";
 
 export default function About() {
-  const [aboutData, setAboutData] = useState<SanityDocument[]>([]);
+  const [aboutData, setAboutData] = useState<About | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await client.fetch<SanityDocument[]>(
-          `*[_type == "about"]{description, profileImage}`
-        );
+        const data = await client.fetch<About>(aboutQuery);
+        console.log(data);
         setAboutData(data);
       } catch (err) {
         console.error("Error fetching about data:", err);
@@ -23,7 +22,7 @@ export default function About() {
     fetchData();
   }, []);
 
-  if (aboutData.length === 0) {
+  if (!aboutData) {
     return <p>Loading...</p>;
   }
 
@@ -31,16 +30,18 @@ export default function About() {
     <main className="flex flex-col xl:flex-row items-center justify-center px-12 h-full pt-32 gap-8">
       <div className="max-w-128">
         <h1 className="text-3xl">About me</h1>
-        <p className="text-neutral-400 py-4">{aboutData[0].description}</p>
+        <p className="text-neutral-400 py-4">
+          {aboutData.description || "No description available"}
+        </p>
       </div>
-      {aboutData[0].profileImage && (
+      {aboutData.profile && (
         <div className="w-full object-cover object-center offset-background">
           <Image
-          src={urlFor(aboutData[0].profileImage).url()}
-          alt="A town with a sunset in the background"
-          width={480}
-          height={480}
-          className="shadow-neutral-900 shadow-2xl rounded-2xl"
+            src={aboutData.profile}
+            alt="A town with a sunset in the background"
+            width={480}
+            height={480}
+            className="shadow-neutral-900 shadow-2xl rounded-2xl"
           />
         </div>
       )}

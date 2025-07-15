@@ -6,17 +6,16 @@ import { Navbar } from "./components/navbar";
 import { Footer } from "./components/footer";
 import { useEffect, useState } from "react";
 import { client } from "@/sanity/lib/client";
-import { SanityDocument } from "next-sanity";
 import { Techstacks } from "./components/techstacks";
+import { homepageQuery } from "@/sanity/lib/queries";
+import { Homepage } from "@/sanity/types/homepage";
 
 export default function Home() {
-  const [homepage, setHomepage] = useState<SanityDocument | null>(null);
+  const [homepage, setHomepage] = useState<Homepage>();
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const data = await client.fetch<SanityDocument>(
-          `*[_type == "homepage"]{contactDescription, title, subtitle, description, skills}[0]`
-        );
+        const data = await client.fetch<Homepage>(homepageQuery)
         setHomepage(data);
       } catch (err) {
         console.error("Error fetching homepage data:", err);
@@ -55,7 +54,9 @@ export default function Home() {
           <p className="text-neutral-400">
             Some knowledge I have picked up along the way to becoming an awesome developer.
           </p>
-       <Techstacks techstacks={homepage.skills}/>
+          {homepage.skills && (
+            <Techstacks techstacks={homepage.skills}/>
+          )}
         </div>
       </div>
       <Footer />
