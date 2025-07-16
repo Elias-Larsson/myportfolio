@@ -79,8 +79,8 @@ export default function SlugProjectPage() {
               />
             )
           )}
-          {project.techstacks && (
-            <Techstacks techstacks={project.techstack || []} />
+          {project.techstack && (
+            <Techstacks techstacks={project.techstack} />
           )}
         </div>
       </main>

@@ -20,13 +20,13 @@ export const project = defineType({
     defineField({
       name: "description",
       title: "Project card description",
-      type: "string",
+      type: "text",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "longDescription",
       title: "Project long description",
-      type: "string",
+      type: "text",
     }),
     defineField({
       name: "slug",
@@ -79,7 +79,7 @@ export const about = defineType({
   fields: [
     defineField({
       name: "description",
-      type: "string",
+      type: "text",
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -113,7 +113,7 @@ export const homepage = defineType({
     defineField({
       name: "contactDescription",
       title: "Contact description",
-      type: "string",
+      type: "text",
     }),
     defineField({
       name: "skills",
