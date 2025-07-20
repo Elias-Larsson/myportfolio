@@ -1,12 +1,12 @@
 import { SanityDocument } from "next-sanity";
-import { Slug } from "sanity";
+import { Image, Slug } from "sanity";
 
 export type Projects = SanityDocument & {
   title: string;
   definition: string;
   description: string;
   slug: Slug;
-  projectImage: string;
+  projectImage: Image;
 };
 
 export type Project = SanityDocument & {
@@ -20,7 +20,7 @@ export type Project = SanityDocument & {
   techstack?: string[];
   liveDemoLink?: string;
   repoLink?: string;
-  backgroundImage?: string;
-  previewImage?: string;
-  video?: string;
+  backgroundImage?: Image;
+  previewImage?: Image;
+  video?: File;
 };
