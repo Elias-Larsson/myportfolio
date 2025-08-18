@@ -10,6 +10,7 @@ import { Button } from "@/app/components/button";
 import Image from "next/image";
 import { projectQuery } from "@/sanity/lib/queries";
 import { Project } from "@/sanity/types/project";
+import { urlFor } from "@/sanity/lib/image";
 
 export default function SlugProjectPage() {
   const { slug } = useParams();
@@ -39,7 +40,7 @@ export default function SlugProjectPage() {
 
   return (
     <>
-      <Banner url={project.backgroundImage || "/wavebackground.svg"}></Banner>
+      <Banner url={urlFor(project.backgroundImage || "/wavebackground.svg").url()}></Banner>
       <main className="py-8 flex flex-col items-start gap-8 justify-around sm:flex-row">
         <div className="flex flex-col  gap-4 px-4">
           <h1 className="text-4xl">{project.title}</h1>
@@ -71,7 +72,7 @@ export default function SlugProjectPage() {
           ) : (
             project.previewImage && (
               <Image
-                src={project.previewImage}
+                src={urlFor(project.previewImage).url()}
                 alt="Project preview"
                 width={384}
                 height={384}

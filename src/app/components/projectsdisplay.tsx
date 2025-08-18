@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Projects } from "@/sanity/types/project";
 import { projectsQuery } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 
 export const ProjectsDisplay = () => {
   const [projects, setProjects] = useState<Projects[]>([]);
@@ -45,7 +46,7 @@ export const ProjectsDisplay = () => {
                 <Image
                   className="width-auto height-auto rounded-xl group-hover:scale-110 transition duration-300 ease-in-out relative z-[0]"
                   alt={project.title || "Project image"}
-                  src={project.projectImage}
+                  src={urlFor(project.projectImage).url()}
                   width={320}
                   height={320}
                 />
