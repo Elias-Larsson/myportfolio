@@ -7,8 +7,18 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Elias Larsson",
-  description: "Fullstack Developer",
+  title: "Elias Larsson | Portfolio",
+  description: "an awesome Fullstack Developer working towards a safe and optimized web experience",
+  openGraph: {
+    images: [
+      {
+        url: "/portfoliowebpage.png",
+        width: 1200,
+        height: 630,
+        alt: "Portfolio preview",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
