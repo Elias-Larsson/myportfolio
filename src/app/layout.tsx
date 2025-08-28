@@ -9,6 +9,7 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Elias Larsson | Portfolio",
   description: "an awesome Fullstack Developer working towards a safe and optimized web experience",
+  appleWebApp: {title: "Elias"},
   openGraph: {
     images: [
       {
