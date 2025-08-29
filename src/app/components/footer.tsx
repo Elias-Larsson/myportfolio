@@ -4,6 +4,7 @@ import { SanityDocument } from "next-sanity";
 import { Suspense, useEffect, useState } from "react";
 import { Button } from "./button";
 import { footerQuery } from "@/sanity/lib/queries";
+import Image from "next/image";
 
 export const Footer = () => {
   const [footerData, setFooterData] = useState<SanityDocument[]>([]);
@@ -27,7 +28,8 @@ export const Footer = () => {
           <p className="max-w-128 text-neutral-400">
             {footerData[0]?.contactDescription}
           </p>
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row justify-between items-center w-full gap-2">
+            <div className="flex flex-row gap-2">
             <Button
               name="Contact me"
               route="https://mail.google.com/mail/?view=cm&fs=1&to=aroezi05@gmail.com"
@@ -41,7 +43,8 @@ export const Footer = () => {
               decoration="/mdi_linkedin.svg"
               route="https://www.linkedin.com/in/elias-h-larsson/"
             />
-            <div className="flex flex-row gap-2"></div>
+            </div>
+            <Image src="/awesomeduck.svg" alt="duck" width={48} height={48}/>
           </div>
         </div>
       </footer>
