@@ -28,6 +28,8 @@ export default function About() {
 
   return (
     <main className="flex flex-col xl:flex-row items-center justify-center px-12 h-full pt-32 gap-8">
+          <Image src="/awesomeduck.svg" alt="duck" width={128} height={128} className="duck"/>         
+        <Image src="/awesomewalnut.svg" alt="cloud" width={128} height={128} className="walnut"/>         
       <div className="max-w-128">
         <h1 className="text-3xl">About me</h1>
         <p className="text-neutral-400 py-4">

@@ -70,3 +70,14 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.duck {
+  position: absolute;
+  left: -42px;
+  transform: rotate(-20deg) scaleX(-1) translateY(128px);
+  -webkit-transform: rotate(-20deg) scaleX(-1) translateY(128px);
+}
+.walnut {
+  position: absolute;
+  right: 48px;
+}
