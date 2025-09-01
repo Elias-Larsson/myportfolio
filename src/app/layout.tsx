@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Elias Larsson | Portfolio",
   description: "an awesome Fullstack Developer working towards a safe and optimized web experience",
   appleWebApp: {title: "Elias"},
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
   openGraph: {
     images: [
       {
