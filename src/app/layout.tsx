@@ -8,8 +8,9 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "Elias Larsson | Portfolio",
-  description: "an awesome Fullstack Developer working towards a safe and optimized web experience",
-  appleWebApp: {title: "Elias"},
+  description:
+    "I’m an awesome fullstack developer passionate about building secure and user-friendly web experiences.",
+  appleWebApp: { title: "Elias" },
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
   openGraph: {
     images: [
@@ -30,7 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.className} antialiased overflow-x-hidden`}>{children}</body>
+      <body className={`${outfit.className} antialiased overflow-x-hidden`}>
+        {children}
+      </body>
     </html>
   );
 }
