@@ -3,7 +3,7 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  background-color: #1E1E1E;
+  background-color: #1e1e1e;
   color: white;
 }
 
@@ -48,36 +48,24 @@ body {
   text-decoration: underline transparent;
   text-underline-offset: 0.5rem;
   transition: 0.4s ease-in-out;
-
 }
 
 .underline-animation:hover {
   text-decoration: underline white;
   text-underline-offset: 0.1rem;
 }
-@keyframes slide-y {
-  0%   { transform: translateY(0%); }
-  50%  { transform: translateY(100%); }
-  100% { transform: translateY(0%); }
-}
-.arrow-animation {
- animation: slide-y 2.5s ease-in-out infinite;
-}
 
 .line-clamp {
   display: -webkit-box;
-  -webkit-line-clamp: 2; 
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .duck {
-  position: absolute;
-  left: -42px;
-  transform: rotate(-20deg) scaleX(-1) translateY(128px);
-  -webkit-transform: rotate(-20deg) scaleX(-1) translateY(128px);
+  @apply absolute translate-y-64 -left-10 -rotate-20 -scale-x-100  md:translate-32;
 }
 .walnut {
-  position: absolute;
-  right: 48px;
+  @apply absolute right-12 translate-y-24 md:translate-y-0;
 }

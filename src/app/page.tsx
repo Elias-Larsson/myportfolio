@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { Button } from "./components/button";
 import { ProjectsDisplay } from "./components/projectsdisplay";
 import { Navbar } from "./components/navbar";
@@ -31,9 +30,11 @@ export default function Home() {
         <Navbar />
         <div className="flex flex-col justify-center h-full px-4">
           <div>
-            <h1 className="text-3xl">{homepage.title}</h1>
-            <h2 className="text-neutral-300 text-xl">{homepage.subtitle}</h2>
-            <p className="py-4 max-w-128">{homepage.description}</p>
+            <h1 className="text-5xl font-bold">{homepage.title}</h1>
+            <h2 className=" text-2xl">{homepage.subtitle}</h2>
+            <p className="text-neutral-300 py-4 max-w-128">
+              {homepage.description}
+            </p>
           </div>
           <Button
             name="Contact me"
@@ -41,15 +42,7 @@ export default function Home() {
             decoration="/maki_arrow.svg"
           />
         </div>
-        <div className="h-24">
-          <Image
-            src="/maki_whitedownarrow.svg"
-            alt=""
-            width={24}
-            height={24}
-            className="arrow-animation"
-          />
-        </div>
+        <div className="h-24"></div>
       </div>
       <ProjectsDisplay />
       <div className="flex flex-col justify-center items-center py-24">
