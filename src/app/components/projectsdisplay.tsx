@@ -24,7 +24,7 @@ export const ProjectsDisplay = () => {
     fetchProjects();
   }, []);
   return (
-    <div className="flex flex-col items-center justify-center gap-4 py-24 px-4">
+    <section className="flex-main items-center gap-4">
       <div>
         <h1 className="text-3xl">Projects</h1>
         <p className="text-neutral-400 max-w-128 py-4">
@@ -60,6 +60,7 @@ export const ProjectsDisplay = () => {
             <p className="text-neutral-400 pt-2 line-clamp">
               {project.description}
             </p>
+
             <Link
               href={`projects/${project.slug.current}`}
               className="underline pt-2 hover:text-red-900 transition duration-300 ease-in-out"
@@ -69,6 +70,6 @@ export const ProjectsDisplay = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 };

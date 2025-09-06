@@ -22,14 +22,13 @@ export const Footer = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <footer className="flex flex-col justify-center items-center py-18 mx-4">
-        <div className="flex flex-col items-start gap-4 bg-neutral-800 p-6 rounded-2xl shadow-2xl">
-          <h1 className="text-3xl">Contact</h1>
-          <p className="max-w-128 text-neutral-400">
-            {footerData[0]?.contactDescription}
-          </p>
-          <div className="flex flex-row justify-between items-center w-full gap-2">
-            <div className="flex flex-row gap-2">
+      <footer className="flex-main items-center gap-4 bg-neutral-800 p-6 rounded-2xl shadow-2xl">
+        <h1 className="text-3xl">Contact</h1>
+        <p className="max-w-128 text-neutral-400">
+          {footerData[0]?.contactDescription}
+        </p>
+        <div className="flex flex-row justify-between items-center w-full gap-2">
+          <div className="flex flex-row gap-2">
             <Button
               name="Contact me"
               route="https://mail.google.com/mail/?view=cm&fs=1&to=aroezi05@gmail.com"
@@ -43,9 +42,8 @@ export const Footer = () => {
               decoration="/mdi_linkedin.svg"
               route="https://www.linkedin.com/in/elias-h-larsson/"
             />
-            </div>
-            <Image src="/awesomeduck.svg" alt="duck" width={48} height={48}/>
           </div>
+          <Image src="/awesomeduck.svg" alt="duck" width={48} height={48} />
         </div>
       </footer>
     </Suspense>

@@ -69,3 +69,7 @@ body {
 .walnut {
   @apply absolute right-12 translate-y-24 md:translate-y-0;
 }
+
+.flex-main {
+  @apply flex flex-col justify-center
+}
