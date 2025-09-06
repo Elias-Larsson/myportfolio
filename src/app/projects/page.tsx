@@ -2,8 +2,8 @@ import { ProjectsDisplay } from "../components/projectsdisplay";
 
 export default function Projects() {
   return (
-    <div className="pt-24">
+    <main className="flex items-center justify-center px-12 h-screen">
       <ProjectsDisplay />
-    </div>
+    </main>
   );
 }
