@@ -22,7 +22,7 @@ export const Footer = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <footer className="flex-main items-center gap-4 bg-neutral-800 p-6 rounded-2xl shadow-2xl">
+      <footer className="flex-main items-center gap-4 bg-neutral-800 p-6 rounded-2xl shadow-2xl w-fit">
         <h1 className="text-3xl">Contact</h1>
         <p className="max-w-128 text-neutral-400">
           {footerData[0]?.contactDescription}

@@ -26,7 +26,7 @@ export default function About() {
   }
 
   return (
-    <main className="flex items-center justify-center px-12 h-screen">
+    <main className="flex items-center justify-center px-6 h-screen">
       <Image
         src="/awesomeduck.svg"
         alt="duck"
@@ -42,24 +42,23 @@ export default function About() {
         className="walnut"
       />
       <section className="flex flex-col xl:flex-row items-center justify-center gap-12">
-
-      <div className="max-w-128">
-        <h1 className="text-3xl">About me</h1>
-        <p className="text-neutral-400 py-4">
-          {aboutData.description || "No description available"}
-        </p>
-      </div>
-      {aboutData.profile && (
-        <figure className="w-full object-cover object-center offset-background">
-          <Image
-            src={aboutData.profile}
-            alt="A town with a sunset in the background"
-            width={560}
-            height={560}
-            className="shadow-neutral-900 shadow-2xl rounded-2xl"
+        <div className="max-w-128">
+          <h1 className="text-3xl">About me</h1>
+          <p className="text-neutral-400 py-4">
+            {aboutData.description || "No description available"}
+          </p>
+        </div>
+        {aboutData.profile && (
+          <figure className="w-full object-cover object-center offset-background">
+            <Image
+              src={aboutData.profile}
+              alt="A town with a sunset in the background"
+              width={560}
+              height={560}
+              className="shadow-neutral-900 shadow-2xl rounded-2xl"
             />
-        </figure>
-      )}
+          </figure>
+        )}
       </section>
     </main>
   );
