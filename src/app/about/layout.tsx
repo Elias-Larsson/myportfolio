@@ -4,7 +4,7 @@ import { Navbar } from "../components/navbar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col items-center h-screen">
+    <div className="flex flex-col items-center pb-24">
       <Navbar />
       {children}
       <Footer />

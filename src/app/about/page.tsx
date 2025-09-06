@@ -12,7 +12,6 @@ export default function About() {
     async function fetchData() {
       try {
         const data = await client.fetch<About>(aboutQuery);
-        console.log(data);
         setAboutData(data);
       } catch (err) {
         console.error("Error fetching about data:", err);
@@ -27,7 +26,7 @@ export default function About() {
   }
 
   return (
-    <main className="flex flex-col xl:flex-row items-center justify-center px-12 h-full pt-32 gap-8">
+    <main className="flex items-center justify-center px-12 h-screen">
       <Image
         src="/awesomeduck.svg"
         alt="duck"
@@ -42,6 +41,8 @@ export default function About() {
         height={128}
         className="walnut"
       />
+      <section className="flex flex-col xl:flex-row items-center justify-center gap-12">
+
       <div className="max-w-128">
         <h1 className="text-3xl">About me</h1>
         <p className="text-neutral-400 py-4">
@@ -49,16 +50,17 @@ export default function About() {
         </p>
       </div>
       {aboutData.profile && (
-        <div className="w-full object-cover object-center offset-background">
+        <figure className="w-full object-cover object-center offset-background">
           <Image
             src={aboutData.profile}
             alt="A town with a sunset in the background"
-            width={480}
-            height={480}
+            width={560}
+            height={560}
             className="shadow-neutral-900 shadow-2xl rounded-2xl"
-          />
-        </div>
+            />
+        </figure>
       )}
+      </section>
     </main>
   );
 }

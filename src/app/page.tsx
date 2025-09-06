@@ -28,23 +28,23 @@ export default function Home() {
     <>
       <main className="flex flex-col items-center justify-center bg-[url('/wavebackground.svg')] bg-cover bg-center bg-no-repeat h-screen pb-12">
         <Navbar />
-          <section className="flex flex-col justify-start px-12">
-            <h1 className="text-5xl font-bold">{homepage.title}</h1>
-            <h2 className=" text-2xl">{homepage.subtitle}</h2>
-            <p className="text-neutral-300 py-4 max-w-128">
-              {homepage.description}
-            </p>
+        <section className="flex flex-col justify-start px-12">
+          <h1 className="text-5xl font-bold">{homepage.title}</h1>
+          <h2 className=" text-2xl">{homepage.subtitle}</h2>
+          <p className="text-neutral-300 py-4 max-w-128">
+            {homepage.description}
+          </p>
           <Button
             name="Contact me"
             route="https://mail.google.com/mail/?view=cm&fs=1&to=aroezi05@gmail.com"
             decoration="/maki_arrow.svg"
-            />
-            </section>
+          />
+        </section>
       </main>
       <main className="flex-main items-center gap-48 px-12 py-48">
-      <ProjectsDisplay />
-      {homepage.skills && <Skills skills={homepage.skills}/>}
-      <Footer />
+        <ProjectsDisplay />
+        {homepage.skills && <Skills skills={homepage.skills} />}
+        <Footer />
       </main>
     </>
   );

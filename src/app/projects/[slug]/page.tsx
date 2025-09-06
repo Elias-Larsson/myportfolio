@@ -20,10 +20,9 @@ export default function SlugProjectPage() {
     async function fetchData() {
       try {
         const project = await client.fetch<Project>(projectQuery, { slug });
-        console.log("Fetched project:", project);
         setProject(project);
       } catch (err) {
-        console.log(`Error when fetching slug project`, err);
+        console.error(`Error when fetching slug project`, err);
       }
     }
 

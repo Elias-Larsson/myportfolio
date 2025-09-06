@@ -14,7 +14,6 @@ export const ProjectsDisplay = () => {
     async function fetchProjects() {
       try {
         const data = await client.fetch<Projects[]>(projectsQuery);
-        console.log(data);
         setProjects(data);
       } catch (err) {
         console.error("Error fetching projects:", err);
