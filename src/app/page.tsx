@@ -29,9 +29,9 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center bg-[url('/wavebackground.svg')] bg-cover bg-center bg-no-repeat h-screen pb-12">
         <Navbar />
         <section className="flex flex-col justify-start px-12">
-          <h1 className="text-5xl font-bold">{homepage.title}</h1>
-          <h2 className=" text-2xl">{homepage.subtitle}</h2>
-          <p className="text-neutral-100 text-xl py-4 max-w-128">
+          <h1 className="text-5xl font-medium">{homepage.title}</h1>
+          <h2 className=" text-3xl">{homepage.subtitle}</h2>
+          <p className="text-neutral-300 text-xl py-4 max-w-128">
             {homepage.description}
           </p>
           <Button
