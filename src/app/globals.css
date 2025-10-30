@@ -64,7 +64,7 @@ body {
 }
 
 .duck {
-  @apply absolute translate-y-64 -left-10 -rotate-20 -scale-x-100  md:translate-32;
+  @apply absolute translate-y-64 -left-10 -rotate-20 -scale-x-100  md:translate-44;
 }
 .walnut {
   @apply absolute right-12 translate-y-24 md:translate-y-0;
