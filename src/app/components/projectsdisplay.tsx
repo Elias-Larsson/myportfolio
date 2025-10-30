@@ -62,7 +62,7 @@ export const ProjectsDisplay = () => {
 
             <Link
               href={`projects/${project.slug.current}`}
-              className="underline pt-2 hover:text-red-900 transition duration-300 ease-in-out"
+              className="underline pt-2 hover:text-red-400 transition duration-300 ease-in-out"
             >
               VIEW PROJECT
             </Link>

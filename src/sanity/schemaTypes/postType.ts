@@ -116,9 +116,36 @@ export const homepage = defineType({
       type: "text",
     }),
     defineField({
-      name: "skills",
-      type: "array",
-      of: [{ type: "string" }],
+      name: 'skills',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'label',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'icon',
+              description: 'Pick an icon at simpleicons.org',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'url',
+              type: 'url',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'color',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+          ],
+        },
+      ],
     }),
   ],
 });

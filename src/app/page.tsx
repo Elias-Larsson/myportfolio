@@ -31,7 +31,7 @@ export default function Home() {
         <section className="flex flex-col justify-start px-12">
           <h1 className="text-5xl font-bold">{homepage.title}</h1>
           <h2 className=" text-2xl">{homepage.subtitle}</h2>
-          <p className="text-neutral-300 py-4 max-w-128">
+          <p className="text-neutral-100 text-xl py-4 max-w-128">
             {homepage.description}
           </p>
           <Button

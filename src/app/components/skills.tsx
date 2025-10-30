@@ -1,8 +1,11 @@
 "use client";
+import { Icon } from "./techstackIcon";
 
-import { Techstacks } from "./techstacks";
-
-export const Skills = ({ skills }: { skills: string[] }) => {
+export const Skills = ({
+  skills,
+}: {
+  skills: { label: string; url: string; color: string; icon: string }[];
+}) => {
   return (
     <section className="flex-main items-center">
       <div className="flex flex-col items-start gap-4 max-w-128">
@@ -11,7 +14,18 @@ export const Skills = ({ skills }: { skills: string[] }) => {
           Some knowledge I have picked up along the way to becoming an awesome
           developer.
         </p>
-        <Techstacks techstacks={skills} />
+        <div className="flex justify-center flex-wrap gap-6">
+          {skills?.map((skill) => (
+            <a
+              href={skill.url}
+              key={skill.label}
+              className="flex gap-1 transition hover:text-red-400"
+            >
+              <Icon name={skill.icon} />
+              {skill.label}
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
