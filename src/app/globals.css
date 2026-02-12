@@ -10,17 +10,12 @@ body {
 
 @theme {
   --color-midnight: #181616;
-  --color-tertiary: #1e1e1e;
-  --color-secondary: #ff3831;
-  --color-primary: #fffddb;
+  --color-tertiary: #1E1E1E;
+  --color-secondary: #FF3831;
+  --color-primary: #FFFDDB;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   text-transform: uppercase;
 }
