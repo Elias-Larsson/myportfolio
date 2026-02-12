@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Ledger } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const outfit = Outfit({
+const ledger = Ledger({
+  weight: "400",
   subsets: ["latin"],
+  variable: "--font-body",
+});
+
+const rubik = localFont({
+  src: "../../public/fonts/RubikOne-Regular.ttf",
+  variable: "--font-heading",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +39,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.className} antialiased overflow-x-hidden`}>
+      <body
+        className={`${rubik.variable} ${ledger.variable} antialiased overflow-x-hidden`}
+      >
         {children}
       </body>
     </html>
