@@ -4,27 +4,16 @@ import Image from "next/image";
 type Props = {
   name?: string;
   route: string | "#";
-  decoration?: string;
 };
 
-export const Button = ({ name, route, decoration }: Props) => {
-  const invertColors = !name ? "group-hover:invert" : "";
+export const Button = ({ name, route }: Props) => {
 
   return (
     <Link href={route} className="cursor-pointer">
       <div
-        className={`button flex flex-row justify-center items-center w-fit bg-neutral-300/30 backdrop-blur-sm p-2 rounded-3xl gap-2 group`}
+        className={`w-fit bg-tertiary px-4 py-2 rounded-sm border-white/5 border-1`}
       >
-        {name && <p>{name}</p>}
-        {decoration && (
-          <Image
-            src={decoration}
-            alt="arrow"
-            width={24}
-            height={24}
-            className={`${invertColors}`}
-          />
-        )}
+        {name && <h4>{name}</h4>}
       </div>
     </Link>
   );
