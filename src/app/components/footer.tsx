@@ -32,14 +32,11 @@ export const Footer = () => {
             <Button
               name="Contact me"
               route="https://mail.google.com/mail/?view=cm&fs=1&to=aroezi05@gmail.com"
-              decoration="/maki_arrow.svg"
             />
             <Button
-              decoration="/mdi_github.svg"
               route="https://github.com/Elias-Larsson"
             />
             <Button
-              decoration="/mdi_linkedin.svg"
               route="https://www.linkedin.com/in/elias-h-larsson/"
             />
           </div>

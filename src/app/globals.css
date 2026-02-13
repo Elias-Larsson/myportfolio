@@ -2,13 +2,27 @@
 html {
   scroll-behavior: smooth;
 }
+
 body {
   background-color: #1e1e1e;
-  color: white;
+  color: var(--color-primary);
 }
 
-h1, h2, h3, h4, h5, h6 {
+@theme {
+  --color-midnight: #181616;
+  --color-tertiary: #1e1e1e;
+  --color-secondary: #ff3831;
+  --color-primary: #fffddb;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
+  text-transform: uppercase;
 }
 
 p {
@@ -20,36 +34,6 @@ p {
   list-style: none;
   padding: 0.5rem 1rem;
   border-radius: 2.5rem;
-}
-
-.button {
-  position: relative;
-  transition: color 0.3s ease-in-out;
-}
-
-.button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #fff;
-  transform: scale(0);
-  transform-origin: 85% 50%;
-  transition: transform 0.3s cubic-bezier(0, 0, 0, 0.8);
-  z-index: 0;
-  border-radius: 2.5rem;
-}
-
-.button:hover::before {
-  transform: scale(1);
-}
-
-.button:hover {
-  color: black;
-}
-
-.button > * {
-  position: relative;
-  z-index: 1;
 }
 
 .underline-animation {
@@ -79,5 +63,5 @@ p {
 }
 
 .flex-main {
-  @apply flex flex-col justify-center
+  @apply flex flex-col justify-center;
 }

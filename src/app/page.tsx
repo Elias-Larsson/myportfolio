@@ -8,6 +8,7 @@ import { client } from "@/sanity/lib/client";
 import { homepageQuery } from "@/sanity/lib/queries";
 import { Homepage } from "@/sanity/types/homepage";
 import { Skills } from "./components/skills";
+import { IconButton } from "./components/iconbutton";
 
 export default function Home() {
   const [homepage, setHomepage] = useState<Homepage>();
@@ -37,8 +38,8 @@ export default function Home() {
           <Button
             name="Contact me"
             route="https://mail.google.com/mail/?view=cm&fs=1&to=aroezi05@gmail.com"
-            decoration="/maki_arrow.svg"
           />
+          <IconButton route="github"></IconButton>
         </section>
       </main>
       <main className="flex-main items-center gap-48 py-48">
