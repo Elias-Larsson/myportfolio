@@ -53,12 +53,10 @@ export default function SlugProjectPage() {
               <Button
                 name="Live Demo"
                 route={project.liveDemoLink}
-                decoration="/maki_arrow.svg"
               />
             )}
             <Button
               route={project.repoLink || "#"}
-              decoration="/mdi_github.svg"
             />
           </nav>
           <p className="max-w-128 text-neutral-400">{project.description}</p>

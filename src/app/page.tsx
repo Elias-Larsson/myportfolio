@@ -31,7 +31,7 @@ export default function Home() {
         <Navbar />
         <section className="flex flex-row gap-96 px-4">
           <div className="flex flex-col h-full">
-            <h1 className="text-[10dvw] md:text-7xl pb-4">
+            <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl text-center pb-4">
               FUTURE OF WEB <br />
               <span className="text-secondary">DEVELOPMENT.</span>
             </h1>
@@ -54,7 +54,7 @@ export default function Home() {
         </section>
       </main>
       <main className="flex-main items-center gap-48 py-48">
-        <div className="flex-main px-6 gap-48">
+        <div className="flex-main px-4 gap-48">
           <ProjectsDisplay />
           {homepage.skills && <Skills skills={homepage.skills} />}
         </div>
