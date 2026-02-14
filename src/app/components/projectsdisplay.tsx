@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Projects } from "@/sanity/types/project";
 import { projectsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
+import { Button } from "./button";
 
 export const ProjectsDisplay = () => {
   const [projects, setProjects] = useState<Projects[]>([]);
@@ -25,7 +26,7 @@ export const ProjectsDisplay = () => {
 
   let projectCount = 0;
   return (
-    <section className="flex-main items-center gap-8 py-48">
+    <section className="flex-main items-center gap-8 py-48 px-4 bg-tertiary">
       <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl text-center">
         Featured <span className="text-secondary">Projects</span>
       </h1>
@@ -38,7 +39,7 @@ export const ProjectsDisplay = () => {
                 className="group relative overflow-hidden transition duration-300 ease-in-out rounded cursor-pointer"
               >
                 <Image
-                  className="rounded-xl group-hover:scale-110 transition duration-300 ease-in-out relative z-[0]"
+                  className="rounded group-hover:scale-110 transition duration-300 ease-in-out relative z-[0]"
                   alt={project.title || "Project image"}
                   src={urlFor(project.projectImage)
                     .width(360)
@@ -55,13 +56,15 @@ export const ProjectsDisplay = () => {
             )}
             <div className="flex justify-between">
               <h2 className=" text-xl md:text-2xl">{project.title}</h2>
-              <h4 className="text-sm">{projectCount++}</h4>
+              <h4 className="text-sm">[{projectCount++}]</h4>
             </div>
             <p className="text-sm">{project.definition}</p>
           </li>
         ))}
       </ul>
-        <Link href="#" className="pt-16"><h1 className="text-xl"><span className="underline">View more</span> -&gt;</h1></Link>
+      <div className="pt-16">
+        <Button route="projects" name="VIEW MORE ->" />
+      </div>
     </section>
   );
 };

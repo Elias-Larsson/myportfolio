@@ -9,6 +9,7 @@ import { homepageQuery } from "@/sanity/lib/queries";
 import { Homepage } from "@/sanity/types/homepage";
 import { Skills } from "./components/skills";
 import { IconButton } from "./components/iconbutton";
+import { VectorTransition } from "./components/background/depthbg";
 
 export default function Home() {
   const [homepage, setHomepage] = useState<Homepage>();
@@ -27,12 +28,13 @@ export default function Home() {
   if (!homepage) return <div>Loading...</div>;
   return (
     <>
-      <main className="flex flex-col items-center justify-center bg-midnight h-screen pb-12">
+      <main className="relative flex flex-col items-center justify-between min-h-screen">
         <Navbar />
-        <section className="flex flex-row gap-96 px-4">
-          <div className="flex flex-col h-full">
-            <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl text-center pb-4">
-              FUTURE OF WEB <br />
+        <section className="px-4 flex pt-10 items-end flex-grow">
+          <div className="flex flex-col">
+            <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl pb-4">
+              FUTURE OF WEB
+              <br />
               <span className="text-secondary">DEVELOPMENT.</span>
             </h1>
             <div className="flex flex-col gap-4 max-w-128">
@@ -52,12 +54,11 @@ export default function Home() {
             </div>
           </div>
         </section>
+          <VectorTransition />
       </main>
+      <ProjectsDisplay />
       <main className="flex-main items-center gap-48 py-48">
-        <div className="flex-main px-4 gap-48">
-          <ProjectsDisplay />
-          {homepage.skills && <Skills skills={homepage.skills} />}
-        </div>
+        {homepage.skills && <Skills skills={homepage.skills} />}
         <Footer />
       </main>
     </>

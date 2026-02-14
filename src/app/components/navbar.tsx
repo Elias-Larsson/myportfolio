@@ -25,7 +25,6 @@ export const Navbar = () => {
   return (
     <nav
       onMouseLeave={() => setHovered(current)}
-      className="pt-4 fixed top-0 z-50 w-full flex justify-center"
     >
       <div className="bg-neutral-300/30 backdrop-blur-[4px] p-2 flex rounded-4xl gap-2 shadow-lg">
         {menuitems.map((item) => (
