@@ -31,7 +31,7 @@ export default function Home() {
         <Navbar />
         <section className="flex flex-row gap-96 px-4">
           <div className="flex flex-col h-full">
-            <h1 className="text-[10dvw] md:text-7xl pb-4">
+            <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl text-center pb-4">
               FUTURE OF WEB <br />
               <span className="text-secondary">DEVELOPMENT.</span>
             </h1>
