@@ -23,49 +23,39 @@ export const ProjectsDisplay = () => {
     fetchProjects();
   }, []);
   return (
-    <section className="flex-main items-center gap-4">
-      <div>
-        <h1 className="text-3xl">Projects</h1>
-        <p className="text-neutral-400 max-w-128 py-4">
-          These are some highlight projects. Each page discusses the purpose of
-          the project, what was learned, and how I came up with solutions.
-        </p>
-      </div>
-      <ul className="flex flex-row justify-center flex-wrap gap-12">
+    <section className="flex-main items-center gap-8 py-48">
+      <h1 className="text-[3dvw]">
+        Featured <span className="text-secondary">Projects</span>
+      </h1>
+      <ul className="grid grid-cols-2 gap-12">
         {projects.map((project) => (
-          <li
-            key={project._id}
-            className="flex flex-col justify-start w-xs gap-1"
-          >
+          <li key={project._id} className="flex flex-col justify-start gap-1">
             {project.projectImage && (
               <Link
                 href={`projects/${project.slug.current}`}
-                className="group projectImage relative overflow-hidden w-xs transition duration-300 ease-in-out rounded-xl hover:shadow-2xl cursor-pointer"
+                className="group relative overflow-hidden transition duration-300 ease-in-out rounded cursor-pointer"
               >
                 <Image
-                  className="width-auto height-auto rounded-xl group-hover:scale-110 transition duration-300 ease-in-out relative z-[0]"
+                  className="rounded-xl group-hover:scale-110 transition duration-300 ease-in-out relative z-[0]"
                   alt={project.title || "Project image"}
-                  src={urlFor(project.projectImage).url()}
-                  width={320}
-                  height={320}
+                  src={urlFor(project.projectImage)
+                    .width(360)
+                    .height(360)
+                    .fit("crop")
+                    .url()}
+                  width={360}
+                  height={360}
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out text-white text-lg underline-animation">
-                  View
+                  <h4 className="text-primary">View</h4>
                 </div>
               </Link>
             )}
-            <h2 className="text-sm text-neutral-400">{project.definition}</h2>
-            <h2 className="text-2xl">{project.title}</h2>
-            <p className="text-neutral-400 pt-2 line-clamp">
-              {project.description}
-            </p>
-
-            <Link
-              href={`projects/${project.slug.current}`}
-              className="underline pt-2 hover:text-red-400 transition duration-300 ease-in-out"
-            >
-              VIEW PROJECT
-            </Link>
+            <div className="flex justify-between">
+              <h2 className="text-2xl">{project.title}</h2>
+              <p>[2]</p>
+            </div>
+            <h2 className="text-sm">{project.definition}</h2>
           </li>
         ))}
       </ul>

@@ -54,7 +54,7 @@ export default function Home() {
         </section>
       </main>
       <main className="flex-main items-center gap-48 py-48">
-        <div className="flex-main px-6 gap-48">
+        <div className="flex-main px-4 gap-48">
           <ProjectsDisplay />
           {homepage.skills && <Skills skills={homepage.skills} />}
         </div>
