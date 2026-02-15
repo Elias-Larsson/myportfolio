@@ -25,7 +25,7 @@ export const ProjectsDisplay = () => {
   }, []);
 
   return (
-    <section className="flex-main items-center gap-8 py-48 px-4 bg-tertiary">
+    <section className="flex-main items-center gap-8 py-48 px-4 bg-tertiary z-10 relative">
       <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl text-center">
         Featured <span className="text-secondary">Projects</span>
       </h1>

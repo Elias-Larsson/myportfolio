@@ -7,7 +7,7 @@ export const VectorTransition = () => {
   const scrollY = useScrollY();
 
   return (
-    <div className="w-full relative h-[420px] overflow-hidden">
+    <div className="w-full relative h-[45vh]">
       {layers.map((layer, i) => (
         <div
           key={i}
