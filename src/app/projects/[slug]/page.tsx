@@ -39,7 +39,8 @@ export default function SlugProjectPage() {
     );
 
   return (
-    <div className="flex-main items-center pb-24">
+    <>
+    <div className="flex-main items-center pb-24 bg-tertiary">
       <Banner
         url={urlFor(project.backgroundImage || "/wavebackground.svg").url()}
       ></Banner>
@@ -80,9 +81,10 @@ export default function SlugProjectPage() {
           )}
           {project.skills && <Techstacks techstacks={project.skills} />}
         </figure>
-        <Navbar/>
       </main>
-      <Footer />
+        <Navbar/>
     </div>
+      <Footer />
+    </>
   );
 }

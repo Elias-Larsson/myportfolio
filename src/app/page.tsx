@@ -8,7 +8,6 @@ import { homepageQuery } from "@/sanity/lib/queries";
 import { Homepage } from "@/sanity/types/homepage";
 import { IconButton } from "./components/iconbutton";
 import { VectorTransition } from "./components/background/depthbg";
-import { ReverseVectorTransition } from "./components/background/reversedepthbg";
 import { useScrollY } from "./hooks/scrollY";
 
 export default function Home() {
@@ -46,9 +45,7 @@ export default function Home() {
             </h1>
             <div className="flex flex-col gap-4 max-w-128">
               <p>
-                My name is Elias Larsson, I am currently studying in Stockholm
-                and building both web applications and backend tools in my spare
-                time.
+                {homepage.description}
               </p>
               <div className="flex flex-row gap-4 items-center">
                 <Button route="https://mail.google.com/mail/?view=cm&fs=1&to=aroezi05@gmail.com">
@@ -64,7 +61,6 @@ export default function Home() {
       </main>
       <ProjectsDisplay />
       <main className="relative flex flex-col items-center justify-between">
-        <ReverseVectorTransition />
         <Footer />
       </main>
     </>
