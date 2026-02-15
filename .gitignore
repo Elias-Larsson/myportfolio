@@ -17,6 +17,10 @@
 /.next/
 /out/
 
+# sanity
+/.sanity/
+/.sanity/runtime/
+
 # production
 /build
 
