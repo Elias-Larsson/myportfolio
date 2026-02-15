@@ -5,6 +5,7 @@ import { Suspense, useEffect, useState } from "react";
 import { Button } from "./button";
 import { footerQuery } from "@/sanity/lib/queries";
 import Image from "next/image";
+import { IconButton } from "./iconbutton";
 
 export const Footer = () => {
   const [footerData, setFooterData] = useState<SanityDocument[]>([]);
@@ -22,26 +23,19 @@ export const Footer = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <footer className="flex-main items-center gap-4 bg-neutral-800 p-6 rounded-2xl shadow-2xl w-fit">
-        <h1 className="text-3xl">Contact</h1>
-        <p className="max-w-128 text-neutral-400">
-          {footerData[0]?.contactDescription}
-        </p>
-        <div className="flex flex-row justify-between items-center w-full gap-2">
-          <div className="flex flex-row gap-2">
+      <footer className="flex-main items-center gap-4 px-4 py-32 rounded-2xl">
+        <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl">
+          HEAR MORE <br />
+          <span className="text-secondary">ABOUT ME</span>
+        </h1>
+          <div className="flex flex-row gap-2 items-center">
             <Button
               name="Contact me"
               route="https://mail.google.com/mail/?view=cm&fs=1&to=aroezi05@gmail.com"
             />
-            <Button
-              route="https://github.com/Elias-Larsson"
-            />
-            <Button
-              route="https://www.linkedin.com/in/elias-h-larsson/"
-            />
+            <IconButton route="linkedin" />
+            <IconButton route="github" />
           </div>
-          <Image src="/awesomeduck.svg" alt="duck" width={48} height={48} />
-        </div>
       </footer>
     </Suspense>
   );

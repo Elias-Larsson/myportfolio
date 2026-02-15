@@ -7,9 +7,9 @@ import { useEffect, useState } from "react";
 import { client } from "@/sanity/lib/client";
 import { homepageQuery } from "@/sanity/lib/queries";
 import { Homepage } from "@/sanity/types/homepage";
-import { Skills } from "./components/skills";
 import { IconButton } from "./components/iconbutton";
 import { VectorTransition } from "./components/background/depthbg";
+import { ReverseVectorTransition } from "./components/background/reversedepthbg";
 
 export default function Home() {
   const [homepage, setHomepage] = useState<Homepage>();
@@ -54,11 +54,12 @@ export default function Home() {
             </div>
           </div>
         </section>
-          <VectorTransition />
+        <VectorTransition />
       </main>
       <ProjectsDisplay />
-      <main className="flex-main items-center gap-48 py-48">
-        {homepage.skills && <Skills skills={homepage.skills} />}
+      <main className="relative flex flex-col items-center justify-between">
+        <ReverseVectorTransition />
+        {/* {homepage.skills && <Skills skills={homepage.skills} />} */}
         <Footer />
       </main>
     </>
