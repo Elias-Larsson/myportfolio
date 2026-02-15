@@ -3,7 +3,7 @@ type Props = {
 };
 export const Banner = ({ url }: Props) => {
   return (
-    <div className="w-full h-1/2 overflow-hidden rounded-b-2xl shadow-2xl">
+    <div className="w-full h-1/2 overflow-hidden">
       <div
         style={{
           backgroundImage: `url(${url ? url : ""})`,
