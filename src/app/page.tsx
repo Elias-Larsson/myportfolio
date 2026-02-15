@@ -45,9 +45,8 @@ export default function Home() {
               </p>
               <div className="flex flex-row gap-4 items-center">
                 <Button
-                  name="Contact me"
                   route="https://mail.google.com/mail/?view=cm&fs=1&to=aroezi05@gmail.com"
-                />
+                >Contact me</Button>
                 <IconButton route="linkedin" />
                 <IconButton route="github" />
               </div>

@@ -62,7 +62,7 @@ export const ProjectsDisplay = () => {
         ))}
       </ul>
       <div className="pt-16">
-        <Button route="projects" name="VIEW MORE ->" />
+        <Button route="projects" color="midnight">VIEW MORE -&gt;</Button>
       </div>
     </section>
   );
