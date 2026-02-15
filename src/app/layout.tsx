@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Ledger } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
-const ledger = Ledger({
+const montserrat = Montserrat({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-body",
@@ -17,7 +17,7 @@ const rubik = localFont({
 export const metadata: Metadata = {
   title: "Elias Larsson | Portfolio",
   description:
-    "I’m an awesome fullstack developer passionate about building secure and user-friendly web experiences.",
+    "I'm an awesome fullstack developer passionate about building secure and user-friendly web experiences.",
   appleWebApp: { title: "Elias" },
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
   openGraph: {
@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${rubik.variable} ${ledger.variable} antialiased overflow-x-hidden`}
+        className={`${rubik.variable} ${montserrat.variable} antialiased overflow-x-hidden`}
       >
         {children}
       </body>
