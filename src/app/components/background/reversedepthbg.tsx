@@ -1,14 +1,13 @@
 "use client";
-import { layers } from "@/app/constants/layersbg";
-import { useScrollY } from "@/app/hooks/scrollY";
+import { reverseLayers } from "@/app/constants/layersbg";
 import Image from "next/image";
 
-export const VectorTransition = () => {
-  const scrollY = useScrollY();
+export const ReverseVectorTransition = () => {
+  const scrollY = 0
 
   return (
-    <div className="w-full relative h-[420px] overflow-hidden">
-      {layers.map((layer, i) => (
+    <div className="w-full relative h-[120px] overflow-hidden">
+      {reverseLayers.map((layer, i) => (
         <div
           key={i}
           className="absolute inset-0 w-full"
