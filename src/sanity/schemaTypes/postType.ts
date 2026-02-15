@@ -24,6 +24,12 @@ export const project = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "featured",
+      title: "project featured",
+      type: "boolean",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "longDescription",
       title: "Project long description",
       type: "text",
@@ -40,9 +46,36 @@ export const project = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "techstack",
+      name: "skills",
       type: "array",
-      of: [{ type: "string" }],
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({
+              name: "label",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "icon",
+              description: "Pick an icon at simpleicons.org",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "url",
+              type: "url",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "color",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+          ],
+        },
+      ],
     }),
     defineField({
       name: "liveDemoLink",
@@ -116,31 +149,31 @@ export const homepage = defineType({
       type: "text",
     }),
     defineField({
-      name: 'skills',
-      type: 'array',
+      name: "skills",
+      type: "array",
       of: [
         {
-          type: 'object',
+          type: "object",
           fields: [
             defineField({
-              name: 'label',
-              type: 'string',
+              name: "label",
+              type: "string",
               validation: (rule) => rule.required(),
             }),
             defineField({
-              name: 'icon',
-              description: 'Pick an icon at simpleicons.org',
-              type: 'string',
+              name: "icon",
+              description: "Pick an icon at simpleicons.org",
+              type: "string",
               validation: (rule) => rule.required(),
             }),
             defineField({
-              name: 'url',
-              type: 'url',
+              name: "url",
+              type: "url",
               validation: (rule) => rule.required(),
             }),
             defineField({
-              name: 'color',
-              type: 'string',
+              name: "color",
+              type: "string",
               validation: (rule) => rule.required(),
             }),
           ],

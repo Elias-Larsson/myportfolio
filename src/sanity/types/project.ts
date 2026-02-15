@@ -17,7 +17,7 @@ export type Project = SanityDocument & {
     _type: "slug";
     current: string;
   };
-  techstack?: string[];
+  skills: { label: string; url: string; color: string; icon: string }[]
   liveDemoLink?: string;
   repoLink?: string;
   backgroundImage?: Image;

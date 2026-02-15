@@ -1,17 +1,21 @@
+import { Icon } from "./techstackIcon";
+
 type Props = {
-  techstacks: string[];
+  techstacks: { label: string; url: string; color: string; icon: string }[];
 };
 export const Techstacks = ({ techstacks }: Props) => {
   return (
-    <div className="flex flex-wrap justify-center gap-3">
-      {techstacks?.map((techstack: string) => (
-        <span
-          key={techstack}
-          className="bg-red-900 px-4 py-2 rounded-xl hover:bg-red-950 transition duration-200 ease-in-out cursor-default"
-        >
-          {techstack}
-        </span>
-      ))}
-    </div>
+   <div className="flex justify-center flex-wrap gap-6">
+          {techstacks?.map((techstack) => (
+            <a
+              href={techstack.url}
+              key={techstack.label}
+              className="flex gap-1 transition hover:text-secondary"
+            >
+              <Icon name={techstack.icon} />
+              {techstack.label}
+            </a>
+          ))}
+        </div>
   );
 };

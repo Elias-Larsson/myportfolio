@@ -29,7 +29,7 @@ export const projectQuery = groq`*[_type == "project" && slug.current == $slug][
   description,
   longDescription,
   slug,
-  techstack,
+  skills,
   liveDemoLink,
   repoLink,
   "backgroundImage": backgroundImage.asset->url,

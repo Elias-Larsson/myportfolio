@@ -22,6 +22,7 @@ export default function SlugProjectPage() {
     async function fetchData() {
       try {
         const project = await client.fetch<Project>(projectQuery, { slug });
+        console.log(project)
         setProject(project);
       } catch (err) {
         console.error(`Error when fetching slug project`, err);
@@ -51,15 +52,13 @@ export default function SlugProjectPage() {
           <nav className="flex flex-row gap-2">
             {project.liveDemoLink && (
               <Button
-                name="Live Demo"
                 route={project.liveDemoLink}
-              />
+              >Live Demo</Button>
             )}
             <Button
               route={project.repoLink || "#"}
-            />
+            >REPO</Button>
           </nav>
-          <p className="max-w-128 text-neutral-400">{project.description}</p>
           <p className="text-base/7 max-w-152">{project.longDescription}</p>
         </section>
         <figure className="flex flex-col items-center gap-4 max-w-96">
@@ -82,7 +81,7 @@ export default function SlugProjectPage() {
               />
             )
           )}
-          {project.techstack && <Techstacks techstacks={project.techstack} />}
+          {project.skills && <Techstacks techstacks={project.skills} />}
         </figure>
       </main>
       <Footer />
