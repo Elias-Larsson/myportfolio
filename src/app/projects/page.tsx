@@ -1,13 +1,11 @@
 import { Footer } from "../components/footer";
-import { Navbar } from "../components/navbar";
-import { ProjectsDisplay } from "../components/projectsdisplay";
+import { ProjectsPage } from "../components/projects/projects";
 
 export default function Projects() {
   return (
-    <main className="flex-main items-center pb-24 pt-48 min-h-screen gap-24">
-      <div className="flex-grow flex items-center justify-center">
-        <Navbar />
-        <ProjectsDisplay />
+    <main className="w-screen bg-tertiary">
+      <div className="flex-grow flex flex-col items-center justify-center">
+        <ProjectsPage />
       </div>
       <Footer />
     </main>

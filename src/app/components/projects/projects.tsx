@@ -6,9 +6,9 @@ import Link from "next/link";
 import { Projects } from "@/sanity/types/project";
 import { projectsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
-import { Button } from "./button";
+import { Navbar } from "../navbar";
 
-export const ProjectsDisplay = () => {
+export const ProjectsPage = () => {
   const [projects, setProjects] = useState<Projects[]>([]);
 
   useEffect(() => {
@@ -25,17 +25,15 @@ export const ProjectsDisplay = () => {
   }, []);
 
   return (
-    <section className="flex-main items-center gap-8 py-48 px-4 bg-tertiary z-10 relative">
-       <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl text-center">
-        Featured <span className="text-secondary">Projects</span>
+    <section className="flex-main items-center gap-12 py-48 px-4 bg-tertiary z-10 relative">
+      <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl text-center">
+        all my <span className="text-secondary">Projects</span>
       </h1>
-      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-24">
-        {projects
-          .filter((project) => project.featured)
-          .map((project, i) => (
-            <li key={project._id} className="flex flex-col justify-start gap-2">
-              {project.projectImage && (
-                <Link
+      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-24 pb-16">
+        {projects.map((project, i) => (
+          <li key={project._id} className="flex flex-col justify-start gap-2">
+            {project.projectImage && (
+              <Link
                 href={`projects/${project.slug.current}`}
                 className="group relative overflow-hidden transition duration-300 ease-in-out rounded cursor-pointer"
               >
@@ -57,15 +55,13 @@ export const ProjectsDisplay = () => {
             )}
             <div className="flex justify-between">
               <h2 className=" text-xl md:text-2xl">{project.title}</h2>
-              <h4 className="text-sm">[{1+i++}]</h4>
+              <h4 className="text-sm">[{1 + i++}]</h4>
             </div>
             <p className="text-sm">{project.definition}</p>
           </li>
         ))}
       </ul>
-      <div className="pt-16">
-        <Button route="projects">VIEW MORE -&gt;</Button>
-      </div>
+      <Navbar />
     </section>
   );
 };

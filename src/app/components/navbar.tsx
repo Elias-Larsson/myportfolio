@@ -1,62 +1,13 @@
-"use client";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { Button } from "./button";
 
 export const Navbar = () => {
-  const pathname = usePathname();
-  const menuitems = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
-  ];
-  const current =
-    menuitems.find((item) => item.href === pathname)?.name || null;
-  const [hovered, setHovered] = useState<string | null>(current);
-
-  const scrollToBottom = () => {
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth",
-    });
-  };
+ 
 
   return (
-    <nav
-      onMouseLeave={() => setHovered(current)}
-    >
-      <div className="bg-neutral-300/30 backdrop-blur-[4px] p-2 flex rounded-4xl gap-2 shadow-lg">
-        {menuitems.map((item) => (
-          <Link
-            key={item.name}
-            href={item.href}
-            onMouseEnter={() => setHovered(item.name)}
-            className="navbarList relative cursor-pointer"
-          >
-            {item.name}
-            {hovered === item.name && (
-              <motion.div
-                className="bg-neutral-300/30 absolute inset-0 rounded-4xl"
-                layoutId="hover"
-              ></motion.div>
-            )}
-          </Link>
-        ))}
-        <div
-          onMouseEnter={() => setHovered("Contact")}
-          className="navbarList relative cursor-pointer"
-          onClick={scrollToBottom}
-        >
-          Contact
-          {hovered === "Contact" && (
-            <motion.div
-              className="bg-neutral-300/30 absolute inset-0 rounded-4xl"
-              layoutId="hover"
-            ></motion.div>
-          )}
-        </div>
-      </div>
+    <nav className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+      <Button route="about">about me</Button>
+      <Button route="/">home</Button>
+      <Button route="projects">projects</Button>
     </nav>
   );
 };
