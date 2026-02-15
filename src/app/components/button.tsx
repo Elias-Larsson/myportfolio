@@ -9,7 +9,7 @@ export const Button = ({ children, route, }: Props) => {
   return (
     <Link
       href={route}
-      className="group relative inline-block overflow-hidden w-fit bg-tertiary px-4 py-2 rounded-sm border-white/5 border hover:bg-primary transition duration-300 ease-in-out"
+      className="group relative inline-block overflow-hidden w-fit bg-tertiary px-4 py-2 rounded-sm border-white/10 border hover:bg-primary transition duration-300 ease-in-out"
     >
       <span className="relative block overflow-hidden">
         {/* Visible text */}
