@@ -24,14 +24,13 @@ export const ProjectsDisplay = () => {
     fetchProjects();
   }, []);
 
-  let projectCount = 0;
   return (
     <section className="flex-main items-center gap-8 py-48 px-4 bg-tertiary">
       <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl text-center">
         Featured <span className="text-secondary">Projects</span>
       </h1>
       <ul className="grid grid-cols-1 lg:grid-cols-2 gap-24">
-        {projects.map((project) => (
+        {projects.map((project, i) => (
           <li key={project._id} className="flex flex-col justify-start gap-2">
             {project.projectImage && (
               <Link
@@ -56,7 +55,7 @@ export const ProjectsDisplay = () => {
             )}
             <div className="flex justify-between">
               <h2 className=" text-xl md:text-2xl">{project.title}</h2>
-              <h4 className="text-sm">[{projectCount++}]</h4>
+              <h4 className="text-sm">[{1+i++}]</h4>
             </div>
             <p className="text-sm">{project.definition}</p>
           </li>
