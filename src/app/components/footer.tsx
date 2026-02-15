@@ -5,7 +5,7 @@ import { IconButton } from "./iconbutton";
 export const Footer = () => {
 
   return (
-      <footer className="flex-main items-center gap-4 px-4 py-32 rounded-2xl">
+      <footer className="flex-main items-center gap-4 px-4 py-32 md:py-56 rounded-2xl">
         <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl text-center">
           HEAR MORE <br />
           <span className="text-secondary">ABOUT ME</span>
