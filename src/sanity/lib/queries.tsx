@@ -17,7 +17,8 @@ export const footerQuery = groq`*[_type == "homepage"]{
 export const projectsQuery = groq`*[_type == "project"]{
   _id, 
   title, 
-  definition, 
+  definition,
+  featured,
   slug, 
   description,
   "projectImage": projectImage.asset->url

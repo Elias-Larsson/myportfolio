@@ -4,6 +4,7 @@ import { Image, Slug } from "sanity";
 export type Projects = SanityDocument & {
   title: string;
   definition: string;
+  featured: boolean;
   description: string;
   slug: Slug;
   projectImage: Image;

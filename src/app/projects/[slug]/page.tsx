@@ -1,4 +1,3 @@
-// app/project/[slug]/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -22,7 +21,6 @@ export default function SlugProjectPage() {
     async function fetchData() {
       try {
         const project = await client.fetch<Project>(projectQuery, { slug });
-        console.log(project)
         setProject(project);
       } catch (err) {
         console.error(`Error when fetching slug project`, err);
