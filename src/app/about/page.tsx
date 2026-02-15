@@ -59,6 +59,8 @@ export default function About() {
             />
           </figure>
         )}
+        {/* {homepage.skills && <Skills skills={homepage.skills} />} */}
+        
       </section>
     </main>
   );

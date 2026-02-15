@@ -10,10 +10,10 @@ export const Techstacks = ({ techstacks }: Props) => {
             <a
               href={techstack.url}
               key={techstack.label}
-              className="flex gap-1 transition hover:text-secondary"
+              className="flex gap-1"
             >
               <Icon name={techstack.icon} />
-              {techstack.label}
+              <p>{techstack.label}</p>
             </a>
           ))}
         </div>
