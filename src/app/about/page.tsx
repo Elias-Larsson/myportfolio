@@ -36,6 +36,7 @@ export default function About() {
             <p className="text-neutral-400 py-4">
               {aboutData.description || "No description available"}
             </p>
+            <Image width={100} height={100} src="awesomeduck.svg" alt="duck" className="rotate-10 mx-8"/>
           </div>
           {aboutData.profile && (
             <figure className="w-full object-cover object-center offset-background">
