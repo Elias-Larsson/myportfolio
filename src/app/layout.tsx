@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import localFont from "next/font/local";
+import "lenis/dist/lenis.css";
+import { SmoothScroll } from "./components/smoothscroll";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -42,6 +44,7 @@ export default function RootLayout({
       <body
         className={`${rubik.variable} ${montserrat.variable} antialiased overflow-x-hidden`}
       >
+        <SmoothScroll />
         {children}
       </body>
     </html>
