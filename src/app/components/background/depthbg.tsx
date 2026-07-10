@@ -22,7 +22,6 @@ export const VectorTransition = () => {
             alt={`parallax layer ${i}`}
             fill
             className="object-cover object-center"
-            priority={i === 0}
           />
         </div>
       ))}

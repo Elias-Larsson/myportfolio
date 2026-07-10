@@ -1,4 +1,3 @@
-"use client";
 import { ReverseVectorTransition } from "./background/reversedepthbg";
 import { Button } from "./button";
 import { IconButton } from "./iconbutton";

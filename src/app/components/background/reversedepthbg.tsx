@@ -1,10 +1,7 @@
-"use client";
 import { reverseLayers } from "@/app/constants/layersbg";
 import Image from "next/image";
 
 export const ReverseVectorTransition = () => {
-  const scrollY = 0
-
   return (
     <div className="w-full relative h-[120px] overflow-hidden">
       {reverseLayers.map((layer, i) => (
@@ -12,7 +9,7 @@ export const ReverseVectorTransition = () => {
           key={i}
           className="absolute inset-0 w-full"
           style={{
-            transform: `translateY(${layer.offsetY + scrollY * layer.speed}px)`,
+            transform: `translateY(${layer.offsetY}px)`,
             zIndex: i,
           }}
         >
@@ -21,7 +18,6 @@ export const ReverseVectorTransition = () => {
             alt={`parallax layer ${i}`}
             fill
             className="object-cover object-center"
-            priority={i === 0}
           />
         </div>
       ))}
