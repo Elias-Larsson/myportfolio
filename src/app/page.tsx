@@ -8,6 +8,7 @@ import { homepageQuery } from "@/sanity/lib/queries";
 import { Homepage } from "@/sanity/types/homepage";
 import { IconButton } from "./components/iconbutton";
 import { VectorTransition } from "./components/background/depthbg";
+import { Experience } from "./components/experience";
 import { useScrollY } from "./hooks/scrollY";
 
 export default function Home() {
@@ -66,6 +67,7 @@ export default function Home() {
         </section>
         <VectorTransition />
       </main>
+      <Experience />
       <ProjectsDisplay />
       <main className="relative flex flex-col items-center justify-between">
         <Footer />

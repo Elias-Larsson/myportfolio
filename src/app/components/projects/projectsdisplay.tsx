@@ -22,13 +22,19 @@ export const ProjectsDisplay = () => {
     }
 
     fetchProjects();
-  }, []);
+  }, []);z
 
   return (
-    <section className="flex-main items-center gap-12 py-48 px-4 bg-tertiary z-10 relative">
-      <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl text-center">
-        Featured <span className="text-secondary">Projects</span>
-      </h1>
+    <section className="flex-main items-center gap-12 pb-48 px-4 bg-tertiary z-10 relative">
+      <header className="max-w-2xl text-center">
+        <h1 className="text-[10.5dvw] sm:text-6xl md:text-7xl">
+          Featured <span className="text-secondary">Projects</span>
+        </h1>
+        <p className="mx-auto mt-5 max-w-xl text-primary/75">
+          A selection of projects that show how I turn ideas into secure,
+          user-friendly web experiences.
+        </p>
+      </header>
       <ul className="grid grid-cols-1 lg:grid-cols-2 gap-24 pb-16">
         {projects
           .filter((project) => project.featured)
