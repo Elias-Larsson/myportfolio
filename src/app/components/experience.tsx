@@ -1,39 +1,12 @@
-const experience = [
-  {
-    company: "Sprinto",
-    role: "Full-stack Developer",
-    period: "[Add dates]",
-    summary: "Full-stack development experience at Sprinto.",
-    detail: "[Add a key responsibility, outcome, or technology you worked with]",
-  },
-  {
-    company: "Järfälla Hus",
-    role: "Full-stack Developer — Client Project",
-    period: "[Add project dates]",
-    summary: "Full-stack development on a project for Järfälla Hus.",
-    detail: "[Add what you built, delivered, or improved for the client]",
-  },
-];
+import type { ProfessionalProfile } from "@/sanity/types/professionalProfile";
 
-const education = [
-  {
-    school: "KTH Royal Institute of Technology",
-    programme: "[Add programme]",
-    period: "Current · [Add start date]",
-  },
-  {
-    school: "Chas Academy",
-    programme: "[Add programme / specialisation]",
-    period: "[Add dates]",
-  },
-  {
-    school: "Östra gymnasium",
-    programme: "[Add programme / specialisation]",
-    period: "[Add dates]",
-  },
-];
+type Props = {
+  profile: ProfessionalProfile | null;
+};
 
-export const Experience = () => {
+export const Experience = ({ profile }: Props) => {
+  if (!profile) return null;
+
   return (
     <section
       aria-labelledby="experience-heading"
@@ -42,11 +15,10 @@ export const Experience = () => {
       <div className="flex w-full max-w-6xl flex-col gap-12">
         <header className="mx-auto max-w-2xl text-center">
           <h1 id="experience-heading" className="text-[10.5dvw] sm:text-6xl md:text-7xl">
-            Experience &amp; <span className="text-secondary">Education</span>
+            {profile.heading} <span className="text-secondary">{profile.headingAccent}</span>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-primary/75">
-            Full-stack development experience across product work and client projects,
-            alongside ongoing studies in technology.
+            {profile.description}
           </p>
         </header>
 
@@ -55,7 +27,7 @@ export const Experience = () => {
             <p className="text-sm uppercase tracking-[0.2em] text-secondary lg:pl-1">
               Experience
             </p>
-            {experience.map((item, index) => (
+            {profile.experiences?.map((item, index) => (
               <article
                 key={item.company}
                 className="rounded-sm border border-white/10 bg-midnight p-6 md:p-8"
@@ -68,10 +40,12 @@ export const Experience = () => {
                   </div>
                   <p className="text-sm text-primary/60">{item.period}</p>
                 </div>
-                <p className="mt-8 max-w-2xl">{item.summary}</p>
-                <p className="mt-3 border-l-2 border-secondary pl-4 text-sm text-primary/65">
-                  {item.detail}
-                </p>
+                {item.summary && <p className="mt-8 max-w-2xl">{item.summary}</p>}
+                {item.detail && (
+                  <p className="mt-3 border-l-2 border-secondary pl-4 text-sm text-primary/65">
+                    {item.detail}
+                  </p>
+                )}
               </article>
             ))}
           </div>
@@ -82,14 +56,12 @@ export const Experience = () => {
             </p>
             <aside className="flex-1 rounded-sm border border-white/10 bg-midnight p-6 md:p-8">
               <div className="flex flex-col divide-y divide-white/10">
-                {education.map((item, index) => (
+                {profile.education?.map((item) => (
                   <article key={item.school} className="py-6 first:pt-0 last:pb-0">
-                    <p className="text-sm text-secondary">
-                      {index === 0 ? "Current" : "Previous studies"}
-                    </p>
+                    {item.status && <p className="text-sm text-secondary">{item.status}</p>}
                     <h2 className="mt-2 text-xl">{item.school}</h2>
-                    <p className="mt-2 text-primary/75">{item.programme}</p>
-                    <p className="mt-3 text-sm text-primary/60">{item.period}</p>
+                    {item.programme && <p className="mt-2 text-primary/75">{item.programme}</p>}
+                    {item.period && <p className="mt-3 text-sm text-primary/60">{item.period}</p>}
                   </article>
                 ))}
               </div>

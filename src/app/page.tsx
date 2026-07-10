@@ -4,8 +4,9 @@ import { ProjectsDisplay } from "./components/projects/projectsdisplay";
 import { Footer } from "./components/footer";
 import { useEffect, useState } from "react";
 import { client } from "@/sanity/lib/client";
-import { homepageQuery } from "@/sanity/lib/queries";
+import { homepageQuery, professionalProfileQuery } from "@/sanity/lib/queries";
 import { Homepage } from "@/sanity/types/homepage";
+import { ProfessionalProfile } from "@/sanity/types/professionalProfile";
 import { IconButton } from "./components/iconbutton";
 import { VectorTransition } from "./components/background/depthbg";
 import { Experience } from "./components/experience";
@@ -13,18 +14,23 @@ import { useScrollY } from "./hooks/scrollY";
 
 export default function Home() {
   const [homepage, setHomepage] = useState<Homepage>();
+  const [professionalProfile, setProfessionalProfile] = useState<ProfessionalProfile | null>(null);
   const scrollY = useScrollY();
 
   useEffect(() => {
-    async function fetchProjects() {
+    async function fetchContent() {
       try {
-        const data = await client.fetch<Homepage>(homepageQuery);
-        setHomepage(data);
+        const [homepageData, profileData] = await Promise.all([
+          client.fetch<Homepage>(homepageQuery),
+          client.fetch<ProfessionalProfile | null>(professionalProfileQuery),
+        ]);
+        setHomepage(homepageData);
+        setProfessionalProfile(profileData);
       } catch (err) {
-        console.error("Error fetching homepage data:", err);
+        console.error("Error fetching homepage content:", err);
       }
     }
-    fetchProjects();
+    fetchContent();
   }, []);
 
   if (!homepage) return <div>Loading...</div>;
@@ -67,7 +73,7 @@ export default function Home() {
         </section>
         <VectorTransition />
       </main>
-      <Experience />
+      <Experience profile={professionalProfile} />
       <ProjectsDisplay />
       <main className="relative flex flex-col items-center justify-between">
         <Footer />

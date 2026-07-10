@@ -22,7 +22,7 @@ export const ProjectsDisplay = () => {
     }
 
     fetchProjects();
-  }, []);z
+  }, []);
 
   return (
     <section className="flex-main items-center gap-12 pb-48 px-4 bg-tertiary z-10 relative">

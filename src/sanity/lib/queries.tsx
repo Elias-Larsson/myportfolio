@@ -10,6 +10,27 @@ export const aboutQuery = groq`*[_type=="about"]{
   "profile": profileImage.asset->url,
 }[0]`;
 
+export const professionalProfileQuery = groq`*[_id == "professionalProfile"][0]{
+  heading,
+  headingAccent,
+  description,
+  experiences[]{
+    _key,
+    company,
+    role,
+    period,
+    summary,
+    detail
+  },
+  education[]{
+    _key,
+    school,
+    programme,
+    period,
+    status
+  }
+}`;
+
 export const footerQuery = groq`*[_type == "homepage"]{
     contactDescription
 }`;
