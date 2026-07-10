@@ -1,6 +1,4 @@
-"use client";
 import { client } from "@/sanity/lib/client";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Projects } from "@/sanity/types/project";
@@ -8,21 +6,12 @@ import { projectsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { Navbar } from "../navbar";
 
-export const ProjectsDisplay = () => {
-  const [projects, setProjects] = useState<Projects[]>([]);
+const revalidate = 60;
 
-  useEffect(() => {
-    async function fetchProjects() {
-      try {
-        const data = await client.fetch<Projects[]>(projectsQuery);
-        setProjects(data);
-      } catch (err) {
-        console.error("Error fetching projects:", err);
-      }
-    }
-
-    fetchProjects();
-  }, []);
+export const ProjectsDisplay = async () => {
+  const projects = await client.fetch<Projects[]>(projectsQuery, {}, {
+    next: { revalidate },
+  });
 
   return (
     <section className="flex-main items-center gap-12 pb-48 px-4 bg-tertiary z-10 relative">

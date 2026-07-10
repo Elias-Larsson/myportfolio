@@ -1,9 +1,9 @@
 "use client";
 
+import type Lenis from "lenis";
 import type { LenisOptions } from "lenis";
-import { ReactLenis } from "lenis/react";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const options: LenisOptions = {
   anchors: true,
@@ -17,19 +17,45 @@ const options: LenisOptions = {
 
 export const SmoothScroll = () => {
   const pathname = usePathname();
-  const [reduceMotion, setReduceMotion] = useState(true);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updatePreference = () => setReduceMotion(mediaQuery.matches);
+    let instance: Lenis | undefined;
+    let cancelled = false;
+    let requestId = 0;
 
-    updatePreference();
-    mediaQuery.addEventListener("change", updatePreference);
+    const start = async () => {
+      const id = ++requestId;
 
-    return () => mediaQuery.removeEventListener("change", updatePreference);
-  }, []);
+      if (mediaQuery.matches) return;
 
-  if (reduceMotion || pathname.startsWith("/studio")) return null;
+      const { default: Lenis } = await import("lenis");
 
-  return <ReactLenis root options={options} />;
+      if (cancelled || mediaQuery.matches || id !== requestId) return;
+
+      instance = new Lenis(options);
+    };
+
+    const updatePreference = () => {
+      requestId += 1;
+      instance?.destroy();
+      instance = undefined;
+
+      if (!mediaQuery.matches) void start();
+    };
+
+    if (!pathname.startsWith("/studio")) {
+      updatePreference();
+      mediaQuery.addEventListener("change", updatePreference);
+    }
+
+    return () => {
+      cancelled = true;
+      requestId += 1;
+      instance?.destroy();
+      mediaQuery.removeEventListener("change", updatePreference);
+    };
+  }, [pathname]);
+
+  return null;
 };

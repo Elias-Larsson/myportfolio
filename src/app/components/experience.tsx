@@ -1,10 +1,14 @@
+import { client } from "@/sanity/lib/client";
+import { professionalProfileQuery } from "@/sanity/lib/queries";
 import type { ProfessionalProfile } from "@/sanity/types/professionalProfile";
 
-type Props = {
-  profile: ProfessionalProfile | null;
-};
+const revalidate = 60;
 
-export const Experience = ({ profile }: Props) => {
+export const Experience = async () => {
+  const profile = await client.fetch<ProfessionalProfile | null>(professionalProfileQuery, {}, {
+    next: { revalidate },
+  });
+
   if (!profile) return null;
 
   return (
