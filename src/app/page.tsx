@@ -30,7 +30,14 @@ export default function Home() {
   return (
     <>
       <main className="relative flex flex-col items-center justify-between min-h-screen">
-        <div></div>
+        
+        <span
+          aria-hidden="true"
+          className="z-20 absolute rounded-full bg-secondary size-[20vw] lg:size-[10vw] right-8 top-8"
+          style={{
+            transform: `translateY(${scrollY * 0.55}px)`,
+          }}
+        />
         <section
           className="px-4 flex pt-10 items-end flex-grow overflow-visible relative z-10"
           style={{
