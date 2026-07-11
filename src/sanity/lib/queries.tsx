@@ -5,10 +5,75 @@ export const homepageQuery = groq`*[_type == "homepage"]{
   description, 
   skills,
   }[0]`;
-export const aboutQuery = groq`*[_type=="about"]{
-  description, 
-  "profile": profileImage.asset->url,
-}[0]`;
+export const aboutQuery = groq`*[_type == "about"] | order(_updatedAt desc)[0]{
+  _id,
+  heroEyebrow,
+  heading,
+  headingAccent,
+  description,
+  profileImage,
+  "profileLqip": profileImage.asset->metadata.lqip,
+  "profileDimensions": profileImage.asset->metadata.dimensions{
+    width,
+    height,
+    aspectRatio
+  },
+  "profileAlt": profileImageAlt,
+  storyHeading,
+  storyHeadingAccent,
+  storyIntroduction,
+  "storySections": coalesce(storySections[]{
+    _key,
+    eyebrow,
+    title,
+    body,
+    layout,
+    media{
+      kind,
+      image,
+      posterImage,
+      alt,
+      caption,
+      "imageLqip": image.asset->metadata.lqip,
+      "imageDimensions": image.asset->metadata.dimensions{
+        width,
+        height,
+        aspectRatio
+      },
+      "videoUrl": videoFile.asset->url,
+      "videoMimeType": videoFile.asset->mimeType,
+      "captionsUrl": captionsFile.asset->url,
+      captionsLanguage
+    }
+  }, []),
+  hobbiesHeading,
+  hobbiesHeadingAccent,
+  hobbiesDescription,
+  "hobbies": coalesce(hobbies[]{
+    _key,
+    title,
+    description,
+    featured,
+    "media": coalesce(media[]{
+      _key,
+      kind,
+      image,
+      posterImage,
+      alt,
+      caption,
+      "imageLqip": image.asset->metadata.lqip,
+      "imageDimensions": image.asset->metadata.dimensions{
+        width,
+        height,
+        aspectRatio
+      },
+      "videoUrl": videoFile.asset->url,
+      "videoMimeType": videoFile.asset->mimeType,
+      "captionsUrl": captionsFile.asset->url,
+      captionsLanguage
+    }, [])
+  }, [])
+}`;
 
 export const professionalProfileQuery = groq`*[_id == "professionalProfile"][0]{
   heading,
