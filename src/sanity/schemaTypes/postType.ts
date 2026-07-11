@@ -105,23 +105,6 @@ export const project = defineType({
     }),
   ],
 });
-export const about = defineType({
-  name: "about",
-  title: "About",
-  type: "document",
-  fields: [
-    defineField({
-      name: "description",
-      type: "text",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "profileImage",
-      title: "Profile Image",
-      type: "image",
-    }),
-  ],
-});
 export const homepage = defineType({
   name: "homepage",
   title: "Homepage",
