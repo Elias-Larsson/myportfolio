@@ -4,7 +4,7 @@ import { useScrollY } from "@/app/hooks/scrollY";
 import Image from "next/image";
 
 export const VectorTransition = () => {
-  const scrollY = useScrollY();
+  const scrollY = useScrollY({ disabledOnMobile: true });
 
   return (
     <div className="w-full relative h-[45vh]">

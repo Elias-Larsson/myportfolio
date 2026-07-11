@@ -10,13 +10,13 @@ type Props = {
 };
 
 export const Hero = ({ description }: Props) => {
-  const scrollY = useScrollY();
+  const scrollY = useScrollY({ disabledOnMobile: true });
 
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-between">
       <span
         aria-hidden="true"
-        className="absolute right-8 top-8 z-20 size-[20vw] rounded-full bg-secondary lg:size-[10vw]"
+        className="absolute right-8 top-8 z-20 hidden size-[20vw] rounded-full bg-secondary sm:block lg:size-[10vw]"
         style={{
           transform: `translateY(${scrollY * 0.55}px)`,
         }}
