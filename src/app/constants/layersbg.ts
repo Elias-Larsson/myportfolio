@@ -7,9 +7,9 @@ export const layers = [
 ];
 
 export const reverseLayers = [
-  // { src: "/depthBackground/reverse/Vector.svg", speed: 0.45, offsetY: -1050 },
-  // { src: "/depthBackground/reverse/Vector-1.svg", speed: 0.3, offsetY: -800 },
-  // { src: "/depthBackground/reverse/Vector-2.svg", speed: 0.225, offsetY: -660 },
-  // { src: "/depthBackground/reverse/Vector-3.svg", speed: 0.15, offsetY: -520 },
-  { src: "/depthBackground/reverse/Vector-4.svg", speed: 0, offsetY: 0 },
+  { src: "/depthBackground/reverse/Vector.svg", height: 300, speed: 0.55 },
+  { src: "/depthBackground/reverse/Vector-1.svg", height: 238, speed: 0.375 },
+  { src: "/depthBackground/reverse/Vector-2.svg", height: 207, speed: 0.2 },
+  { src: "/depthBackground/reverse/Vector-3.svg", height: 151, speed: 0.1 },
+  { src: "/depthBackground/reverse/Vector-4.svg", height: 75, speed: 0 },
 ];
