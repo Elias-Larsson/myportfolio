@@ -30,17 +30,8 @@ export type AboutStorySection = {
   media: AboutMedia | null;
 };
 
-export type AboutHobby = {
-  _key: string;
-  title: string;
-  description: string;
-  featured: boolean | null;
-  media: AboutMedia[];
-};
-
 export type About = {
   _id: string;
-  heroEyebrow: string | null;
   heading: string | null;
   headingAccent: string | null;
   description: string;
@@ -52,8 +43,4 @@ export type About = {
   storyHeadingAccent: string | null;
   storyIntroduction: string | null;
   storySections: AboutStorySection[];
-  hobbiesHeading: string | null;
-  hobbiesHeadingAccent: string | null;
-  hobbiesDescription: string | null;
-  hobbies: AboutHobby[];
 };
