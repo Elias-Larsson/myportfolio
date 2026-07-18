@@ -3,7 +3,6 @@ import { project, homepage } from "./postType";
 import { professionalProfile } from "./professionalProfile";
 import {
   about,
-  aboutHobby,
   aboutMedia,
   aboutStorySection,
 } from "./aboutType";
@@ -16,6 +15,5 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     professionalProfile,
     aboutMedia,
     aboutStorySection,
-    aboutHobby,
   ],
 };

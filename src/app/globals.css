@@ -58,35 +58,6 @@ p {
   @apply flex flex-col justify-center;
 }
 
-.about-orbit {
-  animation: about-orbit 8s ease-in-out infinite;
-  transform-origin: 45% 55%;
-}
-
-.about-float {
-  animation: about-float 5.5s ease-in-out infinite;
-}
-
-@keyframes about-orbit {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(-0.75rem, 1rem, 0) scale(1.04);
-  }
-}
-
-@keyframes about-float {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) rotate(-12deg);
-  }
-  50% {
-    transform: translate3d(0, -0.65rem, 0) rotate(-7deg);
-  }
-}
-
 @keyframes about-reveal {
   from {
     opacity: 0;
@@ -107,8 +78,6 @@ p {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-orbit,
-  .about-float,
   .about-reveal {
     animation: none;
     transform: none;

@@ -7,7 +7,6 @@ export const homepageQuery = groq`*[_type == "homepage"]{
   }[0]`;
 export const aboutQuery = groq`*[_type == "about"] | order(_updatedAt desc)[0]{
   _id,
-  heroEyebrow,
   heading,
   headingAccent,
   description,
@@ -45,33 +44,6 @@ export const aboutQuery = groq`*[_type == "about"] | order(_updatedAt desc)[0]{
       "captionsUrl": captionsFile.asset->url,
       captionsLanguage
     }
-  }, []),
-  hobbiesHeading,
-  hobbiesHeadingAccent,
-  hobbiesDescription,
-  "hobbies": coalesce(hobbies[]{
-    _key,
-    title,
-    description,
-    featured,
-    "media": coalesce(media[]{
-      _key,
-      kind,
-      image,
-      posterImage,
-      alt,
-      caption,
-      "imageLqip": image.asset->metadata.lqip,
-      "imageDimensions": image.asset->metadata.dimensions{
-        width,
-        height,
-        aspectRatio
-      },
-      "videoUrl": videoFile.asset->url,
-      "videoMimeType": videoFile.asset->mimeType,
-      "captionsUrl": captionsFile.asset->url,
-      captionsLanguage
-    }, [])
   }, [])
 }`;
 

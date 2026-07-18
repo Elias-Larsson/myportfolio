@@ -161,51 +161,6 @@ export const aboutStorySection = defineType({
   },
 });
 
-export const aboutHobby = defineType({
-  name: "aboutHobby",
-  title: "Hobby",
-  type: "object",
-  fields: [
-    defineField({
-      name: "title",
-      title: "Hobby",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "description",
-      title: "Why it matters to me",
-      type: "text",
-      rows: 5,
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "featured",
-      title: "Feature this hobby",
-      description: "Featured hobbies span the full gallery width.",
-      type: "boolean",
-    }),
-    defineField({
-      name: "media",
-      title: "Photos and videos",
-      type: "array",
-      of: [defineArrayMember({ type: "aboutMedia" })],
-      validation: (rule) => rule.required().min(1),
-    }),
-  ],
-  preview: {
-    select: {
-      title: "title",
-      subtitle: "description",
-      image: "media.0.image",
-      poster: "media.0.posterImage",
-    },
-    prepare({ title, subtitle, image, poster }) {
-      return { title, subtitle, media: image || poster };
-    },
-  },
-});
-
 export const about = defineType({
   name: "about",
   title: "About",
@@ -213,16 +168,8 @@ export const about = defineType({
   groups: [
     { name: "introduction", title: "Introduction", default: true },
     { name: "story", title: "My story" },
-    { name: "hobbies", title: "Hobbies" },
   ],
   fields: [
-    defineField({
-      name: "heroEyebrow",
-      title: "Hero label",
-      description: "A short line above the main heading.",
-      type: "string",
-      group: "introduction",
-    }),
     defineField({
       name: "heading",
       title: "Hero heading",
@@ -285,34 +232,6 @@ export const about = defineType({
       type: "array",
       of: [defineArrayMember({ type: "aboutStorySection" })],
       group: "story",
-    }),
-    defineField({
-      name: "hobbiesHeading",
-      title: "Hobbies heading",
-      description: "The light-coloured part of the heading.",
-      type: "string",
-      group: "hobbies",
-    }),
-    defineField({
-      name: "hobbiesHeadingAccent",
-      title: "Highlighted hobbies heading",
-      description: "The red part of the heading.",
-      type: "string",
-      group: "hobbies",
-    }),
-    defineField({
-      name: "hobbiesDescription",
-      title: "Hobbies introduction",
-      type: "text",
-      rows: 4,
-      group: "hobbies",
-    }),
-    defineField({
-      name: "hobbies",
-      title: "Hobbies",
-      type: "array",
-      of: [defineArrayMember({ type: "aboutHobby" })],
-      group: "hobbies",
     }),
   ],
   preview: {

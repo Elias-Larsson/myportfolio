@@ -5,7 +5,6 @@ import { urlFor } from "@/sanity/lib/image";
 import { aboutQuery } from "@/sanity/lib/queries";
 import type {
   About,
-  AboutHobby,
   AboutMedia,
   AboutStorySection,
 } from "@/sanity/types/about";
@@ -155,64 +154,12 @@ function StoryChapter({
   );
 }
 
-function HobbyCard({ hobby, index }: { hobby: AboutHobby; index: number }) {
-  const media = hobby.media.filter(hasVisual).slice(0, 3);
-  const hasSeveralVisuals = media.length > 1;
-
-  return (
-    <article
-      className={`about-reveal overflow-hidden rounded-sm border border-white/10 bg-midnight ${
-        hobby.featured ? "md:col-span-2" : ""
-      }`}
-    >
-      {media.length > 0 && (
-        <div className="grid gap-px bg-white/10 sm:grid-cols-2">
-          {media.map((item, mediaIndex) => (
-            <MediaFrame
-              className={
-                hasSeveralVisuals && mediaIndex === 0 ? "sm:col-span-2" : ""
-              }
-              imageClassName={
-                hasSeveralVisuals && mediaIndex > 0
-                  ? "aspect-[4/3]"
-                  : hobby.featured
-                    ? "aspect-[16/8]"
-                    : "aspect-[4/3]"
-              }
-              key={item._key || `${hobby._key}-media-${mediaIndex}`}
-              media={item}
-              sizes={
-                hobby.featured || (hasSeveralVisuals && mediaIndex === 0)
-                  ? "(min-width: 768px) 75vw, 100vw"
-                  : "(min-width: 768px) 40vw, 100vw"
-              }
-            />
-          ))}
-        </div>
-      )}
-
-      <div className="p-6 md:p-8">
-        <div className="flex items-start justify-between gap-6">
-          <h3 className="text-2xl md:text-3xl">{hobby.title}</h3>
-          <span className="shrink-0 text-xs text-secondary">
-            [{String(index + 1).padStart(2, "0")}]
-          </span>
-        </div>
-        <p className="mt-4 max-w-2xl whitespace-pre-line leading-7 text-primary/65">
-          {hobby.description}
-        </p>
-      </div>
-    </article>
-  );
-}
-
 export default async function AboutPage() {
   const about = await client.fetch<About | null>(aboutQuery, {}, {
     next: { revalidate },
   });
 
   const storySections = about?.storySections ?? [];
-  const hobbies = about?.hobbies ?? [];
   const profileUrl = about?.profileImage
     ? urlFor(about.profileImage).width(1000).height(1250).fit("crop").url()
     : null;
@@ -221,16 +168,7 @@ export default async function AboutPage() {
     <>
       <main className="overflow-hidden bg-tertiary">
         <section className="relative isolate px-4 pb-32 pt-24 md:pb-48 md:pt-36">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 -z-20 opacity-35 [background-image:radial-gradient(circle_at_15%_15%,rgba(255,56,49,0.15),transparent_28%),linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] [background-size:auto,5rem_5rem,5rem_5rem]"
-          />
-
           <div className="mx-auto w-full max-w-6xl">
-            <p className="mb-8 text-xs uppercase tracking-[0.24em] text-secondary sm:text-sm">
-              {about?.heroEyebrow || "Developer · student · endlessly curious"}
-            </p>
-
             <div className="grid items-end gap-16 lg:grid-cols-[minmax(0,1.08fr)_minmax(20rem,0.72fr)] lg:gap-20">
               <div className="relative z-10">
                 <h1 className="text-[12vw] leading-[0.94] sm:text-6xl md:text-7xl lg:text-8xl">
@@ -254,11 +192,11 @@ export default async function AboutPage() {
                 <figure className="relative mx-auto w-full max-w-md lg:mx-0">
                   <div
                     aria-hidden="true"
-                    className="about-orbit absolute -right-16 -top-16 -z-10 h-44 w-44 rounded-full bg-secondary sm:h-56 sm:w-56"
+                    className="absolute -right-16 -top-16 -z-10 h-44 w-44 rounded-full bg-secondary sm:h-56 sm:w-56"
                   />
                   <div
                     aria-hidden="true"
-                    className="absolute -bottom-5 -left-5 -z-10 h-full w-full rounded-sm border border-primary/20"
+                    className="absolute -bottom-5 -left-5 -z-10 h-full w-full rounded-sm"
                   />
                   <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-white/10 bg-midnight shadow-2xl shadow-black/35">
                     <Image
@@ -279,7 +217,7 @@ export default async function AboutPage() {
                   <Image
                     alt=""
                     aria-hidden="true"
-                    className="about-float absolute -bottom-9 -right-3 h-auto w-20 -rotate-12 drop-shadow-xl sm:-right-10 sm:w-24"
+                    className="absolute -bottom-9 -right-3 h-auto w-20 -rotate-12 drop-shadow-xl sm:-right-10 sm:w-24"
                     height={96}
                     src="/awesomeduck.svg"
                     width={96}
@@ -293,7 +231,7 @@ export default async function AboutPage() {
         {storySections.length > 0 && (
           <section
             aria-labelledby="story-heading"
-            className="border-y border-white/10 bg-midnight/25 px-4 py-32 md:py-48"
+            className="bg-tertiary px-4 py-32 md:py-48"
           >
             <div className="mx-auto w-full max-w-6xl">
               <header className="about-reveal mx-auto mb-16 max-w-2xl text-center md:mb-24">
@@ -320,38 +258,6 @@ export default async function AboutPage() {
                   key={chapter._key}
                 />
               ))}
-            </div>
-          </section>
-        )}
-
-        {hobbies.length > 0 && (
-          <section
-            aria-labelledby="hobbies-heading"
-            className="px-4 py-32 md:py-48"
-          >
-            <div className="mx-auto w-full max-w-6xl">
-              <header className="about-reveal mx-auto mb-16 max-w-2xl text-center">
-                <h2
-                  className="text-[10.5dvw] sm:text-6xl md:text-7xl"
-                  id="hobbies-heading"
-                >
-                  {about?.hobbiesHeading || "Away from"}{" "}
-                  <span className="text-secondary">
-                    {about?.hobbiesHeadingAccent || "the keyboard."}
-                  </span>
-                </h2>
-                {about?.hobbiesDescription && (
-                  <p className="mx-auto mt-5 max-w-xl whitespace-pre-line leading-7 text-primary/72">
-                    {about.hobbiesDescription}
-                  </p>
-                )}
-              </header>
-
-              <div className="grid gap-8 md:grid-cols-2">
-                {hobbies.map((hobby, index) => (
-                  <HobbyCard hobby={hobby} index={index} key={hobby._key} />
-                ))}
-              </div>
             </div>
           </section>
         )}
