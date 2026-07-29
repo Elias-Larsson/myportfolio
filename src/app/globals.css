@@ -70,7 +70,8 @@ p {
 }
 
 @supports (animation-timeline: view()) {
-  .about-reveal {
+  .about-reveal,
+  .experience-reveal {
     animation: about-reveal linear both;
     animation-range: entry 5% cover 28%;
     animation-timeline: view();
@@ -78,7 +79,8 @@ p {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-reveal {
+  .about-reveal,
+  .experience-reveal {
     animation: none;
     transform: none;
   }

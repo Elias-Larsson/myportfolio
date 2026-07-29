@@ -6,6 +6,8 @@ export type ExperienceEntry = {
   role: string;
   period?: string;
   summary?: string;
+  achievements?: string[];
+  technologies?: string[];
   detail?: string;
 };
 

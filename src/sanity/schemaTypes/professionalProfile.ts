@@ -56,14 +56,46 @@ export const professionalProfile = defineType({
             }),
             defineField({
               name: "summary",
-              title: "Summary",
+              title: "Summary (fallback)",
+              description:
+                "Shown as achievement bullets when no structured achievements are provided.",
               type: "text",
               rows: 3,
             }),
             defineField({
+              name: "achievements",
+              title: "Achievements",
+              description:
+                "Two to four short, impact-focused points. These replace the fallback summary on the site.",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  name: "achievement",
+                  type: "string",
+                }),
+              ],
+              validation: (rule) => rule.max(4),
+            }),
+            defineField({
+              name: "technologies",
+              title: "Technologies",
+              description: "For example: Next.js, tRPC, Jest.",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  name: "technology",
+                  type: "string",
+                }),
+              ],
+              options: {
+                layout: "tags",
+              },
+            }),
+            defineField({
               name: "detail",
-              title: "Highlight",
-              description: "A key outcome, responsibility, or technology.",
+              title: "Project focus (fallback)",
+              description:
+                "Shown below the achievements when no technologies are provided.",
               type: "text",
               rows: 3,
             }),
@@ -108,7 +140,7 @@ export const professionalProfile = defineType({
               title: "Status",
               type: "string",
               options: {
-                list: ["Current", "Previous studies"],
+                list: ["Incoming", "Current", "Previous studies"],
                 layout: "radio",
               },
             }),

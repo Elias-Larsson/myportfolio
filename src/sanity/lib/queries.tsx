@@ -57,6 +57,8 @@ export const professionalProfileQuery = groq`*[_id == "professionalProfile"][0]{
     role,
     period,
     summary,
+    achievements,
+    technologies,
     detail
   },
   education[]{
