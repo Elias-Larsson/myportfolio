@@ -11,7 +11,6 @@ import { projectQuery } from "@/sanity/lib/queries";
 import { Project } from "@/sanity/types/project";
 import { urlFor } from "@/sanity/lib/image";
 import { Footer } from "@/app/components/footer";
-import { Navbar } from "@/app/components/navbar";
 
 export default function SlugProjectPage() {
   const { slug } = useParams();
@@ -40,11 +39,11 @@ export default function SlugProjectPage() {
 
   return (
     <>
-    <div className="flex-main items-center pb-24 bg-tertiary">
-      <Banner
-        url={urlFor(project.backgroundImage || "/wavebackground.svg").url()}
-      ></Banner>
-      <main className="pt-8 flex flex-col items-start gap-8 pb-48 justify-around sm:flex-row px-6">
+      <div className="flex-main items-center bg-tertiary pb-24">
+        <Banner
+          url={urlFor(project.backgroundImage || "/wavebackground.svg").url()}
+        ></Banner>
+        <main className="flex flex-col items-start justify-around gap-8 px-6 pb-48 pt-8 sm:flex-row">
         <section className="flex flex-col gap-4">
           <h1 className="text-4xl">{project.title}</h1>
           <nav className="flex flex-row gap-2">
@@ -81,9 +80,11 @@ export default function SlugProjectPage() {
           )}
           {project.skills && <Techstacks techstacks={project.skills} />}
         </figure>
-      </main>
-        <Navbar/>
-    </div>
+        </main>
+        <div className="flex justify-center px-4">
+          <Button route="/projects">← Back to projects</Button>
+        </div>
+      </div>
       <Footer />
     </>
   );

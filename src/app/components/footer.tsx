@@ -22,10 +22,11 @@ export const Footer = ({
           {heading} <br />
           <span className="text-secondary">{headingAccent}</span>
         </h1>
-        <div className="flex flex-row gap-2 items-center">
+        <div className="flex flex-row flex-wrap items-center justify-center gap-2">
           <Button route="https://mail.google.com/mail/?view=cm&fs=1&to=aroezi05@gmail.com">
             Contact me
           </Button>
+          <Button route="/about">About me</Button>
           <IconButton route="linkedin" />
           <IconButton route="github" />
         </div>

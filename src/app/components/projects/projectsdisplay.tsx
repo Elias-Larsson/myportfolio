@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Projects } from "@/sanity/types/project";
 import { projectsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
-import { Navbar } from "../navbar";
+import { Button } from "../button";
 
 const revalidate = 60;
 
@@ -31,7 +31,7 @@ export const ProjectsDisplay = async () => {
             <li key={project._id} className="flex flex-col justify-start gap-2">
               {project.projectImage && (
                 <Link
-                  href={`projects/${project.slug.current}`}
+                  href={`/projects/${project.slug.current}`}
                   className="group relative overflow-hidden transition duration-300 ease-in-out rounded cursor-pointer"
                 >
                   <Image
@@ -58,7 +58,7 @@ export const ProjectsDisplay = async () => {
             </li>
           ))}
       </ul>
-      <Navbar />
+      <Button route="/projects">More projects →</Button>
     </section>
   );
 };

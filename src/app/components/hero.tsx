@@ -35,10 +35,11 @@ export const Hero = ({ description }: Props) => {
           </h1>
           <div className="flex max-w-128 flex-col gap-4">
             <p>{description ?? "Full-stack developer building secure, user-friendly web experiences."}</p>
-            <div className="flex flex-row items-center gap-4">
+            <div className="flex flex-row flex-wrap items-center gap-4">
               <Button route="https://mail.google.com/mail/?view=cm&fs=1&to=aroezi05@gmail.com">
                 Contact me
               </Button>
+              <Button route="/about">About me</Button>
               <IconButton route="linkedin" />
               <IconButton route="github" />
             </div>
