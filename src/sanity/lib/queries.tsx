@@ -61,6 +61,7 @@ export const professionalProfileQuery = groq`*[_id == "professionalProfile"][0]{
   heading,
   headingAccent,
   description,
+  includeExperienceStarters,
   experiences[]{
     _key,
     company,
@@ -69,7 +70,37 @@ export const professionalProfileQuery = groq`*[_id == "professionalProfile"][0]{
     summary,
     achievements,
     technologies,
-    detail
+    detail,
+    slug,
+    relationship,
+    "logo": select(defined(logo.asset._ref) => logo),
+    cardSummary,
+    website,
+    caseStudy{
+      overview,
+      roleDescription,
+      challenge,
+      solution,
+      outcome,
+      media[]{
+        _key,
+        kind,
+        "image": select(defined(image.asset._ref) => image),
+        "posterImage": select(defined(posterImage.asset._ref) => posterImage),
+        alt,
+        caption,
+        "imageLqip": image.asset->metadata.lqip,
+        "imageDimensions": image.asset->metadata.dimensions{
+          width,
+          height,
+          aspectRatio
+        },
+        "videoUrl": videoFile.asset->url,
+        "videoMimeType": videoFile.asset->mimeType,
+        "captionsUrl": captionsFile.asset->url,
+        captionsLanguage
+      }
+    }
   },
   education[]{
     _key,

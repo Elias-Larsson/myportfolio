@@ -48,17 +48,12 @@ export const ProjectsDisplay = async () => {
       id="selected-work"
     >
       <header className="mx-auto grid w-full max-w-6xl gap-8 border-t border-white/10 pt-8 md:grid-cols-[minmax(0,1fr)_minmax(18rem,0.65fr)] md:items-end">
-        <div>
-          <p className="text-xs uppercase tracking-[0.22em] text-primary/70">
-            [01] Selected work
-          </p>
-          <h2
-            className="mt-4 text-[10.5dvw] leading-[0.94] sm:text-6xl md:text-7xl"
-            id="selected-work-heading"
-          >
-            Built to <span className="text-secondary">work.</span>
-          </h2>
-        </div>
+        <h2
+          className="text-[10.5dvw] leading-[0.94] sm:text-6xl md:text-7xl"
+          id="selected-work-heading"
+        >
+          Built to <span className="text-secondary">work.</span>
+        </h2>
         <p className="max-w-xl text-base leading-7 text-primary/72 md:pb-1 md:text-lg md:leading-8">
           Three projects across distributed systems, developer tooling, and
           public-facing product work—selected for the problems behind them, not
@@ -75,8 +70,6 @@ export const ProjectsDisplay = async () => {
             fallback?.outcomeSummary ||
             project.description ||
             project.definition;
-          const role = project.role || fallback?.role;
-          const year = project.year || fallback?.year;
           const context = project.context || fallback?.context;
           const skills = project.skills?.filter((skill) => skill.label).slice(0, 4);
           const isFlagship = index === 0;
@@ -130,12 +123,6 @@ export const ProjectsDisplay = async () => {
                       </span>
                     </div>
                   )}
-                  <span
-                    aria-hidden="true"
-                    className="absolute bottom-4 right-4 grid size-12 translate-y-2 place-items-center rounded-full bg-secondary text-xl text-midnight opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:transform-none motion-reduce:transition-none"
-                  >
-                    ↗
-                  </span>
                 </figure>
 
                 <article className="flex flex-col p-6 sm:p-8 lg:p-10">
@@ -173,23 +160,6 @@ export const ProjectsDisplay = async () => {
                         </li>
                       ))}
                     </ul>
-                  )}
-
-                  {(role || year) && (
-                    <dl className="mt-auto grid grid-cols-2 gap-4 border-t border-white/10 pt-6 text-xs uppercase tracking-[0.14em]">
-                      {role && (
-                        <div>
-                          <dt className="text-primary/50">Role</dt>
-                          <dd className="mt-2 text-primary/75">{role}</dd>
-                        </div>
-                      )}
-                      {year && (
-                        <div className="text-right">
-                          <dt className="text-primary/50">Year</dt>
-                          <dd className="mt-2 text-primary/75">{year}</dd>
-                        </div>
-                      )}
-                    </dl>
                   )}
                 </article>
               </Link>

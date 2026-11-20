@@ -31,17 +31,12 @@ export const AboutTeaser = async ({
   return (
     <section
       aria-labelledby="about-teaser-heading"
-      className="relative z-10 bg-tertiary px-4 pb-32 pt-8 md:pb-40"
+      className="relative z-10 bg-tertiary px-4 pb-16 pt-8 md:pb-24"
     >
       <div className="about-reveal mx-auto grid w-full max-w-6xl overflow-hidden border-y border-white/10 lg:grid-cols-12 lg:items-stretch">
         <div className="flex flex-col justify-center py-12 lg:col-span-6 lg:pr-16">
-          <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-primary/70">
-            <span>[04]</span>
-            <span aria-hidden="true" className="h-px w-8 bg-secondary/60" />
-            <span>About me</span>
-          </div>
           <h2
-            className="mt-5 text-4xl leading-tight sm:text-5xl md:text-6xl"
+            className="text-4xl leading-tight sm:text-5xl md:text-6xl"
             id="about-teaser-heading"
           >
             {visibleTitle}

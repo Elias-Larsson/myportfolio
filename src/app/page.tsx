@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Experience } from "./components/experience";
+import { Education, Experience } from "./components/experience";
 import { Footer } from "./components/footer";
 import { Hero } from "./components/hero";
 import { ProjectsDisplay } from "./components/projects/projectsdisplay";
@@ -42,23 +42,24 @@ export default async function Home() {
     <>
       <main>
         <Hero
-          credibilityItems={homepage?.credibilityItems}
           description={homepage?.heroDescription}
-          eyebrow={homepage?.heroEyebrow}
           heading={homepage?.heroHeading}
           headingAccent={homepage?.heroHeadingAccent}
         />
+        <Suspense fallback={<SectionSkeleton label="experience" />}>
+          <Experience />
+        </Suspense>
         <Suspense fallback={<SectionSkeleton label="selected projects" />}>
           <ProjectsDisplay />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton label="experience and education" />}>
-          <Experience />
         </Suspense>
         <Suspense fallback={<SectionSkeleton label="about preview" />}>
           <AboutTeaser
             body={homepage?.aboutTeaserBody}
             title={homepage?.aboutTeaserTitle}
           />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton label="education" />}>
+          <Education />
         </Suspense>
       </main>
       <Footer />

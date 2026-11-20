@@ -28,7 +28,6 @@ type ProjectSlug = { slug: string };
 type ResolvedCaseStudy = {
   label: string;
   outcomeSummary: string;
-  role: string;
   team?: string;
   timeline?: string;
   context: string;
@@ -85,7 +84,7 @@ const genericTechnicalDecision = (project: Project) => {
 const resolveCaseStudy = (project: Project): ResolvedCaseStudy => {
   const slug = project.slug.current;
   const fallback = PROJECT_CASE_STUDY_FALLBACKS[slug];
-  const year = project.year ?? fallback?.year;
+  const timeline = firstValue(project.timeline, fallback?.timeline);
   const extractedLearning = extractLearning(project.longDescription);
   const projectType =
     project.projectCategory === "caseStudy" ||
@@ -131,14 +130,8 @@ const resolveCaseStudy = (project: Project): ResolvedCaseStudy => {
       project.description,
       project.definition,
     ),
-    role: firstValue(project.role, fallback?.role, "Developer"),
     team: firstValue(project.team, fallback?.team) || undefined,
-    timeline:
-      firstValue(
-        project.timeline,
-        fallback?.timeline,
-        year?.toString(),
-      ) || undefined,
+    timeline: timeline && !/^\d{4}$/.test(timeline) ? timeline : undefined,
     context: firstValue(project.context, fallback?.context, projectType),
     sections: [
       { number: "01", title: "The challenge", body: challenge },
@@ -259,7 +252,6 @@ export default async function SlugProjectPage({ params }: ProjectPageProps) {
         .url()
     : undefined;
   const metadata = [
-    { label: "Role", value: caseStudy.role },
     { label: "Team", value: caseStudy.team },
     { label: "Timeline", value: caseStudy.timeline },
     { label: "Context", value: caseStudy.context },
@@ -288,7 +280,7 @@ export default async function SlugProjectPage({ params }: ProjectPageProps) {
             {caseStudy.outcomeSummary}
           </p>
 
-          <dl className="mt-12 grid grid-cols-2 border-y border-primary/20 sm:grid-cols-4">
+          <dl className="mt-12 grid grid-cols-2 border-y border-primary/20 sm:grid-cols-3">
             {metadata.map((item) => (
               <div
                 key={item.label}
