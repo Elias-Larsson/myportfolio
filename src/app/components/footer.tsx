@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { contactHref } from "@/app/site";
 import { ReverseVectorTransition } from "./background/reversedepthbg";
 import { Button } from "./button";
 import { IconButton } from "./iconbutton";
@@ -31,15 +31,8 @@ export const Footer = ({
             <p className="text-xs uppercase tracking-[0.2em] text-primary/50">
               Stockholm, Sweden
             </p>
-            <Link
-              className="mt-3 inline-block break-all font-[family-name:var(--font-body)] text-lg underline decoration-secondary/60 underline-offset-4 transition-colors hover:text-secondary sm:text-xl"
-              href="mailto:aroezi05@gmail.com"
-            >
-              aroezi05@gmail.com
-            </Link>
-
-            <div className="mt-6 flex flex-row flex-wrap items-center gap-2">
-              <Button route="mailto:aroezi05@gmail.com">Email me</Button>
+            <div className="mt-6 flex flex-wrap items-center gap-2">
+              <Button route={contactHref}>Email me</Button>
               <IconButton route="linkedin" />
               <IconButton route="github" />
             </div>

@@ -18,6 +18,8 @@ export const siteUrl = new URL(
 
 export const siteName = "Elias Larsson — Full-stack Developer";
 
+export const contactHref = "mailto:elias@eliaslarsson.dev";
+
 export const siteDescription =
   "Portfolio of Elias Larsson, a full-stack developer in Stockholm building web products, backend systems, and infrastructure.";
 

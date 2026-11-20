@@ -73,14 +73,11 @@ const ProjectMeta = ({
   category,
   className,
 }: ProjectMetaProps) => {
-  const fallback = PROJECT_CASE_STUDY_FALLBACKS[projectSlug(project)];
-  const year = project.year ?? fallback?.year;
   const skills = project.skills?.slice(0, 3).filter((skill) => skill.label);
-  const context = [year?.toString(), category].filter(Boolean).join(" / ");
 
   return (
     <div className={className}>
-      <span>{context}</span>
+      <span>{category}</span>
       {skills && skills.length > 0 && (
         <>
           <span aria-hidden="true">/</span>
@@ -155,9 +152,6 @@ const SelectedProjectCard = ({
               }
               className="object-cover transition duration-500 ease-out group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
             />
-            <span className="absolute bottom-4 right-4 translate-y-2 rounded-sm bg-midnight/90 px-4 py-2 font-[family-name:var(--font-body)] text-xs uppercase tracking-[0.16em] opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">
-              View case study ↗
-            </span>
           </div>
         )}
 
@@ -216,19 +210,11 @@ const ExperimentRow = ({ project, index }: ExperimentRowProps) => (
           )}
         </p>
       </div>
-      <div className="flex items-center justify-between gap-6 sm:justify-end">
-        <ProjectMeta
-          category="Experiment"
-          className="flex flex-wrap items-center gap-x-1.5 gap-y-1 font-[family-name:var(--font-body)] text-[0.6875rem] uppercase tracking-[0.12em] text-primary/65 sm:max-w-56 sm:justify-end sm:text-right"
-          project={project}
-        />
-        <span
-          aria-hidden="true"
-          className="text-xl transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
-        >
-          →
-        </span>
-      </div>
+      <ProjectMeta
+        category="Experiment"
+        className="flex flex-wrap items-center gap-x-1.5 gap-y-1 font-[family-name:var(--font-body)] text-[0.6875rem] uppercase tracking-[0.12em] text-primary/65 sm:max-w-56 sm:justify-end sm:text-right"
+        project={project}
+      />
     </Link>
   </li>
 );
