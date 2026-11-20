@@ -167,7 +167,8 @@ export const about = defineType({
   type: "document",
   groups: [
     { name: "introduction", title: "Introduction", default: true },
-    { name: "story", title: "My story" },
+    { name: "work", title: "How I work" },
+    { name: "story", title: "How I keep learning" },
   ],
   fields: [
     defineField({
@@ -206,29 +207,52 @@ export const about = defineType({
       group: "introduction",
     }),
     defineField({
+      name: "workHeading",
+      title: "How I work heading",
+      description: "The light-coloured part of the heading.",
+      type: "string",
+      group: "work",
+    }),
+    defineField({
+      name: "workHeadingAccent",
+      title: "Highlighted how I work heading",
+      description: "The red part of the heading.",
+      type: "string",
+      group: "work",
+    }),
+    defineField({
+      name: "workBody",
+      title: "How I work introduction",
+      description:
+        "A concise description of how you solve problems and collaborate.",
+      type: "text",
+      rows: 6,
+      group: "work",
+    }),
+    defineField({
       name: "storyHeading",
-      title: "Story heading",
+      title: "Learning heading",
       description: "The light-coloured part of the heading.",
       type: "string",
       group: "story",
     }),
     defineField({
       name: "storyHeadingAccent",
-      title: "Highlighted story heading",
+      title: "Highlighted learning heading",
       description: "The red part of the heading.",
       type: "string",
       group: "story",
     }),
     defineField({
       name: "storyIntroduction",
-      title: "Story introduction",
+      title: "Learning introduction",
       type: "text",
       rows: 4,
       group: "story",
     }),
     defineField({
       name: "storySections",
-      title: "Story chapters",
+      title: "Learning chapters",
       type: "array",
       of: [defineArrayMember({ type: "aboutStorySection" })],
       group: "story",
