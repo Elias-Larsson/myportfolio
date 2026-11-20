@@ -21,9 +21,9 @@ export const Button = ({
     href={route}
     rel={external ? "noopener noreferrer" : undefined}
     target={external ? "_blank" : undefined}
-    className={`group relative w-fit overflow-hidden rounded-sm border border-white/10 bg-tertiary px-4 py-2 transition duration-300 ease-in-out hover:bg-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-4 focus-visible:ring-offset-midnight motion-reduce:transition-none motion-reduce:hover:text-tertiary ${icon ? "inline-flex min-h-11 items-center" : "inline-block"}`}
+    className={`group relative w-fit max-w-full overflow-hidden rounded-sm border border-white/10 bg-tertiary px-4 py-2 text-left wrap-anywhere transition duration-300 ease-in-out hover:bg-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-4 focus-visible:ring-offset-midnight motion-reduce:transition-none motion-reduce:hover:text-tertiary ${icon ? "inline-flex min-h-11 items-center" : "inline-block"}`}
   >
-    <span className="relative block overflow-hidden">
+    <span className="relative block min-w-0 overflow-hidden">
       <span className="flex items-center gap-2 font-[family-name:var(--font-heading)] uppercase transition-transform duration-300 ease-in-out group-hover:translate-y-full motion-reduce:transform-none motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
         {icon && (
           <Image

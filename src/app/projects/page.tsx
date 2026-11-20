@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 export default function Projects() {
   return (
     <>
-      <main className="relative w-full bg-tertiary">
+      <main className="relative w-full bg-tertiary wrap-anywhere">
         <HomeDuck />
         <ProjectsPage />
       </main>

@@ -31,14 +31,14 @@ export const Hero = ({
         }}
       />
       <section
-        className="relative z-10 flex flex-grow items-end overflow-visible px-4 pt-10"
+        className="relative z-10 flex w-full flex-grow items-end justify-center px-4 pt-10"
         style={{
           transform: `translateY(${scrollY * 0.375}px)`,
         }}
       >
-        <div className="flex max-w-3xl flex-col">
+        <div className="flex min-w-0 max-w-3xl flex-col">
           {(heading || headingAccent) && (
-            <h1 className="pb-5 text-[10.5dvw] leading-[0.96] sm:text-6xl md:text-7xl lg:text-8xl">
+            <h1 className="pb-5 text-[9dvw] leading-[0.96] sm:text-6xl md:text-7xl lg:text-8xl">
               {heading}
               {headingAccent && (
                 <span className="block text-secondary">{headingAccent}</span>

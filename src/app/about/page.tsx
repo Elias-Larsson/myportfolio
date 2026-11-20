@@ -110,7 +110,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <main className="relative overflow-hidden bg-tertiary">
+      <main className="relative overflow-hidden bg-tertiary wrap-anywhere">
         <HomeDuck />
         <section className="relative isolate px-4 pb-32 pt-24 md:pb-48 md:pt-36">
           <div className="mx-auto w-full max-w-6xl">
@@ -168,7 +168,7 @@ export default async function AboutPage() {
                   <Image
                     alt=""
                     aria-hidden="true"
-                    className="absolute -bottom-9 -right-3 h-auto w-20 -rotate-12 drop-shadow-xl sm:-right-10 sm:w-24"
+                    className="absolute -bottom-9 right-1 h-auto w-20 -rotate-12 drop-shadow-xl sm:-right-10 sm:w-24"
                     height={96}
                     src="/awesomeduck.svg"
                     width={96}

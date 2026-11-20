@@ -154,7 +154,7 @@ export default async function SlugProjectPage({ params }: ProjectPageProps) {
     : undefined;
   return (
     <>
-      <main className="relative bg-tertiary pb-32 sm:pb-40">
+      <main className="relative bg-tertiary pb-32 wrap-anywhere sm:pb-40">
         <div className={heroUrl ? "flex min-h-svh flex-col" : "pt-8 sm:pt-12"}>
           {heroUrl && (
             <figure className="relative min-h-[min(38svh,16rem)] flex-1 overflow-hidden bg-midnight">
@@ -171,7 +171,7 @@ export default async function SlugProjectPage({ params }: ProjectPageProps) {
             </figure>
           )}
 
-          <header className="mx-auto grid w-full max-w-6xl gap-4 px-4 py-6 sm:px-8 sm:py-8 lg:px-12">
+          <header className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-4 px-4 py-6 sm:px-8 sm:py-8 lg:px-12">
             <div className="flex items-start justify-between gap-3">
               <h1 className="min-w-0 wrap-anywhere text-[clamp(2rem,7.5vw,5.75rem)] leading-[0.94]">
                 {project.title}

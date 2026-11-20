@@ -40,7 +40,7 @@ export default async function Home() {
 
   return (
     <>
-      <main>
+      <main className="wrap-anywhere">
         <Hero
           description={homepage?.description}
           hasExperience={experience.length > 0}
