@@ -13,6 +13,7 @@ type Props = {
 
 export const Hero = ({ description, hasExperience }: Props) => {
   const scrollY = useScrollY();
+  const lastSpace = personName.lastIndexOf(" ");
 
   return (
     <header className="relative flex min-h-screen flex-col items-center justify-between">
@@ -31,7 +32,10 @@ export const Hero = ({ description, hasExperience }: Props) => {
       >
         <div className="flex min-w-0 max-w-3xl flex-col">
           <h1 className="pb-5 text-[9dvw] leading-[0.96] sm:text-6xl md:text-7xl lg:text-8xl">
-            {personName}
+            {personName.slice(0, lastSpace + 1)}
+            <span className="text-secondary">
+              {personName.slice(lastSpace + 1)}
+            </span>
           </h1>
           <div className="flex max-w-2xl flex-col gap-5">
             {description && (
