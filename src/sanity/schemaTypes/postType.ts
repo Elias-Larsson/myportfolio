@@ -202,7 +202,7 @@ export const homepage = defineType({
       name: "title",
       title: "Hero heading",
       type: "string",
-      validation: (rule) => rule.required(),
+      hidden: true,
     }),
     defineField({
       name: "subtitle",
@@ -233,6 +233,7 @@ export const homepage = defineType({
       name: "heroHeadingAccent",
       title: "Hero heading accent",
       type: "string",
+      hidden: true,
     }),
     defineField({
       name: "heroDescription",

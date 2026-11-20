@@ -14,9 +14,7 @@ const mediaFields = groq`
 `;
 
 export const homepageQuery = groq`*[_type == "homepage"] | order(_updatedAt desc)[0]{
-  title,
   description,
-  heroHeadingAccent,
   aboutTeaserTitle,
   aboutTeaserBody,
   featuredHeading,

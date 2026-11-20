@@ -44,8 +44,6 @@ export default async function Home() {
         <Hero
           description={homepage?.description}
           hasExperience={experience.length > 0}
-          heading={homepage?.title}
-          headingAccent={homepage?.heroHeadingAccent}
         />
         <Suspense fallback={<SectionSkeleton label="experience" />}>
           <Experience />

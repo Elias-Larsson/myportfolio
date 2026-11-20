@@ -8,17 +8,10 @@ import { IconButton } from "./iconbutton";
 
 type Props = {
   description?: string | null;
-  heading?: string | null;
-  headingAccent?: string | null;
   hasExperience: boolean;
 };
 
-export const Hero = ({
-  description,
-  heading,
-  headingAccent,
-  hasExperience,
-}: Props) => {
+export const Hero = ({ description, hasExperience }: Props) => {
   const scrollY = useScrollY();
 
   return (
@@ -41,14 +34,6 @@ export const Hero = ({
             {personName}
           </h1>
           <div className="flex max-w-2xl flex-col gap-5">
-            {(heading || headingAccent) && (
-              <p className="font-[family-name:var(--font-heading)] text-xl uppercase leading-tight md:text-2xl">
-                {heading}
-                {headingAccent && (
-                  <span className="block text-secondary">{headingAccent}</span>
-                )}
-              </p>
-            )}
             {description && (
               <p className="max-w-xl text-base leading-7 text-primary/75 md:text-lg md:leading-8">
                 {description}
