@@ -1,17 +1,24 @@
+import Image from "next/image";
+
 type Props = {
   url: string;
+  alt?: string;
+  priority?: boolean;
 };
-export const Banner = ({ url }: Props) => {
+
+export const Banner = ({ url, alt = "", priority = false }: Props) => {
+  if (!url) return null;
+
   return (
-    <div className="w-full h-1/2 overflow-hidden">
-      <div
-        style={{
-          backgroundImage: `url(${url ? url : ""})`,
-          backgroundSize: "cover",
-          backgroundPosition: "top",
-          height: "800px",
-        }}
-      ></div>
+    <div className="relative h-[clamp(20rem,52vw,46rem)] w-full overflow-hidden">
+      <Image
+        alt={alt}
+        className="object-cover object-top"
+        fill
+        priority={priority}
+        sizes="100vw"
+        src={url}
+      />
     </div>
   );
 };

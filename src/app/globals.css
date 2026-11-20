@@ -1,14 +1,27 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-midnight);
   color: var(--color-primary);
+  font-family: var(--font-body), sans-serif;
+  min-height: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--color-secondary);
+  color: var(--color-midnight);
 }
 
 @theme {
   --color-midnight: #181616;
   --color-tertiary: #2b2727;
   --color-secondary: #FF3831;
+  --color-secondary-readable: #ff625c;
   --color-primary: #FFFDDB;
 }
 
@@ -79,6 +92,19 @@ p {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .about-reveal,
   .experience-reveal {
     animation: none;

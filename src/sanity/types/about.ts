@@ -39,6 +39,9 @@ export type About = {
   profileAlt: string | null;
   profileLqip: string | null;
   profileDimensions: ImageDimensions | null;
+  workHeading: string | null;
+  workHeadingAccent: string | null;
+  workBody: string | null;
   storyHeading: string | null;
   storyHeadingAccent: string | null;
   storyIntroduction: string | null;

@@ -6,48 +6,45 @@ type Props = {
 };
 
 export const IconButton = ({ route }: Props) => {
-  let imageLight = "";
-  let imageDark = "";
-  let routeURL = "#"
-  switch (route) {
-    case "github":
-      imageLight = "/github_light.svg";
-      imageDark = "/github_dark.svg";
-        routeURL =
-          "https://github.com/Elias-Larsson";
-
-      break;
-    case "linkedin":
-      imageLight = "/linkedin_light.svg";
-      imageDark = "/linkedin_dark.svg";
-      routeURL = "https://www.linkedin.com/in/elias-h-larsson";
-      break;
-    default:
-      return null;
-  }
+  const social = {
+    github: {
+      label: "GitHub",
+      imageLight: "/github_light.svg",
+      imageDark: "/github_dark.svg",
+      url: "https://github.com/Elias-Larsson",
+    },
+    linkedin: {
+      label: "LinkedIn",
+      imageLight: "/linkedin_light.svg",
+      imageDark: "/linkedin_dark.svg",
+      url: "https://www.linkedin.com/in/elias-h-larsson",
+    },
+  }[route];
 
   return (
     <Link
-      href={routeURL}
+      aria-label={`Visit Elias Larsson on ${social.label} (opens in a new tab)`}
+      href={social.url}
+      rel="noopener noreferrer"
       target="_blank"
-      className="relative inline-block w-9 h-9 group"
+      className="group relative inline-block size-9 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-4 focus-visible:ring-offset-midnight"
     >
-      {/* Dark icon visible by default */}
       <Image
-        src={imageDark}
-        alt={`${route} icon`}
+        alt=""
+        aria-hidden="true"
+        src={social.imageDark}
         width={36}
         height={36}
-        className="absolute inset-0 transition-opacity duration-300 opacity-100 group-hover:opacity-0"
+        className="absolute inset-0 opacity-100 transition-opacity duration-300 group-hover:opacity-0 group-focus-visible:opacity-0 motion-reduce:transition-none"
       />
 
-      {/* Light icon slides in on hover */}
       <Image
-        src={imageLight}
-        alt={`${route} icon`}
+        alt=""
+        aria-hidden="true"
+        src={social.imageLight}
         width={36}
         height={36}
-        className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+        className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none"
       />
     </Link>
   );

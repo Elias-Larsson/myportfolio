@@ -5,6 +5,7 @@ import type {
   ExperienceEntry,
   ProfessionalProfile,
 } from "@/sanity/types/professionalProfile";
+import { Icon } from "./techstackIcon";
 
 const revalidate = 60;
 
@@ -52,12 +53,39 @@ const formatPeriod = (period?: string) =>
     .replace(/\bcurrent\b/gi, "Present")
     .replace(/\s+(?:-|–|—)\s+/g, " — ");
 
+const curatedAchievements: Record<string, string[]> = {
+  Samples: [
+    "Building a mobile product that helps people discover nearby events and offers.",
+    "Implemented map-based discovery and Supabase-backed product features.",
+    "Shipped the product website with Next.js and Motion.",
+  ],
+  Sprinto: [
+    "Led a three-person team building AI-assisted quiz workflows in an existing Next.js product.",
+    "Designed generation and manual editing flows for educators.",
+    "Integrated the OpenAI API and tested tRPC endpoints with Jest.",
+  ],
+  "Järfälla Hus": [
+    "Worked in an 11-person Scrum team across development, UX/UI, and DevOps.",
+    "Built authentication and an admin interface for managing resident events and information.",
+    "Received Chas Academy’s Honorable Mention for backend system design and functionality.",
+  ],
+};
+
+const curatedTechnologies: Record<string, string[]> = {
+  Samples: ["Maps", "Supabase", "Next.js", "Motion"],
+  Sprinto: ["Next.js", "OpenAI API", "tRPC", "Jest"],
+  "Järfälla Hus": ["TypeScript", "Express", "Vite"],
+};
+
 const getAchievements = (item: ExperienceEntry) => {
   const achievements = item.achievements
     ?.map((achievement) => achievement.trim())
     .filter(Boolean);
 
   if (achievements?.length) return achievements;
+  if (curatedAchievements[item.company]) {
+    return curatedAchievements[item.company];
+  }
 
   return (
     item.summary
@@ -67,18 +95,32 @@ const getAchievements = (item: ExperienceEntry) => {
   );
 };
 
-const getEducationMeta = (item: EducationEntry) => {
-  const startMatch = item.period?.match(
+const getTechnologies = (item: ExperienceEntry) => {
+  const technologies = item.technologies
+    ?.map((technology) => technology.trim())
+    .filter(Boolean);
+
+  return technologies?.length
+    ? technologies
+    : curatedTechnologies[item.company] ?? [];
+};
+
+const getPeriodStartValue = (period?: string) => {
+  const startMatch = period?.match(
     /\b(jan|feb|mar|apr|may|maj|jun|jul|aug|sep|sept|oct|nov|dec)\s+(\d{4})\b/i,
   );
   const startMonth = startMatch
     ? monthIndexes[startMatch[1].toLowerCase()]
     : null;
+
+  return startMatch && typeof startMonth === "number"
+    ? Number(startMatch[2]) * 12 + startMonth
+    : null;
+};
+
+const getEducationMeta = (item: EducationEntry) => {
+  const startValue = getPeriodStartValue(item.period);
   const now = new Date();
-  const startValue =
-    startMatch && typeof startMonth === "number"
-      ? Number(startMatch[2]) * 12 + startMonth
-      : null;
   const currentValue = now.getUTCFullYear() * 12 + now.getUTCMonth();
   const isIncoming =
     item.status === "Incoming" ||
@@ -97,9 +139,23 @@ const getEducationMeta = (item: EducationEntry) => {
 
   return {
     period: formatPeriod(item.period),
-    status: item.status,
+    status:
+      item.status === "Previous studies" ? "Completed" : item.status,
   };
 };
+
+const sortExperiencesNewestFirst = (items: ExperienceEntry[]) =>
+  [...items].sort((left, right) => {
+    const leftIsCurrent = /present|current/i.test(left.period || "");
+    const rightIsCurrent = /present|current/i.test(right.period || "");
+
+    if (leftIsCurrent !== rightIsCurrent) return leftIsCurrent ? -1 : 1;
+
+    return (
+      (getPeriodStartValue(right.period) ?? Number.NEGATIVE_INFINITY) -
+      (getPeriodStartValue(left.period) ?? Number.NEGATIVE_INFINITY)
+    );
+  });
 
 export const Experience = async () => {
   const profile = await client.fetch<ProfessionalProfile | null>(
@@ -112,10 +168,13 @@ export const Experience = async () => {
 
   if (!profile) return null;
 
+  const experiences = sortExperiencesNewestFirst(profile.experiences ?? []);
+  const education = (profile.education ?? []).slice(0, 2);
+
   return (
     <section
       aria-labelledby="experience-heading"
-      className="relative z-10 bg-tertiary px-4 py-32 md:py-40"
+      className="relative z-10 bg-tertiary px-4 pb-32 pt-20 md:pb-40 md:pt-24"
     >
       <div className="mx-auto w-full max-w-6xl">
         <header className="experience-reveal mx-auto max-w-3xl text-center">
@@ -126,17 +185,18 @@ export const Experience = async () => {
             {profile.heading}{" "}
             <span className="text-secondary">{profile.headingAccent}</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-primary/70 md:text-lg md:leading-8">
-            {profile.description}
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-primary/75 md:text-lg md:leading-8">
+            I build products across web, mobile, and backend systems—working
+            both in small lead roles and larger cross-functional teams.
           </p>
         </header>
 
-        <div className="mt-20 space-y-28 md:mt-28 md:space-y-36">
-          {profile.experiences?.length > 0 && (
+        <div className="mt-16 space-y-20 md:mt-24 md:space-y-28">
+          {experiences.length > 0 && (
             <div className="grid gap-10 lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-16">
               <header className="lg:sticky lg:top-28 lg:self-start">
-                <p className="text-xs uppercase tracking-[0.22em] text-secondary">
-                  [01]
+                <p className="text-xs uppercase tracking-[0.22em] text-primary/70">
+                  [02]
                 </p>
                 <h3
                   className="mt-4 text-3xl md:text-4xl"
@@ -154,28 +214,26 @@ export const Experience = async () => {
                 aria-labelledby="experience-list-heading"
                 className="relative border-y border-white/10 before:absolute before:inset-y-0 before:left-0 before:w-px before:bg-secondary/35"
               >
-                {profile.experiences.map((item, index) => {
+                {experiences.map((item, index) => {
                   const achievements = getAchievements(item);
-                  const technologies = item.technologies
-                    ?.map((technology) => technology.trim())
-                    .filter(Boolean);
+                  const technologies = getTechnologies(item);
 
                   return (
                     <li
-                      className="experience-reveal relative border-b border-white/10 py-12 pl-9 last:border-b-0 md:py-16 md:pl-12"
+                      className="experience-reveal relative border-b border-white/10 py-10 pl-9 last:border-b-0 md:py-14 md:pl-12"
                       key={item._key}
                     >
                       <span
                         aria-hidden="true"
-                        className="absolute -left-[0.3125rem] top-[3.15rem] size-[0.6875rem] rounded-full bg-secondary ring-4 ring-tertiary md:top-[4.15rem]"
+                        className="absolute -left-[0.3125rem] top-[2.65rem] size-[0.6875rem] rounded-full bg-secondary ring-4 ring-tertiary md:top-[3.65rem]"
                       />
                       <article>
                         <div className="flex items-center justify-between gap-4 text-xs uppercase tracking-[0.18em]">
-                          <span className="text-secondary">
+                          <span className="text-primary/70">
                             [{String(index + 1).padStart(2, "0")}]
                           </span>
                           {item.period && (
-                            <time className="text-right text-primary/45">
+                            <time className="text-right text-primary/65">
                               {formatPeriod(item.period)}
                             </time>
                           )}
@@ -184,9 +242,9 @@ export const Experience = async () => {
                         <div className="mt-7 grid gap-8 md:grid-cols-[minmax(12rem,0.7fr)_minmax(0,1fr)] md:gap-10">
                           <div>
                             <h4 className="text-3xl leading-tight md:text-4xl">
-                              {item.role.trim()}
+                              {item.role.trim().replace(/fullstack/i, "Full-stack")}
                             </h4>
-                            <p className="mt-3 text-sm uppercase tracking-[0.16em] text-secondary">
+                            <p className="mt-3 text-sm uppercase tracking-[0.16em] text-secondary-readable">
                               {item.company}
                             </p>
                           </div>
@@ -211,25 +269,18 @@ export const Experience = async () => {
 
                             {(technologies?.length || item.detail) && (
                               <div className="mt-8 border-t border-white/10 pt-5">
-                                <p className="text-[0.68rem] uppercase tracking-[0.2em] text-primary/40">
+                                <p className="text-xs uppercase tracking-[0.2em] text-primary/65">
                                   {technologies?.length ? "Stack" : "Project focus"}
                                 </p>
                                 {technologies?.length ? (
-                                  <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-2 text-xs uppercase tracking-[0.14em] text-primary/65">
-                                    {technologies.map((technology, techIndex) => (
+                                  <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-3 text-xs uppercase tracking-[0.14em] text-primary/65">
+                                    {technologies.map((technology) => (
                                       <li
-                                        className="flex items-center gap-3"
-                                        key={`${technology}-${techIndex}`}
+                                        className="flex items-center gap-2"
+                                        key={technology}
                                       >
-                                        {techIndex > 0 && (
-                                          <span
-                                            aria-hidden="true"
-                                            className="text-secondary/50"
-                                          >
-                                            /
-                                          </span>
-                                        )}
-                                        {technology}
+                                        <Icon name={technology} size={16} />
+                                        <span>{technology}</span>
                                       </li>
                                     ))}
                                   </ul>
@@ -250,11 +301,11 @@ export const Experience = async () => {
             </div>
           )}
 
-          {profile.education?.length > 0 && (
+          {education.length > 0 && (
             <div className="grid gap-10 lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-16">
               <header className="lg:sticky lg:top-28 lg:self-start">
-                <p className="text-xs uppercase tracking-[0.22em] text-secondary">
-                  [02]
+                <p className="text-xs uppercase tracking-[0.22em] text-primary/70">
+                  [03]
                 </p>
                 <h3
                   className="mt-4 text-3xl md:text-4xl"
@@ -272,7 +323,7 @@ export const Experience = async () => {
                 aria-labelledby="education-list-heading"
                 className="border-y border-white/10"
               >
-                {profile.education.map((item, index) => {
+                {education.map((item, index) => {
                   const { period, status } = getEducationMeta(item);
 
                   return (
@@ -281,16 +332,16 @@ export const Experience = async () => {
                       key={item._key}
                     >
                       <article className="grid gap-5 sm:grid-cols-[2.75rem_minmax(0,1fr)_auto] sm:gap-6">
-                        <p className="text-xs tracking-[0.18em] text-secondary">
+                        <p className="text-xs tracking-[0.18em] text-primary/70">
                           [{String(index + 1).padStart(2, "0")}]
                         </p>
                         <div>
                           {status && (
                             <p
                               className={`text-xs uppercase tracking-[0.18em] ${
-                                status === "Previous studies"
-                                  ? "text-primary/40"
-                                  : "text-secondary"
+                                status === "Completed"
+                                  ? "text-primary/65"
+                                  : "text-primary/75"
                               }`}
                             >
                               {status}
@@ -306,7 +357,7 @@ export const Experience = async () => {
                           )}
                         </div>
                         {period && (
-                          <time className="text-xs uppercase tracking-[0.14em] text-primary/45 sm:text-right">
+                          <time className="text-xs uppercase tracking-[0.14em] text-primary/65 sm:text-right">
                             {period}
                           </time>
                         )}

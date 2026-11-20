@@ -1,12 +1,69 @@
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
+import { client } from "@/sanity/lib/client";
+import { absoluteUrl } from "./site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+type SitemapProject = {
+  slug: string;
+  updatedAt?: string;
+};
+
+const projectSitemapQuery = `*[_type == "project" && defined(slug.current)]{
+  "slug": slug.current,
+  "updatedAt": _updatedAt
+}`;
+
+export const revalidate = 3600;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      url: absoluteUrl("/"),
+      changeFrequency: "monthly",
       priority: 1,
     },
-  ]
+    {
+      url: absoluteUrl("/about"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/projects"),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+  ];
+
+  try {
+    const projects = await client.fetch<SitemapProject[]>(
+      projectSitemapQuery,
+      {},
+      { next: { revalidate } },
+    );
+
+    const seenSlugs = new Set<string>();
+    const projectRoutes: MetadataRoute.Sitemap = [];
+
+    for (const project of projects) {
+      if (!project.slug || seenSlugs.has(project.slug)) continue;
+      seenSlugs.add(project.slug);
+
+      const lastModified = project.updatedAt
+        ? new Date(project.updatedAt)
+        : undefined;
+
+      projectRoutes.push({
+        url: absoluteUrl(`/projects/${encodeURIComponent(project.slug)}`),
+        ...(lastModified && !Number.isNaN(lastModified.getTime())
+          ? { lastModified }
+          : {}),
+        changeFrequency: "monthly",
+        priority: 0.7,
+      });
+    }
+
+    return [...staticRoutes, ...projectRoutes];
+  } catch (error) {
+    console.error("Unable to include project pages in the sitemap:", error);
+    return staticRoutes;
+  }
 }

@@ -2,12 +2,11 @@ import { Button } from "./button";
 
 export const Navbar = () => {
   return (
-    <nav className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-      <Button route="/about">about me</Button>
+    <nav
+      aria-label="About page navigation"
+      className="flex items-center justify-center"
+    >
       <Button route="/">home</Button>
-      <Button route="/projects" variant="accent">
-        projects →
-      </Button>
     </nav>
   );
 };

@@ -7,21 +7,22 @@ export const VectorTransition = () => {
   const scrollY = useScrollY({ disabledOnMobile: true });
 
   return (
-    <div className="w-full relative h-[45vh]">
-      {layers.map((layer, i) => (
+    <div aria-hidden="true" className="relative h-[45vh] w-full">
+      {layers.map((layer, index) => (
         <div
-          key={i}
-          className="absolute inset-0 w-full"
+          key={layer.src}
+          className="absolute inset-0 w-full will-change-transform"
           style={{
-            transform: `translateY(${layer.offsetY + scrollY * layer.speed}px)`,
-            zIndex: i,
+            transform: `translate3d(0, ${layer.offsetY + scrollY * layer.speed}px, 0)`,
+            zIndex: index,
           }}
         >
           <Image
             src={layer.src}
-            alt={`parallax layer ${i}`}
+            alt=""
             fill
             className="object-cover object-center"
+            sizes="100vw"
           />
         </div>
       ))}
