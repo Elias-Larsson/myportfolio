@@ -27,11 +27,11 @@ export const ProjectTechStack = ({
     >
       {visible.map(({ label, icon }) => (
         <li
-          className={`inline-flex items-center text-xs text-primary/75 ${compact ? "gap-1 [&_svg]:size-3" : "gap-1.5 rounded-sm border border-primary/20 px-2.5 py-1 [&_svg]:size-4"} [&_svg]:shrink-0`}
+          className={`inline-flex max-w-full items-center text-xs text-primary/75 ${compact ? "gap-1 [&_svg]:size-3" : "gap-1.5 rounded-sm border border-primary/20 px-2.5 py-1 [&_svg]:size-4"} [&_svg]:shrink-0`}
           key={label}
         >
           <Icon name={icon || label} />
-          <span>{label}</span>
+          <span className="min-w-0 wrap-anywhere">{label}</span>
         </li>
       ))}
     </ul>

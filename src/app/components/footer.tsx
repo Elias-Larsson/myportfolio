@@ -12,7 +12,7 @@ export const Footer = async () => {
     <div className="w-full bg-midnight">
       <ReverseVectorTransition />
       <footer
-        className="relative z-10 bg-midnight px-4 py-14 md:py-20"
+        className="relative z-10 bg-midnight px-4 py-14 wrap-anywhere md:py-20"
         id="footer"
       >
         <div
