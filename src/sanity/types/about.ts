@@ -1,11 +1,5 @@
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-export type ImageDimensions = {
-  width: number;
-  height: number;
-  aspectRatio: number;
-};
-
 export type AboutMedia = {
   _key?: string;
   kind: "image" | "video";
@@ -14,7 +8,6 @@ export type AboutMedia = {
   alt: string;
   caption: string | null;
   imageLqip: string | null;
-  imageDimensions: ImageDimensions | null;
   videoUrl: string | null;
   videoMimeType: string | null;
   captionsUrl: string | null;
@@ -31,19 +24,17 @@ export type AboutStorySection = {
 };
 
 export type About = {
-  _id: string;
   heading: string | null;
   headingAccent: string | null;
   description: string;
   profileImage: SanityImageSource | null;
   profileAlt: string | null;
   profileLqip: string | null;
-  profileDimensions: ImageDimensions | null;
   workHeading: string | null;
   workHeadingAccent: string | null;
   workBody: string | null;
   storyHeading: string | null;
   storyHeadingAccent: string | null;
   storyIntroduction: string | null;
-  storySections: AboutStorySection[];
+  storySections: AboutStorySection[] | null;
 };

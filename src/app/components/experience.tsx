@@ -1,30 +1,17 @@
 import Image from "next/image";
-import { getExperienceCases } from "@/sanity/lib/experience";
+import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
-import { getProfessionalProfile } from "@/sanity/lib/professional-profile";
-import type { EducationEntry } from "@/sanity/types/professionalProfile";
-import { ExperienceCard } from "./experience-card";
+import {
+  getExperienceCases,
+  getProfessionalProfile,
+} from "@/sanity/lib/professional-profile";
 
-const lightMark = "brightness-0 invert";
-
-const localLogos: Partial<Record<string, { src: string; treatment?: string }>> =
-  {
-    sprinto: { src: "/logos/sprinto.png", treatment: lightMark },
-    "jarfalla-hus": {
-      src: "/logos/jarfalla.png",
-      treatment: "invert hue-rotate-180 mix-blend-screen",
-    },
-    samples: { src: "/logos/samples.png", treatment: lightMark },
-    streamline: { src: "/logos/streamline.png" },
-    reky: {
-      src: "/logos/reky.png",
-      treatment: "contrast-125 mix-blend-screen",
-    },
-    "paws-n-pantry": { src: "/logos/pawsnpantry.png" },
-  };
+const darkWordmarks = new Set(["sprinto", "samples"]);
 
 export const Experience = async () => {
   const cases = await getExperienceCases();
+
+  if (!cases.length) return null;
 
   return (
     <section
@@ -42,27 +29,43 @@ export const Experience = async () => {
 
         <ul className="mt-8 grid grid-cols-2 border-l border-t border-white/10 sm:grid-cols-3 md:mt-12">
           {cases.map((item) => {
-            const localLogo = localLogos[item.slug];
-            const logo = item.logo
-              ? urlFor(item.logo).width(900).fit("max").auto("format").url()
-              : localLogo?.src;
+            const company = item.company
+              .trim()
+              .toLowerCase()
+              .replace(/\.$/, "");
 
             return (
-              <ExperienceCard
-                company={item.company}
-                href={`/experience/${item.slug}`}
-                key={item._key}
-              >
-                {logo && (
-                  <Image
-                    alt=""
-                    className={`object-contain ${item.logo ? "" : (localLogo?.treatment ?? "")}`}
-                    fill
-                    sizes="(min-width: 640px) 144px, 33vw"
-                    src={logo}
-                  />
-                )}
-              </ExperienceCard>
+              <li key={item._key}>
+                <Link
+                  aria-label={item.company}
+                  className="relative grid h-24 place-items-center border-b border-r border-white/10 bg-midnight text-primary transition-colors hover:z-10 hover:bg-tertiary hover:ring-1 hover:ring-secondary/60 hover:ring-inset focus-visible:z-10 focus-visible:bg-tertiary focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-secondary motion-reduce:transition-none md:h-32"
+                  href={`/experience/${item.slug}`}
+                >
+                  {item.logo ? (
+                    <span className="relative block h-11 w-2/3 max-w-36 md:h-14">
+                      <Image
+                        alt=""
+                        className={
+                          darkWordmarks.has(company)
+                            ? "object-contain invert"
+                            : "object-contain"
+                        }
+                        fill
+                        sizes="(min-width: 640px) 144px, 33vw"
+                        src={urlFor(item.logo)
+                          .width(320)
+                          .fit("max")
+                          .auto("format")
+                          .url()}
+                      />
+                    </span>
+                  ) : (
+                    <span className="wrap-anywhere px-3 text-center font-[family-name:var(--font-heading)] text-sm leading-tight sm:text-base">
+                      {item.company}
+                    </span>
+                  )}
+                </Link>
+              </li>
             );
           })}
         </ul>
@@ -71,154 +74,56 @@ export const Experience = async () => {
   );
 };
 
-const monthLabels: Record<string, string> = {
-  jan: "Jan",
-  feb: "Feb",
-  mar: "Mar",
-  apr: "Apr",
-  may: "May",
-  maj: "May",
-  jun: "Jun",
-  jul: "Jul",
-  aug: "Aug",
-  sep: "Sep",
-  sept: "Sep",
-  oct: "Oct",
-  nov: "Nov",
-  dec: "Dec",
-};
-
-const monthIndexes: Record<string, number> = {
-  jan: 0,
-  feb: 1,
-  mar: 2,
-  apr: 3,
-  may: 4,
-  maj: 4,
-  jun: 5,
-  jul: 6,
-  aug: 7,
-  sep: 8,
-  sept: 8,
-  oct: 9,
-  nov: 10,
-  dec: 11,
-};
-
-const formatPeriod = (period?: string) =>
-  period
-    ?.trim()
-    .replace(
-      /\b(jan|feb|mar|apr|may|maj|jun|jul|aug|sep|sept|oct|nov|dec)\b/gi,
-      (month) => monthLabels[month.toLowerCase()],
-    )
-    .replace(/\bcurrent\b/gi, "Present")
-    .replace(/\s+(?:-|–|—)\s+/g, " — ");
-
-const getPeriodStartValue = (period?: string) => {
-  const startMatch = period?.match(
-    /\b(jan|feb|mar|apr|may|maj|jun|jul|aug|sep|sept|oct|nov|dec)\s+(\d{4})\b/i,
-  );
-  const startMonth = startMatch
-    ? monthIndexes[startMatch[1].toLowerCase()]
-    : null;
-
-  return startMatch && typeof startMonth === "number"
-    ? Number(startMatch[2]) * 12 + startMonth
-    : null;
-};
-
-const getEducationMeta = (item: EducationEntry) => {
-  const startValue = getPeriodStartValue(item.period);
-  const now = new Date();
-  const currentValue = now.getUTCFullYear() * 12 + now.getUTCMonth();
-  const isIncoming =
-    item.status === "Incoming" ||
-    (item.status === "Current" &&
-      startValue !== null &&
-      startValue > currentValue);
-
-  if (isIncoming && item.period) {
-    const start = item.period.split(/\s+(?:-|–|—)\s+/)[0];
-
-    return {
-      period: `Starts ${formatPeriod(start)}`,
-      status: "Incoming",
-    };
-  }
-
-  return {
-    period: formatPeriod(item.period),
-    status: item.status === "Previous studies" ? "Completed" : item.status,
-  };
-};
-
 export const Education = async () => {
   const profile = await getProfessionalProfile();
-  const education = (profile?.education ?? []).slice(0, 2);
+  const education = profile?.education ?? [];
 
   if (!education.length) return null;
 
   return (
     <section
       aria-labelledby="education-heading"
-      className="relative z-10 bg-tertiary px-4 pb-32 pt-12 md:pb-40 md:pt-16"
+      className="relative z-10 bg-tertiary px-4 pb-24 pt-12 md:pb-32 md:pt-16"
     >
-      <div className="mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-16">
-        <header className="lg:sticky lg:top-28 lg:self-start">
-          <h2 className="text-3xl md:text-4xl" id="education-heading">
-            Education
-          </h2>
-          <span
-            aria-hidden="true"
-            className="mt-5 block h-px w-12 bg-secondary/60"
-          />
-        </header>
+      <div className="mx-auto w-full max-w-6xl">
+        <h2
+          className="text-[clamp(2rem,7vw,4.5rem)] leading-[0.94]"
+          id="education-heading"
+        >
+          Education
+        </h2>
 
-        <ol className="border-y border-white/10">
-          {education.map((item, index) => {
-            const { period, status } = getEducationMeta(item);
-
-            return (
-              <li
-                className="experience-reveal border-b border-white/10 py-10 last:border-b-0 md:py-12"
-                key={item._key}
-              >
-                <article className="grid gap-5 sm:grid-cols-[2.75rem_minmax(0,1fr)_auto] sm:gap-6">
-                  <p className="text-xs tracking-[0.18em] text-primary/70">
-                    [{String(index + 1).padStart(2, "0")}]
+        <ul className="mt-8 divide-y divide-white/10 border-y border-white/10 md:mt-12">
+          {education.map((item) => (
+            <li
+              className="grid gap-4 py-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-8 md:py-8"
+              key={item._key}
+            >
+              <div className="min-w-0">
+                <h3 className="text-xl leading-tight sm:text-2xl md:text-3xl">
+                  {item.school}
+                </h3>
+                {item.programme && (
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-primary/75 md:text-base">
+                    {item.programme}
                   </p>
-                  <div>
-                    {status && (
-                      <p
-                        className={`text-xs uppercase tracking-[0.18em] ${
-                          status === "Completed"
-                            ? "text-primary/65"
-                            : "text-primary/75"
-                        }`}
-                      >
-                        {status}
-                      </p>
-                    )}
-                    <h3 className="mt-3 text-2xl leading-tight md:text-3xl">
-                      {item.school}
-                    </h3>
-                    {item.programme && (
-                      <p className="mt-3 max-w-2xl text-sm leading-7 text-primary/68 md:text-base">
-                        {item.programme}
-                      </p>
-                    )}
-                  </div>
-                  {period && (
-                    <time className="text-xs uppercase tracking-[0.14em] text-primary/65 sm:text-right">
-                      {period}
-                    </time>
+                )}
+              </div>
+              {(item.period || item.status) && (
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 self-center text-sm sm:flex-col sm:items-end sm:text-right">
+                  {item.period && (
+                    <p className="text-primary/75">{item.period}</p>
                   )}
-                </article>
-              </li>
-            );
-          })}
-        </ol>
+                  {item.status && (
+                    <p className="text-xs text-secondary-readable">
+                      {item.status}
+                    </p>
+                  )}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

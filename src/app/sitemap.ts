@@ -1,16 +1,12 @@
 import type { MetadataRoute } from "next";
 import { client } from "@/sanity/lib/client";
+import { projectSlugsQuery } from "@/sanity/lib/queries";
 import { absoluteUrl } from "./site";
 
 type SitemapProject = {
   slug: string;
   updatedAt?: string;
 };
-
-const projectSitemapQuery = `*[_type == "project" && defined(slug.current)]{
-  "slug": slug.current,
-  "updatedAt": _updatedAt
-}`;
 
 export const revalidate = 3600;
 
@@ -35,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const projects = await client.fetch<SitemapProject[]>(
-      projectSitemapQuery,
+      projectSlugsQuery,
       {},
       { next: { revalidate } },
     );

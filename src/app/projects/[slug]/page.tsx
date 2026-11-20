@@ -6,8 +6,7 @@ import { cache } from "react";
 import { Button } from "@/app/components/button";
 import { Footer } from "@/app/components/footer";
 import { HomeDuck } from "@/app/components/home-duck";
-import { formatTechnologyLabel } from "@/app/components/projects/format-project-content";
-import { Icon } from "@/app/components/techstackIcon";
+import { ProjectTechStack } from "@/app/components/projects/project-tech-stack";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { projectQuery, projectSlugsQuery } from "@/sanity/lib/queries";
@@ -28,19 +27,6 @@ const getProject = cache((slug: string) =>
     { next: { revalidate } },
   ),
 );
-
-const cleanText = (value?: string) =>
-  value
-    ?.replace(/\r\n/g, "\n")
-    .replace(/[ \t]+\n/g, "\n")
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
-
-const firstValue = (...values: Array<string | undefined>) =>
-  values.map(cleanText).find(Boolean) ?? "";
-
-const projectSummary = (project: Project) =>
-  firstValue(project.description, project.outcomeSummary, project.definition);
 
 const externalUrl = (value?: string | null) => {
   try {
@@ -74,10 +60,8 @@ export async function generateMetadata({
     };
   }
 
-  const description = firstValue(
-    projectSummary(project),
-    project.longDescription,
-  )
+  const description = project.description
+    ?.trim()
     .replace(/\s+/g, " ")
     .slice(0, 160);
   const shareImage = project.backgroundImage ?? project.projectImage;
@@ -105,7 +89,9 @@ export async function generateMetadata({
               url: imageUrl,
               width: 1200,
               height: 630,
-              alt: project.backgroundImageAlt || `${project.title} project`,
+              alt: project.backgroundImage
+                ? (project.backgroundImageAlt ?? undefined)
+                : (project.projectImageAlt ?? undefined),
             },
           ]
         : undefined,
@@ -119,9 +105,8 @@ export default async function SlugProjectPage({ params }: ProjectPageProps) {
 
   if (!project) notFound();
 
-  const description = projectSummary(project);
-  const longDescription = cleanText(project.longDescription);
-  const skills = project.skills?.filter((skill) => skill.label?.trim()) ?? [];
+  const description = project.description?.trim();
+  const longDescription = project.longDescription?.trim();
   const links = [
     {
       key: "live",
@@ -148,10 +133,9 @@ export default async function SlugProjectPage({ params }: ProjectPageProps) {
   const heroLqip = project.backgroundImage
     ? project.backgroundImageLqip
     : project.projectImageLqip;
-  const heroAlt =
-    project.backgroundImageAlt ||
-    project.projectImageAlt ||
-    `${project.title} project overview`;
+  const heroAlt = project.backgroundImage
+    ? project.backgroundImageAlt
+    : project.projectImageAlt;
   const heroUrl = heroImage
     ? urlFor(heroImage).width(2200).auto("format").quality(88).url()
     : undefined;
@@ -176,11 +160,11 @@ export default async function SlugProjectPage({ params }: ProjectPageProps) {
             <figure className="relative min-h-[min(38svh,16rem)] flex-1 overflow-hidden bg-midnight">
               <Image
                 src={heroUrl}
-                alt={heroAlt}
+                alt={heroAlt ?? ""}
                 fill
                 priority
                 placeholder={heroLqip ? "blur" : "empty"}
-                blurDataURL={heroLqip}
+                blurDataURL={heroLqip ?? undefined}
                 sizes="100vw"
                 className="object-cover object-top"
               />
@@ -196,7 +180,7 @@ export default async function SlugProjectPage({ params }: ProjectPageProps) {
             </div>
             {((description && description !== longDescription) ||
               links.length > 0 ||
-              skills.length > 0) && (
+              project.skills?.length) && (
               <div className="space-y-4">
                 {description && description !== longDescription && (
                   <p className="max-w-2xl text-sm leading-6 text-primary/80 sm:text-base">
@@ -221,19 +205,7 @@ export default async function SlugProjectPage({ params }: ProjectPageProps) {
                     ))}
                   </nav>
                 )}
-                {skills.length > 0 && (
-                  <ul aria-label="Tech stack" className="flex flex-wrap gap-2">
-                    {skills.map((skill) => (
-                      <li
-                        key={skill.label}
-                        className="flex items-center gap-1.5 rounded-sm border border-primary/20 px-2.5 py-1 text-xs text-primary/75 [&_svg]:size-4 [&_svg]:shrink-0"
-                      >
-                        <Icon name={skill.icon ?? skill.label} />
-                        <span>{formatTechnologyLabel(skill.label)}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <ProjectTechStack skills={project.skills} />
               </div>
             )}
           </header>
@@ -272,7 +244,10 @@ export default async function SlugProjectPage({ params }: ProjectPageProps) {
                 aria-label={`${project.title} project demonstration`}
                 className="aspect-video w-full rounded-sm bg-midnight object-contain"
               >
-                <source src={project.video} type={project.videoMimeType} />
+                <source
+                  src={project.video}
+                  type={project.videoMimeType ?? undefined}
+                />
                 Your browser does not support embedded video.
               </video>
             ) : (
@@ -280,13 +255,10 @@ export default async function SlugProjectPage({ params }: ProjectPageProps) {
                 <div className="relative aspect-video overflow-hidden rounded-sm bg-midnight/20">
                   <Image
                     src={previewUrl}
-                    alt={
-                      project.previewImageAlt ||
-                      `${project.title} interface preview`
-                    }
+                    alt={project.previewImageAlt ?? ""}
                     fill
                     placeholder={project.previewImageLqip ? "blur" : "empty"}
-                    blurDataURL={project.previewImageLqip}
+                    blurDataURL={project.previewImageLqip ?? undefined}
                     sizes="(min-width: 1024px) 896px, calc(100vw - 64px)"
                     className="object-contain"
                   />
