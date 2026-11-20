@@ -9,6 +9,7 @@ import { Button } from "../components/button";
 import { hasMedia, MediaFrame } from "../components/media-frame";
 import { Footer } from "../components/footer";
 import { HomeDuck } from "../components/home-duck";
+import { absoluteUrl, personName, socialProfiles } from "../site";
 
 export const revalidate = 60;
 
@@ -107,9 +108,29 @@ export default async function AboutPage() {
   const profileUrl = about.profileImage
     ? urlFor(about.profileImage).width(1000).height(1250).fit("crop").url()
     : null;
+  const profileData = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    url: absoluteUrl("/about"),
+    mainEntity: {
+      "@type": "Person",
+      "@id": absoluteUrl("/#person"),
+      name: personName,
+      url: absoluteUrl("/"),
+      description: about.description || undefined,
+      image: profileUrl || undefined,
+      sameAs: Object.values(socialProfiles),
+    },
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(profileData).replace(/</g, "\\u003c"),
+        }}
+      />
       <main className="relative overflow-hidden bg-tertiary wrap-anywhere">
         <HomeDuck />
         <section className="relative isolate px-4 pb-32 pt-24 md:pb-48 md:pt-36">

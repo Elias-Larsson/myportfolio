@@ -1,22 +1,18 @@
-const fallbackSiteUrl = "https://myportfolio-gilt-seven.vercel.app";
-
-const deploymentUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : undefined;
-const configuredSiteUrl = process.env.NEXT_PUBLIC_BASE_URL?.trim();
-const localConfiguredUrl = configuredSiteUrl?.match(
-  /^https?:\/\/(?:localhost|127(?:\.\d{1,3}){3})(?::\d+)?(?:\/|$)/i,
-);
-const resolvedConfiguredUrl =
-  process.env.NODE_ENV === "production" && localConfiguredUrl
-    ? undefined
-    : configuredSiteUrl;
+export const productionOrigin = "https://www.eliaslarsson.dev";
 
 export const siteUrl = new URL(
-  resolvedConfiguredUrl || deploymentUrl || fallbackSiteUrl,
+  (process.env.NODE_ENV === "development" &&
+    process.env.NEXT_PUBLIC_BASE_URL?.trim()) ||
+    productionOrigin,
 );
 
-export const siteName = "Elias Larsson — Full-stack Developer";
+export const personName = "Elias Larsson";
+export const siteName = `${personName} — Full-stack Developer`;
+
+export const socialProfiles = {
+  github: "https://github.com/Elias-Larsson",
+  linkedin: "https://www.linkedin.com/in/elias-h-larsson",
+};
 
 export const contactHref = "mailto:elias@eliaslarsson.dev";
 
