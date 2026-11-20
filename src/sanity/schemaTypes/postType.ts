@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const project = defineType({
   name: "project",
@@ -179,6 +179,37 @@ export const project = defineType({
       name: "repoLink",
       title: "Repository link",
       type: "string",
+    }),
+    defineField({
+      name: "otherLinks",
+      title: "Other project links",
+      description: "Add related websites, documentation, or write-ups.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          name: "projectLink",
+          title: "Project link",
+          type: "object",
+          fields: [
+            defineField({
+              name: "label",
+              title: "Label",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "url",
+              title: "URL",
+              type: "url",
+              validation: (rule) =>
+                rule.required().uri({ scheme: ["http", "https"] }),
+            }),
+          ],
+          preview: {
+            select: { title: "label", subtitle: "url" },
+          },
+        }),
+      ],
     }),
     defineField({
       name: "backgroundImage",

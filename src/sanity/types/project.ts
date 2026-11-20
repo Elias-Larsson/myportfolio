@@ -46,6 +46,7 @@ export type Project = Projects & {
   learning?: string;
   liveDemoLink?: string;
   repoLink?: string;
+  otherLinks?: { _key: string; label: string; url: string }[] | null;
   backgroundImage?: Image;
   backgroundImageAlt?: string;
   backgroundImageLqip?: string;
