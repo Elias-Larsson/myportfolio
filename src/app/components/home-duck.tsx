@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export const HomeDuck = () => (
+export const HomeDuck = ({ inline = false }: { inline?: boolean }) => (
   <Link
     aria-label="Go back home"
-    className="group absolute right-4 top-4 z-40 flex min-h-12 items-center gap-2.5 rounded-sm px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-4 focus-visible:ring-offset-tertiary sm:right-6 sm:top-6"
+    className={`group flex min-h-12 shrink-0 items-center gap-2.5 rounded-sm px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-4 focus-visible:ring-offset-tertiary ${
+      inline ? "w-fit" : "absolute right-4 top-4 z-40 sm:right-6 sm:top-6"
+    }`}
     href="/"
   >
     <span className="font-[family-name:var(--font-heading)] text-sm uppercase tracking-[0.12em] text-primary underline decoration-secondary/70 underline-offset-4 transition-colors group-hover:text-secondary motion-reduce:transition-none">

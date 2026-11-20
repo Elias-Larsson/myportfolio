@@ -176,6 +176,7 @@ export const projectQuery = groq`*[_type == "project" && slug.current == $slug][
   skills[]{label, icon, url, color},
   liveDemoLink,
   repoLink,
+  otherLinks[]{_key, label, url},
   projectImage,
   projectImageAlt,
   "projectImageLqip": projectImage.asset->metadata.lqip,
