@@ -12,28 +12,38 @@ export const project = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "definition",
-      title: "Project definition",
-      type: "string",
+      name: "description",
+      title: "Short description",
+      description: "Shown on project cards and in the project header.",
+      type: "text",
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "description",
-      title: "Project card description",
+      name: "longDescription",
+      title: "Overview",
+      description: "Free-form project details shown below the header.",
       type: "text",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "featured",
       title: "Featured on homepage",
       type: "boolean",
+      initialValue: false,
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "flagship",
+      title: "Flagship project",
+      description:
+        "Use a full-width card and place it before regular cards on the homepage and in selected case studies.",
+      type: "boolean",
+      initialValue: false,
     }),
     defineField({
       name: "projectCategory",
       title: "Archive section",
       description:
-        "Selected case studies appear first; experiments appear in the compact archive.",
+        "Selected case studies use image cards. Experiments and uncategorized projects use compact rows.",
       type: "string",
       options: {
         layout: "radio",
@@ -47,84 +57,27 @@ export const project = defineType({
       name: "displayOrder",
       title: "Display order",
       description:
-        "Lower numbers appear first. Leave empty to use the curated fallback order.",
+        "Lower numbers appear first within each card size. Unnumbered projects appear after numbered projects.",
       type: "number",
       validation: (rule) => rule.integer().min(0),
     }),
-    defineField({
-      name: "year",
-      title: "Project year",
-      type: "number",
-      validation: (rule) => rule.integer().min(2000).max(2100),
-    }),
-    defineField({
-      name: "outcomeSummary",
-      title: "Outcome summary",
-      description:
-        "One concrete sentence used above the fold and in link previews.",
-      type: "string",
-      validation: (rule) => rule.max(220),
-    }),
-    defineField({
-      name: "role",
-      title: "Role",
-      type: "string",
-    }),
-    defineField({
-      name: "team",
-      title: "Team",
-      type: "string",
-    }),
-    defineField({
-      name: "timeline",
-      title: "Timeline",
-      description: "For example: Mar — Jun 2025",
-      type: "string",
-    }),
-    defineField({
-      name: "context",
-      title: "Context",
-      description: "For example: Independent project or Chas Challenge",
-      type: "string",
-    }),
-    defineField({
-      name: "longDescription",
-      title: "Project long description",
-      type: "text",
-    }),
-    defineField({
-      name: "challenge",
-      title: "01 · The challenge",
-      type: "text",
-      rows: 5,
-    }),
-    defineField({
-      name: "contribution",
-      title: "02 · My contribution",
-      type: "text",
-      rows: 5,
-    }),
-    defineField({
-      name: "technicalDecision",
-      title: "03 · Technical decision",
-      type: "text",
-      rows: 5,
-    }),
-    defineField({
-      name: "outcome",
-      title: "04 · Outcome",
-      type: "text",
-      rows: 5,
-    }),
-    defineField({
-      name: "learning",
-      title: "05 · What I learned",
-      type: "text",
-      rows: 5,
-    }),
+    // Keep older fields registered so existing documents can still be edited.
+    defineField({ name: "definition", type: "string", hidden: true }),
+    defineField({ name: "year", type: "number", hidden: true }),
+    defineField({ name: "outcomeSummary", type: "string", hidden: true }),
+    defineField({ name: "role", type: "string", hidden: true }),
+    defineField({ name: "team", type: "string", hidden: true }),
+    defineField({ name: "timeline", type: "string", hidden: true }),
+    defineField({ name: "context", type: "string", hidden: true }),
+    defineField({ name: "challenge", type: "text", hidden: true }),
+    defineField({ name: "contribution", type: "text", hidden: true }),
+    defineField({ name: "technicalDecision", type: "text", hidden: true }),
+    defineField({ name: "outcome", type: "text", hidden: true }),
+    defineField({ name: "learning", type: "text", hidden: true }),
     defineField({
       name: "slug",
       type: "slug",
+      options: { source: "title" },
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -140,6 +93,7 @@ export const project = defineType({
     }),
     defineField({
       name: "skills",
+      title: "Tech stack",
       type: "array",
       of: [
         {
@@ -152,19 +106,19 @@ export const project = defineType({
             }),
             defineField({
               name: "icon",
-              description: "Pick an icon at simpleicons.org",
+              description:
+                "Optional Simple Icons name if it differs from the label.",
               type: "string",
-              validation: (rule) => rule.required(),
             }),
             defineField({
               name: "url",
               type: "url",
-              validation: (rule) => rule.required(),
+              hidden: true,
             }),
             defineField({
               name: "color",
               type: "string",
-              validation: (rule) => rule.required(),
+              hidden: true,
             }),
           ],
         },
@@ -246,7 +200,7 @@ export const homepage = defineType({
   fields: [
     defineField({
       name: "title",
-      title: "Homepage Title",
+      title: "Hero heading",
       type: "string",
       validation: (rule) => rule.required(),
     }),
@@ -254,22 +208,26 @@ export const homepage = defineType({
       name: "subtitle",
       title: "Homepage subtitle",
       type: "string",
+      hidden: true,
     }),
     defineField({
       name: "description",
-      title: "Homepage description",
+      title: "Hero description",
       type: "string",
     }),
     defineField({
       name: "heroEyebrow",
       title: "Hero eyebrow",
-      description: "Short location, role, or availability line above the heading.",
+      description:
+        "Short location, role, or availability line above the heading.",
       type: "string",
+      hidden: true,
     }),
     defineField({
       name: "heroHeading",
       title: "Hero heading",
       type: "string",
+      hidden: true,
     }),
     defineField({
       name: "heroHeadingAccent",
@@ -281,13 +239,14 @@ export const homepage = defineType({
       title: "Hero description",
       type: "text",
       rows: 3,
+      hidden: true,
     }),
     defineField({
       name: "credibilityItems",
       title: "Hero credibility items",
       type: "array",
       of: [{ type: "string" }],
-      validation: (rule) => rule.max(4),
+      hidden: true,
     }),
     defineField({
       name: "aboutTeaserTitle",
@@ -301,13 +260,36 @@ export const homepage = defineType({
       rows: 3,
     }),
     defineField({
+      name: "featuredHeading",
+      title: "Featured work heading",
+      type: "string",
+    }),
+    defineField({
+      name: "featuredDescription",
+      title: "Featured work introduction",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
+      name: "footerHeading",
+      title: "Footer heading",
+      type: "string",
+    }),
+    defineField({
+      name: "footerHeadingAccent",
+      title: "Footer heading accent",
+      type: "string",
+    }),
+    defineField({
       name: "contactDescription",
       title: "Contact description",
       type: "text",
+      hidden: true,
     }),
     defineField({
       name: "skills",
       type: "array",
+      hidden: true,
       of: [
         {
           type: "object",

@@ -4,9 +4,8 @@ import { Education, Experience } from "./components/experience";
 import { Footer } from "./components/footer";
 import { Hero } from "./components/hero";
 import { ProjectsDisplay } from "./components/projects/projectsdisplay";
-import { client } from "@/sanity/lib/client";
-import { homepageQuery } from "@/sanity/lib/queries";
-import type { Homepage } from "@/sanity/types/homepage";
+import { getHomepage } from "@/sanity/lib/homepage";
+import { getExperienceCases } from "@/sanity/lib/professional-profile";
 import { AboutTeaser } from "./components/about-teaser";
 import { SectionSkeleton } from "./components/section-skeleton";
 import { siteDescription, siteName } from "./site";
@@ -34,23 +33,28 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const homepage = await client.fetch<Homepage>(homepageQuery, {}, {
-    next: { revalidate },
-  });
+  const [homepage, experience] = await Promise.all([
+    getHomepage(),
+    getExperienceCases(),
+  ]);
 
   return (
     <>
       <main>
         <Hero
-          description={homepage?.heroDescription}
-          heading={homepage?.heroHeading}
+          description={homepage?.description}
+          hasExperience={experience.length > 0}
+          heading={homepage?.title}
           headingAccent={homepage?.heroHeadingAccent}
         />
         <Suspense fallback={<SectionSkeleton label="experience" />}>
           <Experience />
         </Suspense>
         <Suspense fallback={<SectionSkeleton label="selected projects" />}>
-          <ProjectsDisplay />
+          <ProjectsDisplay
+            heading={homepage?.featuredHeading}
+            description={homepage?.featuredDescription}
+          />
         </Suspense>
         <Suspense fallback={<SectionSkeleton label="about preview" />}>
           <AboutTeaser

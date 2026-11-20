@@ -5,34 +5,14 @@ export const professionalProfile = defineType({
   title: "Experience & Education",
   type: "document",
   fields: [
-    defineField({
-      name: "heading",
-      title: "Section heading",
-      description: "The first, light-coloured part of the heading.",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "headingAccent",
-      title: "Highlighted heading",
-      description: "The red part of the heading.",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "description",
-      title: "Section description",
-      type: "text",
-      rows: 3,
-      validation: (rule) => rule.required(),
-    }),
+    // Keep older fields registered for existing documents.
+    defineField({ name: "heading", type: "string", hidden: true }),
+    defineField({ name: "headingAccent", type: "string", hidden: true }),
+    defineField({ name: "description", type: "text", hidden: true }),
     defineField({
       name: "includeExperienceStarters",
-      title: "Include starter experience content",
-      description:
-        "Turn this off once you want the grid and its case studies to use only your Studio entries.",
       type: "boolean",
-      initialValue: true,
+      hidden: true,
     }),
     defineField({
       name: "experiences",
@@ -55,13 +35,6 @@ export const professionalProfile = defineType({
               title: "Role",
               type: "string",
               validation: (rule) => rule.required(),
-            }),
-            defineField({
-              name: "relationship",
-              title: "Relationship",
-              description:
-                "For example: Internship, Client project, Founder, or Thesis.",
-              type: "string",
             }),
             defineField({
               name: "slug",
@@ -98,13 +71,6 @@ export const professionalProfile = defineType({
               description:
                 "Upload a transparent logo that reads well on a dark surface.",
               type: "image",
-            }),
-            defineField({
-              name: "cardSummary",
-              title: "Case study preview",
-              description: "One short sentence for search result previews.",
-              type: "string",
-              validation: (rule) => rule.max(180),
             }),
             defineField({
               name: "period",
@@ -149,13 +115,10 @@ export const professionalProfile = defineType({
                 layout: "tags",
               },
             }),
-            defineField({
-              name: "detail",
-              title: "Project focus",
-              type: "text",
-              rows: 3,
-              hidden: true,
-            }),
+            defineField({ name: "relationship", type: "string", hidden: true }),
+            defineField({ name: "cardSummary", type: "string", hidden: true }),
+            defineField({ name: "detail", type: "text", hidden: true }),
+            defineField({ name: "website", type: "url", hidden: true }),
             defineField({
               name: "caseStudy",
               title: "Case study",
@@ -183,35 +146,10 @@ export const professionalProfile = defineType({
                   type: "array",
                   of: [defineArrayMember({ type: "aboutMedia" })],
                 }),
-                defineField({
-                  name: "challenge",
-                  title: "Challenge",
-                  type: "text",
-                  rows: 4,
-                  hidden: true,
-                }),
-                defineField({
-                  name: "solution",
-                  title: "Solution",
-                  type: "text",
-                  rows: 4,
-                  hidden: true,
-                }),
-                defineField({
-                  name: "outcome",
-                  title: "Outcome",
-                  type: "text",
-                  rows: 4,
-                  hidden: true,
-                }),
+                defineField({ name: "challenge", type: "text", hidden: true }),
+                defineField({ name: "solution", type: "text", hidden: true }),
+                defineField({ name: "outcome", type: "text", hidden: true }),
               ],
-            }),
-            defineField({
-              name: "website",
-              title: "Related website",
-              type: "url",
-              validation: (rule) => rule.uri({ scheme: ["http", "https"] }),
-              hidden: true,
             }),
           ],
           preview: {

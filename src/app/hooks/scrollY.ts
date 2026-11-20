@@ -1,14 +1,6 @@
 import { useEffect, useState } from "react";
 
-type ScrollYOptions = {
-  disabledOnMobile?: boolean;
-  disabledOnReducedMotion?: boolean;
-};
-
-export const useScrollY = ({
-  disabledOnMobile = false,
-  disabledOnReducedMotion = true,
-}: ScrollYOptions = {}) => {
+export const useScrollY = () => {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -28,14 +20,10 @@ export const useScrollY = ({
       animationFrame = window.requestAnimationFrame(updateScrollPosition);
     };
 
-    const motionIsDisabled = () =>
-      (disabledOnMobile && mobileQuery.matches) ||
-      (disabledOnReducedMotion && reducedMotionQuery.matches);
-
     const updateScrollListener = () => {
       window.removeEventListener("scroll", requestScrollUpdate);
 
-      if (motionIsDisabled()) {
+      if (mobileQuery.matches || reducedMotionQuery.matches) {
         if (animationFrame !== null) {
           window.cancelAnimationFrame(animationFrame);
           animationFrame = null;
@@ -63,7 +51,7 @@ export const useScrollY = ({
         window.cancelAnimationFrame(animationFrame);
       }
     };
-  }, [disabledOnMobile, disabledOnReducedMotion]);
+  }, []);
 
   return scrollY;
 };

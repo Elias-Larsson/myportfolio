@@ -15,7 +15,7 @@ The goal of this project is to present my work beyond a traditional résumé. Ea
 
 - **Featured projects:** Selected projects are highlighted on the homepage.
 - **Project case studies:** Dedicated routes for individual projects, with descriptions, technologies, images or video, and optional demo/repository links.
-- **Experience and education:** A professional timeline populated from Sanity.
+- **Experience and education:** A work grid with individual case studies and a separate education section, populated from Sanity.
 - **About page:** An editorial layout with profile media and configurable story sections.
 - **Content management:** An embedded Sanity Studio at `/studio` for editing site content.
 - **Custom visual design:** Responsive layouts, large typography, animated transitions, parallax effects, and smooth scrolling.
@@ -90,10 +90,10 @@ Set `NEXT_PUBLIC_BASE_URL` to your deployed domain when building for production.
 
 Sanity is used for the following content types:
 
-- **Homepage:** Introductory content and contact-related text.
-- **Projects:** Project descriptions, images, featured status, technologies, and external links.
-- **Experience & Education:** Work history, achievements, technology lists, and education entries.
-- **About:** Personal introduction, profile image, and story sections with optional media.
+- **Homepage** controls the hero, Featured Work heading and intro, About teaser, and footer headline.
+- **Projects** controls descriptions, media, technologies, and links. Turn on **Featured on homepage** to include a project there. Turn on **Flagship project** for a wide card. Set **Display order** to position cards of the same size (lower numbers first), and use **Archive section** to group projects.
+- **Experience & Education** controls published entries, experience logos, case-study text and media, and the order of entries. Upload a logo under **Company logo** for each experience.
+- **About** controls the introduction, profile image, “How I work” section, and story chapters.
 
 The frontend retrieves data through GROQ queries in `src/sanity/lib/queries.tsx`. Sanity schemas are defined in `src/sanity/schemaTypes/`.
 

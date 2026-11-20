@@ -4,10 +4,10 @@ import { notFound } from "next/navigation";
 import { Button } from "@/app/components/button";
 import { Footer } from "@/app/components/footer";
 import { HomeDuck } from "@/app/components/home-duck";
+import { hasMedia, MediaFrame } from "@/app/components/media-frame";
 import { Icon } from "@/app/components/techstackIcon";
-import { getExperienceCases } from "@/sanity/lib/experience";
 import { urlFor } from "@/sanity/lib/image";
-import { CaseStudyMedia } from "./case-study-media";
+import { getExperienceCases } from "@/sanity/lib/professional-profile";
 
 export const revalidate = 60;
 
@@ -26,7 +26,7 @@ export async function generateMetadata({
 
   return {
     title: item.company,
-    description: item.preview || undefined,
+    description: item.overview?.slice(0, 160),
     alternates: { canonical: `/experience/${item.slug}` },
   };
 }
@@ -36,16 +36,13 @@ export default async function ExperiencePage({ params }: PageProps) {
   const item = await findCase(slug);
   if (!item) notFound();
 
-  const overview = item.caseStudy?.overview?.trim() || item.summary;
   const roleDescription = item.caseStudy?.roleDescription?.trim();
   const achievements =
     item.achievements?.map((point) => point.trim()).filter(Boolean) ?? [];
   const technologies = [
     ...new Set(item.technologies?.map((tech) => tech.trim()).filter(Boolean)),
   ];
-  const media = (item.caseStudy?.media ?? []).filter((asset) =>
-    asset.kind === "video" ? Boolean(asset.videoUrl) : Boolean(asset.image),
-  );
+  const media = (item.caseStudy?.media ?? []).filter(hasMedia);
 
   return (
     <>
@@ -74,11 +71,11 @@ export default async function ExperiencePage({ params }: PageProps) {
           </header>
 
           <div className="divide-y divide-primary/20">
-            {overview && (
+            {item.overview && (
               <section className="grid gap-4 py-10 md:grid-cols-[minmax(10rem,0.35fr)_1fr] md:py-14">
                 <h2 className="text-2xl">Overview</h2>
                 <p className="max-w-3xl whitespace-pre-line leading-8 text-primary/80">
-                  {overview}
+                  {item.overview}
                 </p>
               </section>
             )}
@@ -133,11 +130,15 @@ export default async function ExperiencePage({ params }: PageProps) {
                 </h2>
                 <div className="mt-6 grid gap-5 sm:grid-cols-2">
                   {media.map((asset) => (
-                    <CaseStudyMedia
+                    <MediaFrame
+                      className="overflow-hidden rounded-sm border border-white/10 bg-midnight only:col-span-full"
                       key={asset._key}
                       media={asset}
-                      company={item.company}
-                      fullWidth={media.length === 1}
+                      sizes={
+                        media.length === 1
+                          ? "(min-width: 1280px) 1152px, 100vw"
+                          : "(min-width: 1280px) 566px, (min-width: 640px) 50vw, 100vw"
+                      }
                     />
                   ))}
                 </div>
