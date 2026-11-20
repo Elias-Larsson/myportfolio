@@ -84,7 +84,7 @@ bun run build
 bun run start
 ```
 
-Set `NEXT_PUBLIC_BASE_URL` to your deployed domain when building for production.
+Production canonical URLs use `https://www.eliaslarsson.dev` from `src/app/site.ts`. `NEXT_PUBLIC_BASE_URL` is a development override. The app permanently redirects the non-`www` and old Vercel hosts to the matching canonical paths. If the hosting dashboard handles a redirect before Next.js receives the request, configure it as a permanent redirect there too.
 
 ## Content Management
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useScrollY } from "@/app/hooks/scrollY";
-import { contactHref } from "@/app/site";
+import { contactHref, personName } from "@/app/site";
 import { Button } from "./button";
 import { VectorTransition } from "./background/depthbg";
 import { IconButton } from "./iconbutton";
@@ -37,15 +37,18 @@ export const Hero = ({
         }}
       >
         <div className="flex min-w-0 max-w-3xl flex-col">
-          {(heading || headingAccent) && (
-            <h1 className="pb-5 text-[9dvw] leading-[0.96] sm:text-6xl md:text-7xl lg:text-8xl">
-              {heading}
-              {headingAccent && (
-                <span className="block text-secondary">{headingAccent}</span>
-              )}
-            </h1>
-          )}
+          <h1 className="pb-5 text-[9dvw] leading-[0.96] sm:text-6xl md:text-7xl lg:text-8xl">
+            {personName}
+          </h1>
           <div className="flex max-w-2xl flex-col gap-5">
+            {(heading || headingAccent) && (
+              <p className="font-[family-name:var(--font-heading)] text-xl uppercase leading-tight md:text-2xl">
+                {heading}
+                {headingAccent && (
+                  <span className="block text-secondary">{headingAccent}</span>
+                )}
+              </p>
+            )}
             {description && (
               <p className="max-w-xl text-base leading-7 text-primary/75 md:text-lg md:leading-8">
                 {description}

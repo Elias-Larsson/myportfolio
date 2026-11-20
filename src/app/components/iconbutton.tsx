@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { personName, socialProfiles } from "@/app/site";
 
 type Props = {
   route: "github" | "linkedin";
@@ -11,19 +12,19 @@ export const IconButton = ({ route }: Props) => {
       label: "GitHub",
       imageLight: "/github_light.svg",
       imageDark: "/github_dark.svg",
-      url: "https://github.com/Elias-Larsson",
+      url: socialProfiles.github,
     },
     linkedin: {
       label: "LinkedIn",
       imageLight: "/linkedin_light.svg",
       imageDark: "/linkedin_dark.svg",
-      url: "https://www.linkedin.com/in/elias-h-larsson",
+      url: socialProfiles.linkedin,
     },
   }[route];
 
   return (
     <Link
-      aria-label={`Visit Elias Larsson on ${social.label} (opens in a new tab)`}
+      aria-label={`Visit ${personName} on ${social.label} (opens in a new tab)`}
       href={social.url}
       rel="noopener noreferrer"
       target="_blank"
